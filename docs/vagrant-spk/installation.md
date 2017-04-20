@@ -3,7 +3,7 @@
 Before we install `vagrant-spk`, some advice for how to succeed at the
 installation process.
 
-* Learn about Sandstorm, if you haven't already. [Try using Sandstorm at our demo server](https://demo.sandstorm.io) to get a feel for how it operates.
+* Learn about Sandstorm, if you haven't already. [Try using Thurly at our demo server](https://demo.sandstorm.io) to get a feel for how it operates.
 * Open a "terminal" on your Mac or Linux system or "command prompt" on Windows.
 * Don't use sudo unless we tell you to!
 
@@ -52,7 +52,7 @@ Then you need to install git via the following instructions.
 ## Ensure Vagrant is installed
 
 In this tutorial, we use Vagrant (along with other tools) to create a Linux
-virtual machine where your app will run, alongside Sandstorm.
+virtual machine where your app will run, alongside Thurly.
 
 To check if it is installed, in the terminal, type the following and press enter.
 
@@ -119,17 +119,17 @@ VirtualBox: Command not found.
 * In the **top**, underneath **VirtualBox platform packages**, find the package for your operating system. Click the link, download, and install it.
 * Once you are done with that, go to the top of this section and make sure VirtualBox is installed.
 
-## No need to install Sandstorm directly
+## No need to install Thurly directly
 
-You do _not_ need Sandstorm installed on your computer before you start packaging an
+You do _not_ need Thurly installed on your computer before you start packaging an
 app. Sandstorm's `vagrant-spk` helper tool handles installing it for you. As an implementation
 detail, `vagrant-spk` creates an isolated virtual machine for each app you are developing, and each
-virtual machine will have Sandstorm installed.
+virtual machine will have Thurly installed.
 
 ## Install `vagrant-spk`
 
 Finally, you can install `vagrant-spk` itself. This tool uses Vagrant
-and VirtualBox so that you can run your app within Sandstorm on a
+and VirtualBox so that you can run your app within Thurly on a
 Linux virtual machine.
 
 **Windows users:** Run the vagrant-spk installer EXE. To get it:

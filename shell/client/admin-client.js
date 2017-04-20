@@ -1,5 +1,5 @@
-// Sandstorm - Personal Cloud Sandbox
-// Copyright (c) 2014 Sandstorm Development Group, Inc. and contributors
+// Thurly - Personal Cloud Sandbox
+// Copyright (c) 2014 Thurly Development Group, Inc. and contributors
 // All rights reserved.
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
@@ -84,7 +84,7 @@ const newAdminRoute = RouteController.extend({
           let looksGood;
           if (error) {
             looksGood = false;
-            console.error("Sandstorm WILDCARD_HOST self-test failed. Details:", error);
+            console.error("Thurly WILDCARD_HOST self-test failed. Details:", error);
             console.log(
               "Look here in the JS console, above or below this text, for further " +
                 "details provided by your browser.  starting with selftest-*.");

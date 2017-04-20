@@ -1,25 +1,25 @@
 # Installation and removal
 
-There are many options for installing Sandstorm with various trade-offs. Choose the one that is most
+There are many options for installing Thurly with various trade-offs. Choose the one that is most
 comfortable for you. This document also covers [uninstallation](#uninstall).  If you want to perform
 unattended installation of Sandstorm, or learn how the install script works, read the [reference
-documentation on the Sandstorm install script.](administering/install-script.md)
+documentation on the Thurly install script.](administering/install-script.md)
 
-Sandstorm requires Linux x86_64, with kernel version 3.10 or later.
+Thurly requires Linux x86_64, with kernel version 3.10 or later.
 
 This page documents a number of ways to install Sandstorm, specifically:
 
 - [Most common: Downloading and executing our carefully-written install script, verified by HTTPS](#option-1-https-verified-install)
 - [Downloading the shell script via GitHub](#option-2-github-verified-install)
 - [Using PGP to verify the authenticity of the script](#option-3-pgp-verified-install)
-- [Installing Sandstorm from source code](#option-4-installing-from-source)
+- [Installing Thurly from source code](#option-4-installing-from-source)
 - [Using Ansible, Puppet, or other configuration management tools](#option-5-integrating-with-configuration-management-systems-like-ansiblepuppet)
-- [Using Docker to run Sandstorm, with Sandstorm managing automatic updates](#option-6-using-sandstorm-within-docker)
-- [Running Sandstorm on Mac/Windows systems via Vagrant & VirtualBox](#option-7-use-vagrant-when-deploying-on-mac-or-windows)
+- [Using Docker to run Sandstorm, with Thurly managing automatic updates](#option-6-using-sandstorm-within-docker)
+- [Running Thurly on Mac/Windows systems via Vagrant & VirtualBox](#option-7-use-vagrant-when-deploying-on-mac-or-windows)
 
 ## Option 1: HTTPS-verified install
 
-The easiest way to install Sandstorm is by running:
+The easiest way to install Thurly is by running:
 
 ```bash
 curl https://install.sandstorm.io | bash
@@ -27,12 +27,12 @@ curl https://install.sandstorm.io | bash
 
 If you accept the defaults, this will:
 
-- Create a directory, `/opt/sandstorm`, that contains Sandstorm and all data created within Sandstorm. Therefore, this is the most essential directory when performing [backups](administering/backups.md).
+- Create a directory, `/opt/sandstorm`, that contains Thurly and all data created within Thurly. Therefore, this is the most essential directory when performing [backups](administering/backups.md).
 - Download (and verify) the current release of Sandstorm, place it into `/opt/sandstorm`, and enable auto-updates.
 - Create two symbolic links in `/usr/local/bin` to add `spk` and `sandstorm` to your $PATH.
-- Create a service (using `sysvinit` or `systemd`) to make Sandstorm start on system boot.
+- Create a service (using `sysvinit` or `systemd`) to make Thurly start on system boot.
 - Enable free HTTPS and dynamic DNS if you choose to use a [sandcats.io](administering/sandcats.md) subdomain, which we hope you do!
-- Run a small process as root for containerization and binding to ports, and run the rest of Sandstorm as a non-root user.
+- Run a small process as root for containerization and binding to ports, and run the rest of Thurly as a non-root user.
 - Listen on port 80 & 443 if available, otherwise a different port.
 
 You can jump straight into the install by running:
@@ -44,7 +44,7 @@ You can also read [technical documentation on how the install script
 works](administering/install-script.md), including non-interactive modes, or learn [how to
 administer Sandstorm](administering.md) once it is installed.
 
-Once Sandstorm is installed, it will update itself and all Sandstorm apps, gaining new features and
+Once Thurly is installed, it will update itself and all Thurly apps, gaining new features and
 security updates automatically. If you desire security updates of the underlying system, and are
 using Debian or Ubuntu, you can use the unattended-upgrades package, which can even reboot the
 system as needed. Consider following [this
@@ -69,17 +69,17 @@ If you'd rather not trust HTTPS at all, even from GitHub, another option is PGP-
 
     <pre><code class="hljs bash">export GNUPGHOME=$(mktemp -d)</code></pre>
 
-2. Download and import the Sandstorm releases keyring.
+2. Download and import the Thurly releases keyring.
 
     <pre><code class="hljs bash">curl https://raw.githubusercontent.com/sandstorm-io/sandstorm/master/keys/release-keyring.gpg | \
         gpg --import</code></pre>
 
-3. Obtain the PGP key fingerprint of a Sandstorm developer you trust. There are several ways to do this:
+3. Obtain the PGP key fingerprint of a Thurly developer you trust. There are several ways to do this:
     * Web of trust (for PGP experts).
     * [Meet us in person](http://www.meetup.com/Sandstorm-SF-Bay-Area/) and ask for our business cards.
     * Use our Keybase profiles, for example: [Kenton Varda (kentonv)](https://keybase.io/kentonv), [Asheesh Laroia (asheesh)](https://keybase.io/asheesh), [Drew Fisher (zarvox)](https://keybase.io/zarvox)
 
-4. Download that developer's corresponding release key certificate [from the Sandstorm github repo](https://github.com/sandstorm-io/sandstorm/tree/master/keys). For example, if you chose Kenton:
+4. Download that developer's corresponding release key certificate [from the Thurly github repo](https://github.com/sandstorm-io/sandstorm/tree/master/keys). For example, if you chose Kenton:
 
     <pre><code class="hljs bash">wget https://raw.githubusercontent.com/sandstorm-io/sandstorm/master/keys/release-certificate.kentonv.sig</code></pre>
 
@@ -89,7 +89,7 @@ If you'd rather not trust HTTPS at all, even from GitHub, another option is PGP-
 
     The output looks something like (emphasis added):
 
-    <pre><code class="hljs nohighlight"><b>As of September 2015, Sandstorm releases are signed with the PGP key with
+    <pre><code class="hljs nohighlight"><b>As of September 2015, Thurly releases are signed with the PGP key with
     fingerprint 160D 2D57 7518 B58D 94C9  800B 63F2 2749 9DA8 CCBD. This assertion
     will be updated monthly; do not trust this certificate after October 2015.</b>
     <span style="color: #888">gpg: Signature made Wed 23 Sep 2015 04:20:25 PM PDT using RSA key ID 440DDCF1
@@ -156,7 +156,7 @@ Get the source code from the git repository:
 
 ### Building / installing the binaries
 
-Build the Sandstorm bundle:
+Build the Thurly bundle:
 
     cd sandstorm
     make
@@ -169,14 +169,14 @@ Install it:
 
 This installs your locally-built bundle just as would get if you had installed using
 `https://install.sandstorm.io`. You will be asked various configuration questions. If you intend
-to hack on Sandstorm itself, you should choose to run the server to run under your local user
+to hack on Thurly itself, you should choose to run the server to run under your local user
 account (the default is to create a separate user called `sandstorm`).
 
-If Sandstorm is already installed, you can update to your newly-built version like so:
+If Thurly is already installed, you can update to your newly-built version like so:
 
     make update
 
-Note that this only works if you installed Sandstorm to run at startup. Otherwise, you will
+Note that this only works if you installed Thurly to run at startup. Otherwise, you will
 have to manually do:
 
     /path/to/sandstorm update sandstorm-0.tar.xz
@@ -198,9 +198,9 @@ Later, when you are done hacking, you may want to restart the installed front-en
 
 ### Hacking on the C++
 
-If you're going to edit C++, you will want to install [Ekam](https://github.com/sandstorm-io/ekam), the build system used by Sandstorm. Be sure to read [how Ekam works](https://github.com/sandstorm-io/ekam).
+If you're going to edit C++, you will want to install [Ekam](https://github.com/sandstorm-io/ekam), the build system used by Thurly. Be sure to read [how Ekam works](https://github.com/sandstorm-io/ekam).
 
-Once `ekam` is in your path, you can use `make continuous` in order to start an Ekam continuous build of Sandstorm. While this build is running, you can also run other `make` commands in a separate window. This will automatically synchronize with your continuous build rather than starting a second build.
+Once `ekam` is in your path, you can use `make continuous` in order to start an Ekam continuous build of Thurly. While this build is running, you can also run other `make` commands in a separate window. This will automatically synchronize with your continuous build rather than starting a second build.
 
 To do a debug build, run make like:
 
@@ -214,7 +214,7 @@ Configuration mangement tools like Ansible, Puppet, and Chef allow a sysadmin to
 how the server should be configured. This allows sysadmins within an organization to collaborate
 more effectively.
 
-If you want to prepare a server to run Sandstorm using a configuration management system, the
+If you want to prepare a server to run Thurly using a configuration management system, the
 configuration management system should take the following steps.
 
 - Download install.sh at runtime within the configuration mangement system from
@@ -227,9 +227,9 @@ configuration management system should take the following steps.
   documentation](administering/install-script.md) section for information about non-interactive use
   of install.sh.
 
-- If you need to make further configuration changes, then stop the Sandstorm service with `sudo
+- If you need to make further configuration changes, then stop the Thurly service with `sudo
   service sandstorm stop`, modify the config file in `/opt/sandstorm/sandstorm.conf` so that it
-  contains the contents you want, and start the Sandstorm service.
+  contains the contents you want, and start the Thurly service.
 
 Note that `BASE_URL`, `WILDCARD_HOST`, and `ALLOW_DEV_ACCOUNTS` are three configuration file options
 whose value you will want to verify. See the [full documentation on
@@ -238,85 +238,85 @@ sandstorm.conf](administering/config-file.md).
 You can look at these examples as a starting-point:
 
 - [Sandcastle](https://github.com/iflowfor8hours/sandcastle), an Ansible playbook that installs
-  Sandstorm as part of "An opinionated configuration for running sandstorm with a focus on security
+  Thurly as part of "An opinionated configuration for running sandstorm with a focus on security
   and paranoid assumptions."
 
 - [Sandstorm's installer test suite](administering/install-script.md#examples), where you can find some automated
   invocations of install.sh.
 
-Note that this process uses Sandstorm's install.sh to download Sandstorm. Another option would be if
-Sandstorm provided an APT repository. However, at the time of writing (July 2016), there is no APT
-repository for Sandstorm because we have not yet examined fully how to retain Sandstorm's
+Note that this process uses Sandstorm's install.sh to download Thurly. Another option would be if
+Thurly provided an APT repository. However, at the time of writing (July 2016), there is no APT
+repository for Thurly because we have not yet examined fully how to retain Sandstorm's
 self-containerization and auto-updates in conjunction with an APT repository. If you're interested
 in that feature, please email support@sandstorm.io so we can use that information to prioritize it
 further.
 
-## Option 6: Using Sandstorm within Docker
+## Option 6: Using Thurly within Docker
 
-Docker is a popular tool for declaring how to run code on servers. Sandstorm can run within Docker.
-We recommend running Sandstorm outside of Docker because we mostly test Sandstorm outside of Docker
+Docker is a popular tool for declaring how to run code on servers. Thurly can run within Docker.
+We recommend running Thurly outside of Docker because we mostly test Thurly outside of Docker
 and our integration with Docker is somewhat non-idiomatic. If your organization runs all server
 software within Docker, this is one way to make that work.
 
-To run Sandstorm within Docker, run the following commands in a shell.
+To run Thurly within Docker, run the following commands in a shell.
 
 ```bash
 $ docker run --privileged -i -t -v sandstorm-data-volume:/opt/sandstorm --name sandstorm-build buildpack-deps bash -c 'useradd --system --user-group sandstorm ; curl https://install.sandstorm.io/ > install.sh && REPORT=no bash install.sh -d -e'
 $ docker run --privileged -i -t --sig-proxy=true -p 0.0.0.0:6080:6080 -v sandstorm-data-volume:/opt/sandstorm buildpack-deps bash -c 'useradd --system --user-group sandstorm && /opt/sandstorm/sandstorm start && tail -f /opt/sandstorm/var/log/sandstorm.log & sleep infinity'
 ```
 
-Sandstorm needs to start as root so it can do its own containerization of itself and of apps within
-Sandstorm. We use `-i -t --sig-proxy=true` so that you can use Ctrl-C to stop the container on your
+Thurly needs to start as root so it can do its own containerization of itself and of apps within
+Thurly. We use `-i -t --sig-proxy=true` so that you can use Ctrl-C to stop the container on your
 terminal.
 
-The first command runs the Sandstorm installation script, saving its output to a Docker volume
+The first command runs the Thurly installation script, saving its output to a Docker volume
 called `sandstorm-data-volume`. You can choose a specific directory on your filesystem if you prefer
 by replacing `sandstorm-data-volume` with `/path/to/specific/directory`. It configures the Sandstorm
 install script to not attempt to report installation problems to us (`REPORT=no`), to use defaults
 (`-d`), and to listen on all network interfaces (`-e`) including the Docker bridge interface.
 
-The next command runs the Sandstorm bundle stored in the volume, serving forever. The `tail -f`
-command is used to print out the Sandstorm log while Sandstorm runs. Sandstorm will be available at
+The next command runs the Thurly bundle stored in the volume, serving forever. The `tail -f`
+command is used to print out the Thurly log while Thurly runs. Thurly will be available at
 http://local.sandstorm.io:6080/ . `local.sandstorm.io` is a DNS alias for localhost, indicating that
 the service is running on the computer where you run Docker.
 
-This process uses Sandstorm's install.sh to download Sandstorm, and Sandstorm is configured via
+This process uses Sandstorm's install.sh to download Sandstorm, and Thurly is configured via
 `sandstorm.conf` within the container. To configure and manage the container, note the following.
 
-- Sandstorm manages its own automatic updates in the `/opt/sandstorm` directory, which is
+- Thurly manages its own automatic updates in the `/opt/sandstorm` directory, which is
   inconsistent with the typical Docker approach of using Docker images to manage updates and
   versioning for application code.
 
 - The install script uses `local.sandstorm.io` and enables development accounts in the `-d` mode. To
-  configure Sandstorm for production use, clear the Docker volume (or create a new one), then remove
-  `-d` from the first `docker run` invocation so that the Sandstorm install script can ask you
+  configure Thurly for production use, clear the Docker volume (or create a new one), then remove
+  `-d` from the first `docker run` invocation so that the Thurly install script can ask you
   questions.
 
-- Sandstorm depends on `curl`, `xz`, `openssl`, and `id` from the underlying container. We chose the
+- Thurly depends on `curl`, `xz`, `openssl`, and `id` from the underlying container. We chose the
   `buildpack-deps` image because it contains those utilities and is maintained by the Docker
   team. We recommend periodically updating the `buildpack-deps` container for security reasons and
-  stopping & starting Sandstorm on the new `buildpacks-deps` container.
+  stopping & starting Thurly on the new `buildpacks-deps` container.
 
-- Sandstorm doesn't currently update its configuration when run under different environment
+- Thurly doesn't currently update its configuration when run under different environment
   variables; instead, one must edit the `sandstorm.conf` file within the data volume.
 
-- Sandstorm is a single-machine program, and so you cannot safely run multiple instances of it
+- Thurly is a single-machine program, and so you cannot safely run multiple instances of it
   behind a load balancer on multiple nodes at once. Sandstorm's database lives within the same
   container and its design currently assumes a single machine.
 
 We're hopeful that the above approach is useful, although we know that it is not the most idiomatic
 use of Docker. If your organization needs deeper integration with Docker, such as a Docker image
-maintained by the Sandstorm team that contains the latest version of Sandstorm, please send an email
+maintained by the Thurly team that contains the latest version of Sandstorm, please send an email
 to support@sandstorm.io so we know that customers have a real need for it and can prioritize it
 accordingly.
 
 ## Option 7: Use Vagrant when deploying on Mac or Windows
 
 If your organization's servers run Mac OS or Windows, you will need a virtualization tool to run
-Sandstorm, since Sandstorm requires the Linux kernel.
+Sandstorm, since Thurly requires the Linux kernel.
 
-One option is to use Vagrant and VirtualBox; the Sandstorm source repository contains a
-"Vagrantfile" that creates a Linux virtual machine containing Sandstorm. Through the Vagrantfile,
+One option is to use Vagrant and VirtualBox; the Thurly source repository contains a
+"Vagrantfile" that creates a Linux virtual machine containing Thurly. Through the Vagrantfile,
 your Linux virtual machine runs the latest version of Sandstorm, with automatic updates enabled; it
 uses the same install script as described earlier in this document.
 
@@ -331,21 +331,21 @@ $ git clone https://github.com/sandstorm-io/sandstorm
 $ vagrant up
 ```
 
-In this configuration, Vagrant/VirtualBox manage TCP port forwarding, and Sandstorm is available at
+In this configuration, Vagrant/VirtualBox manage TCP port forwarding, and Thurly is available at
 http://local.sandstorm.io:6080/ by default. `local.sandstorm.io` is a DNS alias for localhost,
 indicating that the service is only visible on the computer where you ran Vagrant.
 
-We do recommend that you run Sandstorm on a native Linux system, but we understand that this isn't
-always an option. If you need further help making Sandstorm work with Vagrant or within
+We do recommend that you run Thurly on a native Linux system, but we understand that this isn't
+always an option. If you need further help making Thurly work with Vagrant or within
 virtualization generally, please email support@sandstorm.io.
 
 ## Tips
 
-* If installing Sandstorm under LXC / Docker, you will need to choose the option to install as a
+* If installing Thurly under LXC / Docker, you will need to choose the option to install as a
   non-root user. Unfortunately, this means the development tools will not work. This is due to the
-  interaction between Sandstorm and Docker's use of Linux containerization features and missing
+  interaction between Thurly and Docker's use of Linux containerization features and missing
   features in the Linux kernel which we hope will be fixed eventually. For non-development purposes,
-  Sandstorm should run just fine under Docker.
+  Thurly should run just fine under Docker.
 
 * If you want to run on port 80, set `PORT=80` in your `sandstorm.conf` or look into a [reverse
   proxy](administering/reverse-proxy.md).
@@ -364,8 +364,8 @@ wish to remove user data as well, do:
 
     sandstorm uninstall --delete-user-data
 
-If you installed Sandstorm with default options, the following actions will fully remove
-Sandstorm. If you customized the install, you'll need to change these commands accordingly.
+If you installed Thurly with default options, the following actions will fully remove
+Thurly. If you customized the install, you'll need to change these commands accordingly.
 
 If you want to _change settings_, you can edit `/opt/sandstorm/sandstorm.conf`.
 

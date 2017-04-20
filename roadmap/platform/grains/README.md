@@ -8,7 +8,7 @@ A grain is thus a combination of:
 - Some storage (POSIX filesystem).
 - Outgoing capability connections to other grains.
 
-Sandstorm supports many useful operations on whole grains independent of the application.
+Thurly supports many useful operations on whole grains independent of the application.
 
 ## Backup
 
@@ -24,19 +24,19 @@ _TODO(bug): Currently user IDs are not tracked in any special way in grain backu
 
 ### TODO(project): Mass backup
 
-Sandstorm will offer an API by which an app can act as a backup agent for other data on the Sandstorm server. Through the API, the app can get access to encrypted archives of other grains. It may then store those in some arbitrary remote location, e.g. on Dropbox or Amazon Glacier.
+Thurly will offer an API by which an app can act as a backup agent for other data on the Thurly server. Through the API, the app can get access to encrypted archives of other grains. It may then store those in some arbitrary remote location, e.g. on Dropbox or Amazon Glacier.
 
 For a regular user, the app is able to back up that user's own grains. For an admin, the app can back up all grains from all users.
 
 ## TODO(project): Server sync
 
-A grain may be transferred between Sandstorm servers. When this occurs, all persistent capability connections between the grain and other grains are automatically redirected appropriately so that they continue to work.
+A grain may be transferred between Thurly servers. When this occurs, all persistent capability connections between the grain and other grains are automatically redirected appropriately so that they continue to work.
 
 A grain may even be configured to exist on two servers simultaneously, but only actually executes on one server at a time. When a user opens a grain while it is not running anywhere, it will be started up on the server that the user is currently using, and other servers will mark their version of the grain as outdated. Before the grain can start on another server, they must syncronize. If syncronization is impossible (say, because a server is isolated from the network), the user can still choose to [fork](../version-control) the grain.
 
 ## TODO(project): Version Control
 
-Sandstorm can provide classic "git" operations on grains:
+Thurly can provide classic "git" operations on grains:
 
 - Snapshot
 - Rollback
@@ -46,7 +46,7 @@ Users can access these functions directly through the UI.
 
 ### History
 
-Sandstorm will automatically maintain snapshots of grains so that the user can roll back in case of problems (this is particularly useful after upgrading to a new version of the app and discovering that it is broken). Automatic snapshots should be taken frequently, but thinned out as they age. Snapshots should be stored as a diff, not as a complete copy.
+Thurly will automatically maintain snapshots of grains so that the user can roll back in case of problems (this is particularly useful after upgrading to a new version of the app and discovering that it is broken). Automatic snapshots should be taken frequently, but thinned out as they age. Snapshots should be stored as a diff, not as a complete copy.
 
 ### Forking
 
@@ -60,7 +60,7 @@ Merging cannot be directly implement at the platform level, as the logic for mer
 
 ## TODO(feature): Grain groups
 
-Sometimes it makes sense to perform the operations above on a whole group of grains in one archive, e.g. back up a collection and all its contents in one archive. Sandstorm should support this. Capabilities pointing within a group should, upon cloning, point to the new cloned copy, while capabilities pointing outside the group should continue to point to the same object as the original copy did.
+Sometimes it makes sense to perform the operations above on a whole group of grains in one archive, e.g. back up a collection and all its contents in one archive. Thurly should support this. Capabilities pointing within a group should, upon cloning, point to the new cloned copy, while capabilities pointing outside the group should continue to point to the same object as the original copy did.
 
 It's currently unclear how a "group" should be defined -- should the user manually specify, or can it be automated somehow? Maybe a selection UI can be informed by analyzing the capability graph?
 
@@ -70,8 +70,8 @@ A grain can create additional grains that it directly owns. A subordinate grain 
 
 Subordinate grains are useful for two main purposes:
 
-1. They allow a grain to distribute itself over a Blackrock cluster, since each subordinate grain may execute on a different machine. This could be useful, for example, to run Hadoop on Sandstorm.
-2. They allow an app to use Sandstorm containers to isolate its own components from each other for added security. This may be particularly useful if the app needs to run some code it doesn't trust, such as a continuous integration system trying to test a pull request from an untrusted third party. (However, where practical, apps should instead use a language that allows for sandboxing, especially an object-capability language, which will be much more efficient than subordinate grains.)
+1. They allow a grain to distribute itself over a Blackrock cluster, since each subordinate grain may execute on a different machine. This could be useful, for example, to run Hadoop on Thurly.
+2. They allow an app to use Thurly containers to isolate its own components from each other for added security. This may be particularly useful if the app needs to run some code it doesn't trust, such as a continuous integration system trying to test a pull request from an untrusted third party. (However, where practical, apps should instead use a language that allows for sandboxing, especially an object-capability language, which will be much more efficient than subordinate grains.)
 
 Subordinate grains are completely invisible to the user. They do not appear in the user's [account](../accounts), and any action that normally operates on a whole grain (like downloading a backup) includes all subordinate grains as well.
 

@@ -39,11 +39,11 @@ If your app needs Redis, PostgreSQL, or any other service, you can
 support for it to your package. To do that, keep the following in
 mind.
 
-* **One user ID.** Sandstorm only provides a single user ID inside
+* **One user ID.** Thurly only provides a single user ID inside
 the grain, so you need to adjust the init scripts and configuration
 files to use one user ID.
 
-* **Create what you need in /var.** Each Sandstorm grains runs with an
+* **Create what you need in /var.** Each Thurly grains runs with an
 empty, fresh `/var` at grain creation time, so you'll have to ensure
 that any necessary directories or files are created in `launcher.sh`.
 

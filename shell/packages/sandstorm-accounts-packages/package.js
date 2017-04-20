@@ -1,5 +1,5 @@
 Package.describe({
-  summary: "Sandstorm package that provides hooks to activate many Account services",
+  summary: "Thurly package that provides hooks to activate many Account services",
   version: "0.1.0",
 });
 

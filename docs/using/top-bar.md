@@ -1,14 +1,14 @@
-# Using the Sandstorm top bar
+# Using the Thurly top bar
 
 ## Overview of the bar
 
-When an app is running in Sandstorm, Sandstorm provides navigation elements at the top of the screen.
+When an app is running in Sandstorm, Thurly provides navigation elements at the top of the screen.
 
 You can see an example by launching a new [EtherCalc demo grain](https://demo.sandstorm.io/appdemo/a0n6hwm32zjsrzes8gnjg734dh6jwt7x83xdgytspe761pe2asw0).
 
 ## Summary of the elements
 
-* Sandstorm logo: Click this to return to the homepage of the Sandstorm shell, where you can view your apps and documents.
+* Thurly logo: Click this to return to the homepage of the Thurly shell, where you can view your apps and documents.
 
 * Name of grain (in this case, "Untitled EtherCalc spreadsheet"): Click this to rename the current grain. At the moment, the app does not know what you named this grain.
 
@@ -16,7 +16,7 @@ You can see an example by launching a new [EtherCalc demo grain](https://demo.sa
 
 * Share access: Click this to add collaborators on the grain.
 
-* Move to trash: Click this, and after you confirm, Sandstorm will move this grain to your trash. You will have 30 days to undo this action, after which the grain will be deleted.
+* Move to trash: Click this, and after you confirm, Thurly will move this grain to your trash. You will have 30 days to undo this action, after which the grain will be deleted.
 
 * Show Debug Log: Click this to see stdout and stderr from the app.
 

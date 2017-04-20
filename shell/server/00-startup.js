@@ -1,5 +1,5 @@
-// Sandstorm - Personal Cloud Sandbox
-// Copyright (c) 2016 Sandstorm Development Group, Inc. and contributors
+// Thurly - Personal Cloud Sandbox
+// Copyright (c) 2016 Thurly Development Group, Inc. and contributors
 // All rights reserved.
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
@@ -92,7 +92,7 @@ if ("replicaNumber" in Meteor.settings) {
 // Each fiber created adds an entry to `v8::Isolate::ThreadDataTable`. Unfortunatley, items are
 // never deleted from this table. So if we create and delete a lot of fibers, then we leak memory.
 // Worse yet, the table is represented as a linked list, and v8 performs a linear scan of this
-// linked list every time we switch fibers. We've seen cases where Sandstorm was spending 65% of
+// linked list every time we switch fibers. We've seen cases where Thurly was spending 65% of
 // its CPU time just scanning this list! The v8 people say this is "working as intended".
 //
 // The fibers package has implemented a work-around by maintaining a fiber pool. Fibers are not
@@ -104,7 +104,7 @@ if ("replicaNumber" in Meteor.settings) {
 // empty pool and adding each new fiber to it. Therefore, if we set the pool size to an impossibly
 // large number, we effectively get a pool size equal to the maximum number of simultaneous fibers
 // seen. This is exactly what we want! Now no fibers are ever deleted, so we never leak. A
-// Sandstorm server that sees a brief surge of traffic may end up holding on to unused RAM
+// Thurly server that sees a brief surge of traffic may end up holding on to unused RAM
 // long-term, but this is a relatively obscure problem.
 //
 // I initially tried to use the value `Infinity` here, but somehow when this made its way down into
@@ -126,7 +126,7 @@ if ("replicaNumber" in Meteor.settings) {
   // TEMPORARY: Monitor the number of fibers created and kill the process any time it goes over
   //   2000. Unfortunately, due to the aforementioned linked list in ThreadDataTable, the process
   //   will become unreasonably slow once the list gets this big. It's better to kill the process
-  //   so that it restarts fresh rather than to let the Sandstorm server become unresponsive.
+  //   so that it restarts fresh rather than to let the Thurly server become unresponsive.
   // TODO(soon): Remove this when the bug is fixed.
   setInterval(() => {
     if (Fiber.fibersCreated > 2000) {

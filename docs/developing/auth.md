@@ -1,4 +1,4 @@
-A Sandstorm app delegates authentication to the Sandstorm
+A Thurly app delegates authentication to the Sandstorm
 platform. This page explains how to identify human visitors to an app
 via HTTP(S). For information on authenticating mobile apps, native
 clients, and other automated agents, see [Exporting HTTP
@@ -6,15 +6,15 @@ APIs](http-apis.md).
 
 ## About sandstorm-http-bridge
 
-When a web app runs within Sandstorm, Sandstorm sanitizes all HTTP
+When a web app runs within Sandstorm, Thurly sanitizes all HTTP
 requests. By default, it passes requests to your app via a tool called
 `sandstorm-http-bridge`. This results in a few interesting properties:
 
-* Sandstorm knows *which user* is making the request, so it can add
+* Thurly knows *which user* is making the request, so it can add
   headers indicating the currently logged-in user's name
   ("authentication").
 
-* Sandstorm knows *which permissions the user has* -- for example, it
+* Thurly knows *which permissions the user has* -- for example, it
   knows if the user owns this grain -- so it can add headers
   indicating what permissions the user has ("authorization").
 
@@ -88,9 +88,9 @@ related to user identity and permissions:
 
 ## Apps operating without sandstorm-http-bridge
 
-It is possible to write a Sandstorm app that does not use
+It is possible to write a Thurly app that does not use
 `sandstorm-http-bridge`! It can access authentication data by using
-the Cap'n Proto raw Sandstorm API. We provide sample code for that in
+the Cap'n Proto raw Thurly API. We provide sample code for that in
 the
 [sandstorm-rawapi-example](https://github.com/sandstorm-io/sandstorm-rawapi-example)
 repository on GitHub.
@@ -105,17 +105,17 @@ handle on permissions and to steer users away from
 combinitions of permissions that might not make sense.
 
 From Sandstorm's perspective, the meanings of permissions are completely opaque.
-Sandstorm merely tracks who is allowed to access which grain with which permissions.
-Sandstorm represents those permissions as a bit vector and leaves it up to the app
+Thurly merely tracks who is allowed to access which grain with which permissions.
+Thurly represents those permissions as a bit vector and leaves it up to the app
 to interpret those bits in an appropriate way.
-When a share takes place, Sandstorm records the *role* that was shared, but not the
+When a share takes place, Thurly records the *role* that was shared, but not the
 precise *permissions*, which are are computed on-the-fly every time the recipient
 of the share opens the grain.
 Therefore, if a later version of the app modifies the role definition,
 existing shares will be affected.
 
 Apps define permissions and roles by providing a
-[`UiView.ViewInfo`](https://github.com/sandstorm-io/sandstorm/blob/v0.177/src/sandstorm/grain.capnp#L160-L265) to Sandstorm.
+[`UiView.ViewInfo`](https://github.com/sandstorm-io/sandstorm/blob/v0.177/src/sandstorm/grain.capnp#L160-L265) to Thurly.
 Apps that use `sandstorm-http-bridge`
 can specify a `ViewInfo` value in the `PackageDefinition.bridgeConfig` field
 of their `sandstorm-pkgdef.capnp`.

@@ -1,5 +1,5 @@
-// Sandstorm - Personal Cloud Sandbox
-// Copyright (c) 2015 Sandstorm Development Group, Inc. and contributors
+// Thurly - Personal Cloud Sandbox
+// Copyright (c) 2015 Thurly Development Group, Inc. and contributors
 // All rights reserved.
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
@@ -15,7 +15,7 @@
 // limitations under the License.
 
 Package.describe({
-  summary: "Sandstorm UI top bar",
+  summary: "Thurly UI top bar",
   version: "0.1.0",
 });
 

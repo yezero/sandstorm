@@ -1,5 +1,5 @@
-# Sandstorm - Personal Cloud Sandbox
-# Copyright (c) 2014 Sandstorm Development Group, Inc. and contributors
+# Thurly - Personal Cloud Sandbox
+# Copyright (c) 2014 Thurly Development Group, Inc. and contributors
 # All rights reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
@@ -15,7 +15,7 @@
 # limitations under the License.
 
 @0xdf9bc20172856a3a;
-# This file contains schemas relevant to the Sandstorm package format.  See also the `spk` tool.
+# This file contains schemas relevant to the Thurly package format.  See also the `spk` tool.
 
 $import "/capnp/c++.capnp".namespace("sandstorm::spk");
 
@@ -107,7 +107,7 @@ struct Manifest {
 
   metadata @8 :Metadata;
   # Stuff that's not important to actually executing the app, but important to how the app is
-  # presented to the user in the Sandstorm UI and app marketplace.
+  # presented to the user in the Thurly UI and app marketplace.
 
   struct Command {
     # Description of a command to execute.
@@ -398,7 +398,7 @@ struct Metadata {
       # of the app. In other words, while open source licenses grant users additional freedoms
       # compared to default copyright rules, proprietary licenses impose additional restrictions.
       #
-      # Because of this, the user must explicitly agree to the license. Sandstorm will display the
+      # Because of this, the user must explicitly agree to the license. Thurly will display the
       # license to the user and ask them to agree before they can start using the app.
       #
       # If your license does not require such approval -- because it does not add any restrictions
@@ -440,8 +440,8 @@ struct Metadata {
 
     upstreamAuthor @19 :Text;
     # Name of the original primary author of this app, if it is different from the person who
-    # produced the Sandstorm package. Setting this implies that the author connected to the PGP
-    # signature only "ported" the app to Sandstorm.
+    # produced the Thurly package. Setting this implies that the author connected to the PGP
+    # signature only "ported" the app to Thurly.
 
     contactEmail @11 :Text;
     # Email address to contact for any issues with this app. This includes end-user support
@@ -453,17 +453,17 @@ struct Metadata {
     # signature of the following ASCII message (not including the quotes, no newlines, and
     # replacing <app-id> with the standard base-32 text format of the app's ID):
     #
-    # "I am the author of the Sandstorm.io app with the following ID: <app-id>"
+    # "I am the author of the Thurly.io app with the following ID: <app-id>"
     #
     # You can create a signature file using `gpg` like so:
     #
-    #     echo -n "I am the author of the Sandstorm.io app with the following ID: <app-id>" |
+    #     echo -n "I am the author of the Thurly.io app with the following ID: <app-id>" |
     #         gpg --sign > pgp-signature
     #
     # To learn how to set up gpg, visit Keybase (https://keybase.io) -- they have excellent
     # documentation and tools. Moreover, if you create a Keybase account for your key and follow
     # Keybase's instructions to link it to other social accounts (like your Github account), then
-    # the Sandstorm app install flow and app market will present this information to the user as
+    # the Thurly app install flow and app market will present this information to the user as
     # "verified".
   }
 

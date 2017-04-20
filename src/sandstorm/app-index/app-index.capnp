@@ -1,5 +1,5 @@
-# Sandstorm - Personal Cloud Sandbox
-# Copyright (c) 2015 Sandstorm Development Group, Inc. and contributors
+# Thurly - Personal Cloud Sandbox
+# Copyright (c) 2015 Thurly Development Group, Inc. and contributors
 # All rights reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
@@ -15,7 +15,7 @@
 # limitations under the License.
 
 @0xe16c039c931f2a8a;
-# The app index is designed to run inside a Sandstorm grain, where it maintains the following
+# The app index is designed to run inside a Thurly grain, where it maintains the following
 # directory structure:
 #
 # /var/
@@ -40,7 +40,7 @@
 #   tmp/             Temp files staged to be moved elsewhere or deleted.
 #
 # TODO(cleanup): Currently we actually append file extensions like .json, .svg, and .png to the
-#   stuff under www, because Sandstorm web publishing depends on it. Eventually we should fix
+#   stuff under www, because Thurly web publishing depends on it. Eventually we should fix
 #   web publishing then remove the unnecessary extensions. Note that to keep code changes minimal,
 #   the JSON files list imageIds that include the extensions. The client must know to add ".json",
 #   though. Note also that we do NOT add ".spk" to packages currently, because there's no
@@ -164,12 +164,12 @@ const pkgdef :Package.PackageDefinition = (
   id = "ghze43a24vg5rck3w5kegeuhu1hy52nh17j8qm7vf40ekc3r5z3h",
 
   manifest = (
-    appTitle = (defaultText = "Sandstorm App Index"),
+    appTitle = (defaultText = "Thurly App Index"),
     appVersion = 3,
     appMarketingVersion = (defaultText = "2016-02-22"),
 
     actions = [
-      ( title = (defaultText = "New Sandstorm App Index"),
+      ( title = (defaultText = "New Thurly App Index"),
         command = (argv = ["/app-index", "--init"])
       )
     ],

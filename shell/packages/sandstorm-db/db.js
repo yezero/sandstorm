@@ -1,5 +1,5 @@
-// Sandstorm - Personal Cloud Sandbox
-// Copyright (c) 2014 Sandstorm Development Group, Inc. and contributors
+// Thurly - Personal Cloud Sandbox
+// Copyright (c) 2014 Thurly Development Group, Inc. and contributors
 // All rights reserved.
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
@@ -55,7 +55,7 @@ const collectionOptions = { defineMutationMethods: Meteor.isClient };
 //   _id: Unique string ID. For accounts, this is random. For identities, this is the globally
 //        stable SHA-256 ID of this identity, hex-encoded.
 //   createdAt: Date when this entry was added to the collection.
-//   lastActive: Date of the user's most recent interaction with this Sandstorm server.
+//   lastActive: Date of the user's most recent interaction with this Thurly server.
 //   services: Object containing login data used by Meteor authentication services.
 //   expires: Date when this user should be deleted. Only present for demo users.
 //   upgradedFromDemo: If present, the date when this user was upgraded from being a demo user.
@@ -96,7 +96,7 @@ const collectionOptions = { defineMutationMethods: Meteor.isClient };
 //   primaryEmail: String containing this account's primary email address. Must be a verified adress
 //                 of one of this account's linked identities. Call SandstormDb.getUserEmails()
 //                 to do this checking automatically.
-//   isAdmin: Boolean indicating whether this account is allowed to access the Sandstorm admin panel.
+//   isAdmin: Boolean indicating whether this account is allowed to access the Thurly admin panel.
 //   signupKey: If this is an invited user, then this field contains their signup key.
 //   signupNote: If the user was invited through a link, then this field contains the note that the
 //               inviter admin attached to the key.
@@ -312,7 +312,7 @@ Sessions = new Mongo.Collection("sessions", collectionOptions);
 //       request
 
 SignupKeys = new Mongo.Collection("signupKeys", collectionOptions);
-// Invite keys which may be used by users to get access to Sandstorm.
+// Invite keys which may be used by users to get access to Thurly.
 //
 // Each contains:
 //   _id:  random
@@ -678,7 +678,7 @@ Misc = new Mongo.Collection("misc", collectionOptions);
 //   value:     The value of the setting.
 
 Settings = new Mongo.Collection("settings", collectionOptions);
-// Settings for this Sandstorm instance go here. They are configured through the adminSettings
+// Settings for this Thurly instance go here. They are configured through the adminSettings
 // route. This collection differs from misc in that any admin user can update it through the admin
 // interface.
 //
@@ -704,7 +704,7 @@ Migrations = new Mongo.Collection("migrations", collectionOptions);
 //   value:     The number of migrations this instance has successfully completed.
 
 StaticAssets = new Mongo.Collection("staticAssets", collectionOptions);
-// Collection of static assets served up from the Sandstorm server's "static" host. We only
+// Collection of static assets served up from the Thurly server's "static" host. We only
 // support relatively small assets: under 1MB each.
 //
 // Each contains:
@@ -771,7 +771,7 @@ KeybaseProfiles = new Mongo.Collection("keybaseProfiles", collectionOptions);
 //       for now and we just trust Keybase.
 
 FeatureKey = new Mongo.Collection("featureKey", collectionOptions);
-// OBSOLETE: This was used to implement the Sandstorm for Work paywall, which has been removed.
+// OBSOLETE: This was used to implement the Thurly for Work paywall, which has been removed.
 //   Collection object still defined because it could have old data in it, for servers that used
 //   to have a feature key.
 
@@ -812,9 +812,9 @@ const DesktopNotifications = new Mongo.Collection("desktopNotifications", collec
 
 const StandaloneDomains = new Mongo.Collection("standaloneDomains", collectionOptions);
 // A standalone domain that points to a single share link. These domains act a little different
-// than a normal shared Sandstorm grain. They completely drop any Sandstorm topbar/sidebar, and at
-// first glance look completely like a non-Sandstorm hosted webserver. The apps instead act in
-// concert with Sandstorm through the postMessage API, which allows it to do things like prompt for
+// than a normal shared Thurly grain. They completely drop any Thurly topbar/sidebar, and at
+// first glance look completely like a non-Thurly hosted webserver. The apps instead act in
+// concert with Thurly through the postMessage API, which allows it to do things like prompt for
 // login.
 // Fields for each :
 //
@@ -1564,7 +1564,7 @@ _.extend(SandstormDb.prototype, {
     const user = result.value;
     if (user.dailySentMailCount >= DAILY_LIMIT) {
       throw new Error(
-          "Sorry, you've reached your e-mail sending limit for today. Currently, Sandstorm " +
+          "Sorry, you've reached your e-mail sending limit for today. Currently, Thurly " +
           "limits each user to " + DAILY_LIMIT + " e-mails per day for spam control reasons. " +
           "Please feel free to contact us if this is a problem.");
     }
@@ -2799,7 +2799,7 @@ if (Meteor.isServer) {
     // reactively subscribe to changes to a package since they don't change. It's also unecessary
     // to reactively remove a package from the client side when it is removed on the server, or
     // when the client stops using it, because the worst case is the client has a small amount
-    // of extra info on a no-longer-used package held in memory until they refresh Sandstorm.
+    // of extra info on a no-longer-used package held in memory until they refresh Thurly.
     // So, we implement this as a cache: the first time each package ID shows up among the user's
     // stuff, we push the package info to the client, and then we never update it.
     //

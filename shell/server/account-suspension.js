@@ -1,5 +1,5 @@
-// Sandstorm - Personal Cloud Sandbox
-// Copyright (c) 2016 Sandstorm Development Group, Inc. and contributors
+// Thurly - Personal Cloud Sandbox
+// Copyright (c) 2016 Thurly Development Group, Inc. and contributors
 // All rights reserved.
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
@@ -28,7 +28,7 @@ function sendDeletionEmails(db, deletedUserId, byAdminUserId, feedback) {
       const emailOptions = {
         from: db.getReturnAddress(),
         subject: `Your account on ${db.getServerTitle()} will be deleted in 7 days.`,
-        text: `You have requested that your Sandstorm account on ${db.getServerTitle()} be deleted. Your account has been suspended and will be fully deleted in seven days. If you change your mind, log into ${process.env.ROOT_URL} to cancel the process.
+        text: `You have requested that your Thurly account on ${db.getServerTitle()} be deleted. Your account has been suspended and will be fully deleted in seven days. If you change your mind, log into ${process.env.ROOT_URL} to cancel the process.
 
 If you did not request this deletion, please contact the server administrator immediately.`,
       };
@@ -51,7 +51,7 @@ If you did not request this deletion, please contact the server administrator im
   if (byAdminUserId) {
     const initiatingAdmin = db.getUser(byAdminUserId);
     const adminName = db.getIdentity(initiatingAdmin.loginIdentities[0].id).profile.name;
-    emailOptions.text = `${adminName} has requested that the Sandstorm account held by ${deleteUserString} on ${db.getServerTitle()} be deleted. The account has been suspended and will be fully deleted in seven days. To cancel the deletion, go to: ${process.env.ROOT_URL}/admin/users/${deletedUser._id}`;
+    emailOptions.text = `${adminName} has requested that the Thurly account held by ${deleteUserString} on ${db.getServerTitle()} be deleted. The account has been suspended and will be fully deleted in seven days. To cancel the deletion, go to: ${process.env.ROOT_URL}/admin/users/${deletedUser._id}`;
   } else {
     emailOptions.text = `${deleteUserString} has requested that their account be deleted on ${db.getServerTitle()}. The account has been suspended and will be fully deleted in seven days. To cancel the deletion, go to: ${process.env.ROOT_URL}/admin/users/${deletedUser._id}`;
     if (feedback) {

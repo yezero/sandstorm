@@ -16,12 +16,12 @@ $[slow]ok
 $[run]sudo ln -sf $(which busybox) /tmp/busybox-utilities/mkdir && sudo ln -sf $(which busybox) /tmp/busybox-utilities/mktemp && sudo ln -sf $(which busybox) /tmp/busybox-utilities/stat && echo ok
 $[slow]ok
 $[run]sudo PATH=/tmp/busybox-utilities:$PATH:/sbin:/usr/sbin CURL_USER_AGENT=testing REPORT=no bash /vagrant/install.sh -d
-$[slow]Sandstorm requires sysctl kernel.unprivileged_userns_clone to be enabled.
+$[slow]Thurly requires sysctl kernel.unprivileged_userns_clone to be enabled.
 Config written to /opt/sandstorm/sandstorm.conf.
 Finding latest build for dev channel...
 $[veryslow]Downloading: https://dl.sandstorm.io/
 $[veryslow]GPG signature is valid.
-$[veryslow]Sandstorm started.
+$[veryslow]Thurly started.
 $[veryslow]Your server is coming online. Waiting up to 90 seconds...
 $[veryslow]Visit this link to start using it:
   http://local.sandstorm.io:6080/

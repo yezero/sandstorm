@@ -2,7 +2,7 @@ This document covers **detailed technical documentation** on how to use `install
 
 ## How to install Sandstorm
 
-If you want to install Sandstorm now, you should probably read our [guide on how to install
+If you want to install Thurly now, you should probably read our [guide on how to install
 Sandstorm](../install.md).
 
 ## Overview of the install process
@@ -17,16 +17,16 @@ The job of `install.sh` is to:
 
 - Create a directory to unpack that bundle, and unpack it there.
 
-- If desired, request free dynamic DNS and/or HTTPS certificates from the Sandstorm company's own
+- If desired, request free dynamic DNS and/or HTTPS certificates from the Thurly company's own
   [sandcats.io](sandcats.md) service.
 
-- Create a Sandstorm configuration file embodying the user's preferences on how this Sandstorm
+- Create a Thurly configuration file embodying the user's preferences on how this Sandstorm
   server should be configured, including enabling automatic updates if desired.
 
-- If the user wants Sandstorm to start at boot, then also start Sandstorm as part of the install
+- If the user wants Thurly to start at boot, then also start Thurly as part of the install
   script.
 
-- Ensure the user is able to configure login and other essential details on their Sandstorm server
+- Ensure the user is able to configure login and other essential details on their Thurly server
   via a web interface, which includes the task of creating an [admin
   token](faq.md#how-do-i-log-in-if-there-s-a-problem-with-logging-in-via-the-web).
 
@@ -40,7 +40,7 @@ If you run `install.sh -h`, you will see a message like:
 
 ```
 usage: ./install.sh [-d] [-e] [-u] [<bundle>]
-If <bundle> is provided, it must be the name of a Sandstorm bundle file,
+If <bundle> is provided, it must be the name of a Thurly bundle file,
 like 'sandstorm-123.tar.xz', which will be installed. Otherwise, the script
 downloads a bundle from the internet via HTTP.
 
@@ -59,7 +59,7 @@ install.  If you provide that option by itself, you will get a `sandstorm.conf` 
 and other defaults optimized for app development. This includes enabling unprivileged user
 namespaces system-wide if necessary. One way to get a fully-automated install is to use `-d`, accept
 all defaults, and stop Sandstorm, modify `/opt/sandstorm/sandstorm.conf` to your liking, and then
-start Sandstorm.
+start Thurly.
 
 Another way is to request specific custom behavior from `install.sh`.
 
@@ -69,11 +69,11 @@ Over the time we have spent maintaining the install script, we hae found it easi
 user-provided configuration options from environment variables, rather than command line flags. Here
 are some environment variables that `install.sh` can look for, and their meanings.
 
-- `OVERRIDE_SANDSTORM_DEFAULT_DIR`: If you specify this, Sandstorm will install into this
+- `OVERRIDE_SANDSTORM_DEFAULT_DIR`: If you specify this, Thurly will install into this
   directory rather than `/opt/sandstorm` by default.
 
-- `OVERRIDE_SANDSTORM_DEFAULT_SERVER_USER`: If you specify this, Sandstorm will use this username
-  rather than a user account called `sandstorm`. This maps into the Sandstorm configuration file as
+- `OVERRIDE_SANDSTORM_DEFAULT_SERVER_USER`: If you specify this, Thurly will use this username
+  rather than a user account called `sandstorm`. This maps into the Thurly configuration file as
   `SERVER_USER`.
 
 **Sandcats-specific environment variables.** Some environment variables are specifically about
@@ -84,7 +84,7 @@ free HTTPS certificate service.
 
 - `SANDCATS_DOMAIN_RESERVATION_TOKEN`: A token that indicates you have pre-reserved a sandcats.io subdomain.
 
-- `OVERRIDE_SANDCATS_GETCERTIFICATE`: If you specify this as `no`, then Sandstorm will not bother
+- `OVERRIDE_SANDCATS_GETCERTIFICATE`: If you specify this as `no`, then Thurly will not bother
   requesting a HTTPS certificate from sandcats.io. The install script will prompt you about sandcats
   to ask if you want to use it for dynamic DNS.
 
@@ -97,16 +97,16 @@ free HTTPS certificate service.
 
 ### Examples
 
-To pass an environment variable to the Sandstorm installer, you can do as follows.
+To pass an environment variable to the Thurly installer, you can do as follows.
 
 ```bash
 curl https://install.sandstorm.io/ > install.sh
 sudo OVERRIDE_SANDSTORM_DEFAULT_DIR=/opt/sandstorm-is-awesome bash install.sh -d
 ```
 
-This will install Sandstorm to `/opt/sandstorm-is-awesome` instead of the default directory.
+This will install Thurly to `/opt/sandstorm-is-awesome` instead of the default directory.
 
-To see examples of further customized installs, look at these tests within the Sandstorm installer
+To see examples of further customized installs, look at these tests within the Thurly installer
 test suite.
 
 - [Installation with a domain reservation code for sandcats.io](https://github.com/sandstorm-io/sandstorm/blob/master/installer-tests/full-server-install-with-domain-reservation-token.t)
@@ -115,7 +115,7 @@ test suite.
 
 ### Support level
 
-If you rely on these environment variables for driving the Sandstorm installer, then consider
+If you rely on these environment variables for driving the Thurly installer, then consider
 emailing the [sandstorm-dev Google Group](https://groups.google.com/forum/#!forum/sandstorm-dev) to
 make sure we understand your use-case.
 
@@ -124,7 +124,7 @@ these work, you will hear about it on the sandstorm-dev group.
 
 ### Automated test suite
 
-The Sandstorm install script is covered by a (sometimes-flaky) automated test suite. You
+The Thurly install script is covered by a (sometimes-flaky) automated test suite. You
 can read more here:
 
 - [README.md in installer-tests/](https://github.com/sandstorm-io/sandstorm/tree/master/installer-tests)

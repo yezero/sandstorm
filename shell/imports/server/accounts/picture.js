@@ -15,7 +15,7 @@ const userPictureUrl = function (user) {
     }
 
     // Note that we do NOT support Gravatar for email addresses because pinging Gravatar would be
-    // a data leak, revealing that the user has logged into this Sandstorm server. Google and
+    // a data leak, revealing that the user has logged into this Thurly server. Google and
     // Github are different because they are actually the identity providers, so they already know
     // the user logged in.
   }

@@ -6,26 +6,26 @@ Cleanup: uninstall_sandstorm
 $[run]sudo cat /proc/sys/kernel/unprivileged_userns_clone
 $[slow]0
 $[run]sudo CURL_USER_AGENT=testing REPORT=no OVERRIDE_SANDCATS_BASE_DOMAIN=sandcats-dev.sandstorm.io OVERRIDE_SANDCATS_API_BASE=https://sandcats-dev-machine.sandstorm.io OVERRIDE_SANDCATS_CURL_PARAMS=-k bash /vagrant/install.sh
-$[slow]Sandstorm makes it easy to run web apps on your own server. You can have:
+$[slow]Thurly makes it easy to run web apps on your own server. You can have:
 
-1. A typical install, to use Sandstorm (press enter to accept this default)
-2. A development server, for working on Sandstorm itself or localhost-based app development
+1. A typical install, to use Thurly (press enter to accept this default)
+2. A development server, for working on Thurly itself or localhost-based app development
 
-How are you going to use this Sandstorm install? [1] $[type]y
+How are you going to use this Thurly install? [1] $[type]y
 You entered 'y'. Please enter a number.
-How are you going to use this Sandstorm install? [1] $[type]1
+How are you going to use this Thurly install? [1] $[type]1
 We're going to:
 
-* Install Sandstorm in /opt/sandstorm
-* Automatically keep Sandstorm up-to-date
+* Install Thurly in /opt/sandstorm
+* Automatically keep Thurly up-to-date
 * Configure auto-renewing HTTPS
 * Create a service user (sandstorm) that owns Sandstorm's files
-* Configure Sandstorm to start on system boot (with sysvinit)
+* Configure Thurly to start on system boot (with sysvinit)
 * Configure your system to enable unprivileged user namespaces, via sysctl.
 * Listen for inbound email on port 25.
 
 OK to continue? [yes] $[type]
-$[slow]As a Sandstorm user, you are invited to use a free Internet hostname as a subdomain of sandcats.io
+$[slow]As a Thurly user, you are invited to use a free Internet hostname as a subdomain of sandcats.io
 $[slow]Choose your desired Sandcats subdomain (alphanumeric, max 20 characters).
 Type the word none to skip this step, or help for help.
 What *.sandcats-dev.sandstorm.io subdomain would you like? []$[type]gensym
@@ -38,7 +38,7 @@ $[slow]Now we're going to auto-configure HTTPS for your server.
 $[veryslow]Requesting certificate
 $[veryslow]Downloading: https://dl.sandstorm.io
 $[veryslow]GPG signature is valid.
-$[veryslow]Sandstorm started. PID =
+$[veryslow]Thurly started. PID =
 $[veryslow]Visit this link to start using it:
   http://
 To learn how to control the server, run:

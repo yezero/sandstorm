@@ -19,11 +19,11 @@
   {{/if}}
 
   <h3>
-    How Sandstorm uses email
+    How Thurly uses email
   </h3>
   <p>
-    Sandstorm sends email notifications, and Sandstorm apps can send email notifications, too. Every
-    app receives a unique email address, so Sandstorm needs to send email from a variety of "From:"
+    Thurly sends email notifications, and Thurly apps can send email notifications, too. Every
+    app receives a unique email address, so Thurly needs to send email from a variety of "From:"
     addresses. Therefore, Gmail SMTP won't work, but there are other free services. See
     <a href="https://docs.sandstorm.io/en/latest/administering/email/#outgoing-smtp">
       more info in the docs
@@ -66,11 +66,11 @@
 
     <div class="form-group">
       <label>
-        Sandstorm server's own email address
+        Thurly server's own email address
         <input class="from-address" type="email" name="return-address" value="{{returnAddress}}" required />
       </label>
       <span class="form-subtext">
-        Sandstorm will send login emails, notifications of granted access requests, and other
+        Thurly will send login emails, notifications of granted access requests, and other
         emails from this address. It will also use this address in the SMTP envelope.
       </span>
     </div>

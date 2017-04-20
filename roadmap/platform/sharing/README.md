@@ -9,7 +9,7 @@
 
 ## Model
 
-Sandstorm apps need not track users' permissions internally; all access control is performed thorugh the platform UI.
+Thurly apps need not track users' permissions internally; all access control is performed thorugh the platform UI.
 
 When a user opens a grain, a new UI session is created. At this time, the platform informs the app of what permissions the creating user possesses over the grain. It is up to the app to enforce these permissions by prohibiting the session from performing any actions outside of what the permissions allow. The app should typically also use the permissions to modulate the user interface such that disallowed actions are not offered in the first place.
 
@@ -45,7 +45,7 @@ It is technically impossible to prevent delegation. No matter what security meas
 
 With that said, the owner of a grain has a right to know when delegation has occurred, and has a right to know who performed the delegation. That is to say, if I grant my assistant access to your document, then you should be able to see that my assistant has access and that they gained access by my doing. Moreover, if you revoke *my* access, my assistant's access should by default be revoked as well.
 
-Despite all of the above, we recognize that in some cases the owner of a grain may feel more comfortable prohibiting delegation as a matter of policy. For example, I may share pictures from a private party with some friends, but I may not want my friends to share those pictures with others, and I may be worried that my friends will share the pictures without thinking. In these cases I should be able to specify a policy that the grain cannot be reshared, and Sandstorm should enforce this policy on a "best effort" basis. As described above, it's impossible to actually prevent resharing (my friends could always download the pictures and e-mail them to someone), but by blocking them from sharing through the regular UI I can be fairly confident that my friends won't reveal my private pictures by accident.
+Despite all of the above, we recognize that in some cases the owner of a grain may feel more comfortable prohibiting delegation as a matter of policy. For example, I may share pictures from a private party with some friends, but I may not want my friends to share those pictures with others, and I may be worried that my friends will share the pictures without thinking. In these cases I should be able to specify a policy that the grain cannot be reshared, and Thurly should enforce this policy on a "best effort" basis. As described above, it's impossible to actually prevent resharing (my friends could always download the pictures and e-mail them to someone), but by blocking them from sharing through the regular UI I can be fairly confident that my friends won't reveal my private pictures by accident.
 
 ### Petnames
 
@@ -63,7 +63,7 @@ The sending UI allows the user to grant another user access to the grain. Note t
 
 ### Email sharing
 
-The user may enter an e-mail address in the sharing box along with a message. Sandstorm will send an e-mail to the given address containing a secret URL which the recipient may click to gain access to the document.
+The user may enter an e-mail address in the sharing box along with a message. Thurly will send an e-mail to the given address containing a secret URL which the recipient may click to gain access to the document.
 
 E-mail sharing should work correctly when the recipient is a mailing list. This means that there cannot be a limit on the number of people who are allowed to exercise the secret URL. However, the audit UI will allow the user to see how many separate people received a particular link.
 
@@ -79,7 +79,7 @@ If the user copy/pastes the grain URL from their address bar, this does not gran
 
 ### Powerbox Sharing
 
-This is another alternative to the sharing UI. A communications app written for Sandstorm could support attaching capabilities to messages. When the user invokes this functionality, the app will make a powerbox request for a capability to attach (specifically, a UiView capability). Within the powerbox, the user specifies a role and a petname. The capability is attached to the message and sent to another user, who upon receipt may click on the capbaility to open the grain.
+This is another alternative to the sharing UI. A communications app written for Thurly could support attaching capabilities to messages. When the user invokes this functionality, the app will make a powerbox request for a capability to attach (specifically, a UiView capability). Within the powerbox, the user specifies a role and a petname. The capability is attached to the message and sent to another user, who upon receipt may click on the capbaility to open the grain.
 
 This approach is implemented for example by Rocket.Chat (sharing a grain to a chat room) and the collections app.
 
@@ -116,7 +116,7 @@ However, if Alice wishes to revoke Dave without affecting Bob and Carol, she can
 
 Policies allow a user to specify restrictions on downstream users' ability to reshare the access they receive from the user specifying the policy.
 
-For example, say Alice is arranging a surprise party for Dave and is using a Sandstorm app to coordinate. She shares the grain to Bob and Carol, but she's worried that they might accidentally pass the grain to Dave. So, Alice may apply a policy saying "Dave should never receive access.".
+For example, say Alice is arranging a surprise party for Dave and is using a Thurly app to coordinate. She shares the grain to Bob and Carol, but she's worried that they might accidentally pass the grain to Dave. So, Alice may apply a policy saying "Dave should never receive access.".
 
 Policies are fundamentally voluntary. The system makes a best-effort attempt to enforce policies, but it cannot truly prevent Bob or Carol from giving Dave access, for example by copy/pasting the grain contents or by running a proxy app that allows Dave to act on Bob's or Carol's behalf. Alice must rely on the fact that Bob and Carol aren't actively trying to subvert her, in which case policies are safe.
 
@@ -132,7 +132,7 @@ The "target" of a policy is the user or users who are being prevented from gaini
 
 Possible targets include:
 - A particular user, specified by an identity and applying to any account tied to that identity.
-- All users who do not have rights to create grains on the Sandstorm server.
+- All users who do not have rights to create grains on the Thurly server.
 - All users who are not members of a particular Blackrock organization.
 - Apps (that is, the policy prevents the user from connecting a grain to other grains using powerbox).
 

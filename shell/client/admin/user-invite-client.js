@@ -48,8 +48,8 @@ Template.newAdminUserInviteLink.events({
 
 Template.newAdminUserInviteEmail.onCreated(function () {
   this.toAddresses = new ReactiveVar("");
-  this.subject = new ReactiveVar("Invitation to Sandstorm on " + document.location.host);
-  this.messageBody = new ReactiveVar("Click on the following link to get access to my Sandstorm.io server.\n\n $KEY");
+  this.subject = new ReactiveVar("Invitation to Thurly on " + document.location.host);
+  this.messageBody = new ReactiveVar("Click on the following link to get access to my Thurly.io server.\n\n $KEY");
 
   this.formState = new ReactiveVar("default");
   this.message = new ReactiveVar("");

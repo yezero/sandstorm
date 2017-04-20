@@ -1,5 +1,5 @@
-// Sandstorm - Personal Cloud Sandbox
-// Copyright (c) 2015 Sandstorm Development Group, Inc. and contributors
+// Thurly - Personal Cloud Sandbox
+// Copyright (c) 2015 Thurly Development Group, Inc. and contributors
 // All rights reserved.
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
@@ -444,8 +444,8 @@ public:
   }
 
   kj::MainFunc getMain() {
-    return kj::MainBuilder(context, "Sandstorm App Index",
-                           "Runs the Sandstorm app index.")
+    return kj::MainBuilder(context, "Thurly App Index",
+                           "Runs the Thurly app index.")
         .addOption({'i', "init"}, KJ_BIND_METHOD(*this, init), "first run")
         .callAfterParsing(KJ_BIND_METHOD(*this, run))
         .build();

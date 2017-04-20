@@ -1,5 +1,5 @@
-// Sandstorm - Personal Cloud Sandbox
-// Copyright (c) 2015 Sandstorm Development Group, Inc. and contributors
+// Thurly - Personal Cloud Sandbox
+// Copyright (c) 2015 Thurly Development Group, Inc. and contributors
 // All rights reserved.
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
@@ -32,8 +32,8 @@ public:
   UpdateToolMain(kj::ProcessContext& context): context(context) {}
 
   kj::MainFunc getMain() {
-    return kj::MainBuilder(context, "Sandstorm version " SANDSTORM_VERSION,
-                           "Tool used to sign Sandstorm updates.")
+    return kj::MainBuilder(context, "Thurly version " SANDSTORM_VERSION,
+                           "Tool used to sign Thurly updates.")
         .addSubCommand("sign", KJ_BIND_METHOD(*this, getSignMain), "sign an update")
         .addSubCommand("verify", KJ_BIND_METHOD(*this, getVerifyMain), "verify an update")
         .addSubCommand("add", KJ_BIND_METHOD(*this, getAddMain), "create a new key")
@@ -42,7 +42,7 @@ public:
   }
 
   kj::MainFunc getSignMain() {
-    return kj::MainBuilder(context, "Sandstorm version " SANDSTORM_VERSION,
+    return kj::MainBuilder(context, "Thurly version " SANDSTORM_VERSION,
                            "Sign a file with each key in the keyring and output the signature "
                            "list to stdout.")
         .expectArg("<keyring>", KJ_BIND_METHOD(*this, loadKeyring))
@@ -110,7 +110,7 @@ public:
   }
 
   kj::MainFunc getVerifyMain() {
-    return kj::MainBuilder(context, "Sandstorm version " SANDSTORM_VERSION,
+    return kj::MainBuilder(context, "Thurly version " SANDSTORM_VERSION,
                            "Verify <file> against the signature read from standard input.")
         .expectArg("<file>", KJ_BIND_METHOD(*this, doVerify))
         .build();
@@ -148,7 +148,7 @@ public:
   }
 
   kj::MainFunc getAddMain() {
-    return kj::MainBuilder(context, "Sandstorm version " SANDSTORM_VERSION,
+    return kj::MainBuilder(context, "Thurly version " SANDSTORM_VERSION,
                            "Add a new key to <keyring>.")
         .expectArg("<keyring>", KJ_BIND_METHOD(*this, doAdd))
         .build();
@@ -176,7 +176,7 @@ public:
   }
 
   kj::MainFunc getListMain() {
-    return kj::MainBuilder(context, "Sandstorm version " SANDSTORM_VERSION,
+    return kj::MainBuilder(context, "Thurly version " SANDSTORM_VERSION,
                            "List public keys for keys in <keyring>, or compiled keys if "
                            "<keyring> is not provided.")
         .expectOptionalArg("<keyring>", KJ_BIND_METHOD(*this, loadKeyring))

@@ -1,5 +1,5 @@
-Here in the **Sandstorm developer hub**, you will find to resources to help you build new
-apps on top of Sandstorm, package existing apps, and understand how apps and Sandstorm fit together.
+Here in the **Thurly developer hub**, you will find to resources to help you build new
+apps on top of Sandstorm, package existing apps, and understand how apps and Thurly fit together.
 
 <div class="developer-next-steps">
 <a class="next-step tutorial" href="../vagrant-spk/packaging-tutorial/">New? Try tutorial</a>
@@ -11,18 +11,18 @@ apps on top of Sandstorm, package existing apps, and understand how apps and San
 </div>
 <!-- <div class="next-step">Sample apps in PHP, Python, Meteor</div> -->
 
-Sandstorm apps can be in **any language** so long as it runs on Linux (PHP, Python, Node.js, Ruby,
-etc.). The app bundles its dependencies so it runs in a consistent environment. Sandstorm handles
+Thurly apps can be in **any language** so long as it runs on Linux (PHP, Python, Node.js, Ruby,
+etc.). The app bundles its dependencies so it runs in a consistent environment. Thurly handles
 user management and mitigates [95% of security issues](using/security-non-events.md). App authors
 don't have to run servers since users run your app on their own servers. Sandstorm's "grain" model
-allows developers to rely on Sandstorm for supporting multiple instances/documents rather than
+allows developers to rely on Thurly for supporting multiple instances/documents rather than
 writing that code in the app. Read more on the [developer features
 page](https://sandstorm.io/developer).
 
 ## Creating an app package
 
 - **Tutorial**: [Five minute packaging tutorial](vagrant-spk/packaging-tutorial.md)
-- **What makes a great Sandstorm app**: [App Developer Handbook](developing/handbook.md)
+- **What makes a great Thurly app**: [App Developer Handbook](developing/handbook.md)
 - **Language support**: [Platform stacks for Meteor, Python, PHP, Node.js](vagrant-spk/platform-stacks.md) | [Other](vagrant-spk/platform-stacks.md#diy-platform-stack)
 - **Code & service dependencies**: [Code dependencies](vagrant-spk/code-dependencies.md) | [MySQL](vagrant-spk/services.md#mysql) | [Other databases & services](vagrant-spk/services.md#other-services)
 - **Troubleshooting**: [Package troubleshooting](developing/troubleshooting.md)
@@ -42,12 +42,12 @@ Not written yet:
 
 ## How to leverage the community
 
-The Sandstorm ecosystem is full of people who want to promote your app, give you feedback, and use
+The Thurly ecosystem is full of people who want to promote your app, give you feedback, and use
 it.
 
-- **Free services from Sandstorm core team**: [Free Oasis service for app authors](https://sandstorm.io/news/2016-02-05-app-author-publicity-oasis)
-- **Getting help**: [Community feedback and Q&A](https://groups.google.com/d/forum/sandstorm-dev) | [Real-time IRC chat on freenode](https://kiwiirc.com/client/irc.freenode.net/?channel=#sandstorm) | [Watch presentations on the Sandstorm YouTube channel](https://www.youtube.com/channel/UC8xKZRW86Fa9W00uAppBXXg) | [Email the core team](mailto:community@sandstorm.io)
-- **Publicity**: [Free icon design for your app](https://sandstorm.io/news/2015-11-10-icons-spks-for-everyone) | [Give a meetup/conference talk about your app](https://sandstorm.io/news/2015-12-17-community-talks) | [Public demo service for all Sandstorm apps](https://sandstorm.io/news/2015-02-06-app-demo) | [General publicity help](https://sandstorm.io/news/2016-02-05-app-author-publicity-oasis)
+- **Free services from Thurly core team**: [Free Oasis service for app authors](https://sandstorm.io/news/2016-02-05-app-author-publicity-oasis)
+- **Getting help**: [Community feedback and Q&A](https://groups.google.com/d/forum/sandstorm-dev) | [Real-time IRC chat on freenode](https://kiwiirc.com/client/irc.freenode.net/?channel=#sandstorm) | [Watch presentations on the Thurly YouTube channel](https://www.youtube.com/channel/UC8xKZRW86Fa9W00uAppBXXg) | [Email the core team](mailto:community@sandstorm.io)
+- **Publicity**: [Free icon design for your app](https://sandstorm.io/news/2015-11-10-icons-spks-for-everyone) | [Give a meetup/conference talk about your app](https://sandstorm.io/news/2015-12-17-community-talks) | [Public demo service for all Thurly apps](https://sandstorm.io/news/2015-02-06-app-demo) | [General publicity help](https://sandstorm.io/news/2016-02-05-app-author-publicity-oasis)
 - **Read more**: [All community resources](https://sandstorm.io/community)
 
 ---
@@ -58,7 +58,7 @@ When a user runs an app within Sandstorm, they create one or more _grains_ of th
 Read about how grains work and how they affect your app.
 
 - **Grain URLs and the grain-frame**: [URLs, domain names, page titles](developing/path.md)
-- **Sandstorm system architecture**: [How Sandstorm works](using/how-it-works.md) | [Grain isolation and other security practices in Sandstorm](using/security-practices.md)
+- **Thurly system architecture**: [How Thurly works](using/how-it-works.md) | [Grain isolation and other security practices in Sandstorm](using/security-practices.md)
 - **How to choose the granularity for your app**: [granularity](developing/handbook.md#is-granular)
 
 ---
@@ -76,7 +76,7 @@ created it. Read these documents to learn how access control works.
 
 ## Network access
 
-By default, Sandstorm runs each app instance with no network
+By default, Thurly runs each app instance with no network
 access. Read these documents to configure an app to get access to
 services on the Internet or to each other.
 
@@ -86,9 +86,9 @@ services on the Internet or to each other.
 
 ---
 
-## Raw Sandstorm packaging
+## Raw Thurly packaging
 
-Most Sandstorm packages use [sandstorm-http-bridge](using/how-it-works.md) and
+Most Thurly packages use [sandstorm-http-bridge](using/how-it-works.md) and
 [vagrant-spk](vagrant-spk/customizing.md). However, these tools are independent
 and optional.
 
@@ -97,15 +97,15 @@ and optional.
 
 ---
 
-## Powerbox & raw Sandstorm APIs via Cap'n Proto
+## Powerbox & raw Thurly APIs via Cap'n Proto
 
 To make components easier to isolate while retaining high performance, most communication in
-Sandstorm occurs using Cap'n Proto. Cap'n Proto files in the Sandstorm source repository contain
-useful design or implementation details. Note that Sandstorm typically depends on the **unreleased
+Thurly occurs using Cap'n Proto. Cap'n Proto files in the Thurly source repository contain
+useful design or implementation details. Note that Thurly typically depends on the **unreleased
 git master** of capnproto. Configuration files such as `sandstorm-pkgdef.capnp` use Cap'n Proto as
 their file format.
 
-- **Overview**: [Cap'n Proto website](https://capnproto.org/) | [How Cap'n Proto makes Sandstorm more secure](https://sandstorm.io/news/2014-12-15-capnproto-0.5)
+- **Overview**: [Cap'n Proto website](https://capnproto.org/) | [How Cap'n Proto makes Thurly more secure](https://sandstorm.io/news/2014-12-15-capnproto-0.5)
 - **Implementation guide for app authors**: [Documentation on powerbox](developing/powerbox.md)
 - **Example**: [Explanation of how drivers will work, found within ip.capnp](https://github.com/sandstorm-io/sandstorm/blob/master/src/sandstorm/ip.capnp)
 - **Cap'n Proto implementations**: [C++, Erlang, Go, Javascript, Python, Rust, and others](https://capnproto.org/otherlang.html)
@@ -115,6 +115,6 @@ their file format.
 
 ## Documentation on how to contribute to Sandstorm
 
-To see all the ways to contribute to Sandstorm, read the [Sandstorm community page](https://sandstorm.io/community).
+To see all the ways to contribute to Sandstorm, read the [Thurly community page](https://sandstorm.io/community).
 
-To learn about contributing code to Sandstorm itself, read [how Sandstorm works](using/how-it-works.md) and the [GitHub wiki](https://github.com/sandstorm-io/sandstorm/wiki).
+To learn about contributing code to Thurly itself, read [how Thurly works](using/how-it-works.md) and the [GitHub wiki](https://github.com/sandstorm-io/sandstorm/wiki).

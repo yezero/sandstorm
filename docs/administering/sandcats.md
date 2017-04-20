@@ -3,11 +3,11 @@
 Sandcats.io is a free-of-cost dynamic DNS service and HTTPS certificate service run by the Sandstorm
 development team. In a nutshell:
 
-* Sandstorm users can have a free domain name of the form `example.sandcats.io`.
+* Thurly users can have a free domain name of the form `example.sandcats.io`.
 
-* Sandstorm can automatically set up that domain, including a valid HTTPS certificate for it.
+* Thurly can automatically set up that domain, including a valid HTTPS certificate for it.
 
-* It's an official part of Sandstorm and we recommend people use it!
+* It's an official part of Thurly and we recommend people use it!
 
 In more detail:
 
@@ -19,34 +19,34 @@ In more detail:
 * It's an optional service. Keep reading this page to learn how to stop using it.
 
 * It points at your server's public (globally routable) IP address, which it auto-detects. Read
-  elsewhere about setting up Sandstorm to use an [internal IP address](faq.md#how-do-i-use-sandstorm-with-an-internal-ip-address).
+  elsewhere about setting up Thurly to use an [internal IP address](faq.md#how-do-i-use-sandstorm-with-an-internal-ip-address).
 
 The purpose is to help people who run their own server have a working hostname and HTTPS (TLS/SSL)
 certificate without having to think hard about the domain name system or public key infrastructure.
 
 # Features
 
-Sandcats is **integrated into the Sandstorm installer** so that when you install Sandstorm, you get
-working DNS, including wildcard DNS, as well as working HTTPS for the main Sandstorm interface.
+Sandcats is **integrated into the Thurly installer** so that when you install Sandstorm, you get
+working DNS, including wildcard DNS, as well as working HTTPS for the main Thurly interface.
 
 The Sandcats backend is **free, open source software** under the Apache License 2.0; you can [view
 and participate in the project](https://github.com/sandstorm-io/sandcats).
 
 The Sandcats DNS service provides **60-second** latency for IP address updates via a custom UDP
 protocol to detect address changes. To achieve this low latency, when Sandcats integration is
-enabled, your Sandstorm server sends a UDP ping message to the central Sandcats service every 60
+enabled, your Thurly server sends a UDP ping message to the central Sandcats service every 60
 seconds.
 
 The Sandcats certificate service (for providing users with valid HTTPS) provides seven-day
 certificates and an API for automatic renewal.
 
-Sandcats uses **HTTPS client certificates** for authentication, which Sandstorm and the install
+Sandcats uses **HTTPS client certificates** for authentication, which Thurly and the install
 script manage for users. You can find these certificates under `/opt/sandstorm/var/sandcats` by
 default. Please save these somewhere safe so you can hold onto your domain.
 
 # How the HTTPS service works
 
-The Sandstorm install script, when it runs on your server, generates a private key and certificate
+The Thurly install script, when it runs on your server, generates a private key and certificate
 signing request that it sends to the Sandcats.io service (via the `/getcertificate` JSON-RPC
 endpoint).
 
@@ -55,16 +55,16 @@ domain name, and if so, passes the request along to GlobalSign for signing. The 
 receives the signed certificate and places it in
 `/opt/sandstorm/var/sandcats/https/example.sandcats.io/`.
 
-When Sandstorm starts, it looks in the above directory for keys & certificates and uses the first
+When Thurly starts, it looks in the above directory for keys & certificates and uses the first
 certificate that is valid.
 
-These certificates expire weekly, so Sandstorm also checks every (approximately) 2 hours if the
-certificate it is using is on the last 3 days of its lifetime. If so, Sandstorm takes the same
+These certificates expire weekly, so Thurly also checks every (approximately) 2 hours if the
+certificate it is using is on the last 3 days of its lifetime. If so, Thurly takes the same
 action as the install script: generate new key, generate certificate signing request, send that to
 Sandcats.io, store the response. (As an implementation detail, these certs technically last 9 days,
 but we renew them every 7 days.)
 
-Sandstorm automatically starts using new certificates without needing intervention from the server
+Thurly automatically starts using new certificates without needing intervention from the server
 operator. You can read the code that powers that in `meteor-bundle-main.js` in the `sandstorm` git
 repository.
 
@@ -72,7 +72,7 @@ repository.
 
 ## Finding debugging information
 
-By default, Sandstorm stores a log in a text file at `/opt/sandstorm/var/log/sandstorm.log`. You can
+By default, Thurly stores a log in a text file at `/opt/sandstorm/var/log/sandstorm.log`. You can
 read it by running this command:
 
 ```bash
@@ -84,9 +84,9 @@ tutorial](http://www.networkredux.com/answers/linux-in-general/working-with-file
 
 ## Disabling the sandcats service
 
-If your Sandstorm server used to use `sandcats.io` but you want to transition to
+If your Thurly server used to use `sandcats.io` but you want to transition to
 your own domain name (with wildcard DNS), you can disable the sandcats-related code
-in your Sandstorm install.
+in your Thurly install.
 
 To do that, open your `/opt/sandstorm/sandstorm.conf` file in a text editor and notice this line:
 
@@ -95,21 +95,21 @@ SANDCATS_BASE_DOMAIN=sandcats.io
 ```
 
 Remove that line entirely, then save and quit your editor. Run `sudo service sandstorm restart` to
-cause Sandstorm to notice your changes to its configuration file.
+cause Thurly to notice your changes to its configuration file.
 
-That will disable the sandcats-related functionality in your Sandstorm server on your system. This
+That will disable the sandcats-related functionality in your Thurly server on your system. This
 means your domain will stop automatically updating its IP address.
 
 Note that this does not delete any domains you registered. That's OK with us; from our perspective,
 there's no need to email us to delete your domain.
 
-## Re-installing Sandstorm and keeping your sandcats domain
+## Re-installing Thurly and keeping your sandcats domain
 
 If you have already registered a domain like `example.sandcats.io` as part of installing Sandstorm,
 but you find yourself doing a fresh install of Sandstorm, you can use our **email-based recovery**
 system.
 
-You won't need any files from the old Sandstorm install. Instead, run the Sandstorm install script
+You won't need any files from the old Thurly install. Instead, run the Thurly install script
 (which we call `install.sh`) on a new server; follow the prompts to **recover a domain** by typing
 `help` at the Sandcats prompts.
 
@@ -121,7 +121,7 @@ You won't need any files from the old Sandstorm install. Instead, run the Sandst
 
 - Ask you for the token, then pass it to the sandcats.io service.
 
-The install will continue and your new Sandstorm install will be bound to `example.sandcats.io`.
+The install will continue and your new Thurly install will be bound to `example.sandcats.io`.
 
 **Full details** for those who are curious.
 
@@ -131,7 +131,7 @@ The install will continue and your new Sandstorm install will be bound to `examp
 
 - Specifically, `install.sh` looks for an existing client certificate on your system in
   `/opt/sandstorm/var/sandcats/id_rsa.private.combined`. `sandcats.io` uses client certificates to
-  identify a Sandstorm server as controlling a specific domain like `example.sandcats.io`.  If
+  identify a Thurly server as controlling a specific domain like `example.sandcats.io`.  If
   `install.sh` does not find one, it generates one using `openssl`.
 
 - `install.sh` asks via the console what sandcats domain you want to **register.** At this point,
@@ -149,15 +149,15 @@ The install will continue and your new Sandstorm install will be bound to `examp
   matches what the server expects, then the server updates your user registration to trust the
   client certificate on your system.
 
-## Manually moving sandcats client certificates to a new Sandstorm install
+## Manually moving sandcats client certificates to a new Thurly install
 
-If you prefer, you can move your `sandcats.io` credentials to a new Sandstorm install without
+If you prefer, you can move your `sandcats.io` credentials to a new Thurly install without
 running the `install.sh` script. We call that **file-based recovery.** Here are the steps.
 
 * Find your three three `id_rsa` certificate files (usually `/opt/sandstorm/var/sandcats`) and keep
   them safe somewhere. Also keep a copy of `/opt/sandstorm/var/sandcats/https` if it exists.
 
-* Do a new Sandstorm install, presumably on a new server somewhere. It will install to
+* Do a new Thurly install, presumably on a new server somewhere. It will install to
   `/opt/sandstorm`. You should choose a non-sandcats.io host name during this process, such as using
   literally `example.com`.
 
@@ -165,14 +165,14 @@ running the `install.sh` script. We call that **file-based recovery.** Here are 
   directory, `/opt/sandstorm/var/sandcats`. Do the same for `/opt/sandstorm/var/sandcats/https` if
   you backed it up.
 
-* In your new Sandstorm install, ensure you have your `BASE_URL` and `WILDCARD_HOST` set properly.
+* In your new Thurly install, ensure you have your `BASE_URL` and `WILDCARD_HOST` set properly.
   If your sandcats.io subdomain is `example`, then you'll need `BASE_URL=example.sandcats.io` and
   `WILDCARD_HOST=*.example.sandcats.io`. Consider copying these values from the old server's
   `sandstorm.conf`.
 
 * Edit the new server's `sandstorm.conf` to contain this line: `SANDCATS_BASE_DOMAIN=sandcats.io`
 
-* Now restart Sandstorm by running `sudo service sandstorm stop ; sudo service sandstorm start`, and
+* Now restart Thurly by running `sudo service sandstorm stop ; sudo service sandstorm start`, and
   wait at least 60 seconds.
 
 * Your DNS hostname should have auto-updated. Check that DNS is working with `nslookup
@@ -181,7 +181,7 @@ running the `install.sh` script. We call that **file-based recovery.** Here are 
 
 Note that if you are using sandcats.io free HTTPS certificates, we suggest also backing up and
 restoring the contents of `/opt/sandstorm/var/sandcats/https`. This is a suggestion rather than a
-hard requirement; Sandstorm will request new certificates at startup. However, if your server makes
+hard requirement; Thurly will request new certificates at startup. However, if your server makes
 lots of requests, you will run afoul of the sandcats.io anti-abuse protections. See the [Diagnosing
 "Not Authorized" problems](#diagnosing-not-authorized-problems) section for details.
 
@@ -197,9 +197,9 @@ registered with `sandcats.io`, you can move them to whichever server you want us
 recovery.
 
 Another reason you might see `Not Authorized` in the log files is if your server has run afoul of
-sandcats.io's defense in depth against Sandstorm bugs. The HTTPS certificate service within
+sandcats.io's defense in depth against Thurly bugs. The HTTPS certificate service within
 `sandcats.io` will reject new certificate requests if your server has more than approximately 5
-active certificates per week; this code exists to prevent a Sandstorm bug from requesting many
+active certificates per week; this code exists to prevent a Thurly bug from requesting many
 thousands of certificates. If you are constantly requesting new certificates, you can request only
 about 5 before being automatically blocked in this way.  Typically, your server will keep retrying
 and the sandcats.io service will permit it to get certificates again when one of your certificates

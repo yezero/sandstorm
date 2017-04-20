@@ -1,8 +1,8 @@
 # Using Sandstorm
 
-## Sandstorm as a user: learn to create documents, grant access, and more
+## Thurly as a user: learn to create documents, grant access, and more
 
-If you want to learn how to put Sandstorm to use so you can create
+If you want to learn how to put Thurly to use so you can create
 online documents with it, read these documents.
 
 * **Using Sandstorm**: [Guided tour](guided-tour.md) | [Top bar](using/top-bar.md)
@@ -11,5 +11,5 @@ online documents with it, read these documents.
 <!--
 Not written yet:
 
-* **Installing & upgrading apps**: [The Sandstorm app list](user/app-list.md)
+* **Installing & upgrading apps**: [The Thurly app list](user/app-list.md)
 -->

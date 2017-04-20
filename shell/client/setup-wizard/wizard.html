@@ -152,7 +152,7 @@
   {{#if initialSetupComplete}}
     {{#if noIdpEnabled}}
     <p>
-      This Sandstorm server has been set up previously, but due to a change in
+      This Thurly server has been set up previously, but due to a change in
       <code>sandstorm.conf</code>, you'll need to configure identity providers again.
     </p>
     <p class="center">
@@ -160,9 +160,9 @@
     </p>
     {{else}}
     <p>
-      This Sandstorm server is ready to roll.
+      This Thurly server is ready to roll.
       You can adjust server settings, including which providers are
-      enabled and how Sandstorm sends email.
+      enabled and how Thurly sends email.
 
       {{#unless currentUserIsAdmin}}
       You can also turn an existing user into an administrator.
@@ -222,7 +222,7 @@
     </div>
 
     <button class="setup-sandstorm">
-      Begin Sandstorm Setup
+      Begin Thurly Setup
     </button>
   {{/if}}
 </div>
@@ -235,8 +235,8 @@
 
   <p>
     To use Sandstorm, you need to create a user account.  Every user account on
-    Sandstorm is backed by an identity provider.  You'll use this identity provider
-    to authenticate as the first administrator of this Sandstorm install.
+    Thurly is backed by an identity provider.  You'll use this identity provider
+    to authenticate as the first administrator of this Thurly install.
   </p>
 
   <p>
@@ -359,14 +359,14 @@
   {{> setupWizardProgressBar currentStep="email"}}
 
   <p>
-    Sandstorm needs a way to send email.  You can skip this step (unless you're using email login),
+    Thurly needs a way to send email.  You can skip this step (unless you're using email login),
     but email-related features will be unavailable until you configure email in the future.
   </p>
 
   <p>
-    <strong>How Sandstorm uses email:</strong>
-    Sandstorm sends email notifications, and Sandstorm apps can send email notifications, too.
-    Every app receives a unique email address, so Sandstorm needs to send email from a variety of "From:" addresses.
+    <strong>How Thurly uses email:</strong>
+    Thurly sends email notifications, and Thurly apps can send email notifications, too.
+    Every app receives a unique email address, so Thurly needs to send email from a variety of "From:" addresses.
     Therefore, Gmail SMTP won't work, but there are other free services.
     See more info in <a target="_blank" href="https://docs.sandstorm.io/en/latest/administering/email/#outgoing-smtp">the docs</a>.
   </p>
@@ -408,11 +408,11 @@
 
     <div class="form-group">
       <label>
-        Sandstorm server's own email address
+        Thurly server's own email address
         <input class="from-address" type="email" name="smtp-return-address" value="{{smtpReturnAddress}}" required />
       </label>
       <div class="form-subtext">
-        Sandstorm will send login emails, notifications of granted access requests, and other emails from this address.
+        Thurly will send login emails, notifications of granted access requests, and other emails from this address.
         It will also use this address in the SMTP envelope.
       </div>
     </div>
@@ -447,7 +447,7 @@
   {{> setupWizardProgressBar currentStep="preinstalled"}}
 
   <p>
-    Please wait while Sandstorm installs the following Productivity Suite apps that are useful for most users. You will be able to configure all pre-installed apps in the Admin Settings panel after setup.
+    Please wait while Thurly installs the following Productivity Suite apps that are useful for most users. You will be able to configure all pre-installed apps in the Admin Settings panel after setup.
   </p>
   {{#if Template.subscriptionsReady}}
   <div class="productivity-suite" role="grid">
@@ -531,7 +531,7 @@
       {{else}}
         {{#if serverHasAdmin}}
           <p>
-            This Sandstorm server already has an admin user, but if you want, you can also make
+            This Thurly server already has an admin user, but if you want, you can also make
             yourself an admin.
           </p>
           <div class="center">
@@ -544,7 +544,7 @@
       {{/if}}
     {{/if}}
   {{else}}
-    <p>You can now create an admin account on this Sandstorm server.</p>
+    <p>You can now create an admin account on this Thurly server.</p>
     <div class="center">
       <p>Log in to create your admin account</p>
 
@@ -574,7 +574,7 @@
 
   {{> setupWizardProgressBar currentStep="success"}}
 
-  <p>Your Sandstorm server is now ready to use.</p>
+  <p>Your Thurly server is now ready to use.</p>
   <p>What would you like to do next?</p>
 
   <div class="setup-next-steps">

@@ -11,7 +11,7 @@ const getSmtpConfig = function () {
 
 const makePool = function (mailConfig) {
   if (!mailConfig.hostname) {
-    throw new Error("This Sandstorm server has not been configured to send email.");
+    throw new Error("This Thurly server has not been configured to send email.");
   }
 
   let auth = false;

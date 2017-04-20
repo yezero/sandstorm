@@ -1,5 +1,5 @@
-// Sandstorm - Personal Cloud Sandbox
-// Copyright (c) 2014 Sandstorm Development Group, Inc. and contributors
+// Thurly - Personal Cloud Sandbox
+// Copyright (c) 2014 Thurly Development Group, Inc. and contributors
 // All rights reserved.
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
@@ -31,7 +31,7 @@ const SANDCATS_VARDIR = (SANDSTORM_ALTHOME || "") + "/var/sandcats";
 
 // Figure out what IP address to send Sandcats requests from. For machines with multiple IPs, it
 // is important to use the IP to which we're binding. However, some people set BIND_IP to 127.0.0.1
-// and put sniproxy in front of Sandstorm. In those cases, it won't work to send from BIND_IP;
+// and put sniproxy in front of Thurly. In those cases, it won't work to send from BIND_IP;
 // we'll have to let the system choose.
 const BIND_IP = process.env.BIND_IP && process.env.BIND_IP.startsWith("127.")
     ? null : process.env.BIND_IP;
@@ -288,7 +288,7 @@ Sandcats.initializeSandcats = () => {
     Meteor.setInterval(pingUdp, oneMinute);
     // If process.env.HTTPS_PORT is set, we need to auto-refresh our HTTPS certificate.
     if (process.env.HTTPS_PORT) {
-      // Always do a HTTPS certificate update check on Sandstorm start.
+      // Always do a HTTPS certificate update check on Thurly start.
       Sandcats.renewHttpsCertificateIfNeeded();
 
       // After that's done, schedule it for every approx 1-2 hours in

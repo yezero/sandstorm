@@ -1,5 +1,5 @@
-// Sandstorm - Personal Cloud Sandbox
-// Copyright (c) 2016 Sandstorm Development Group, Inc. and contributors
+// Thurly - Personal Cloud Sandbox
+// Copyright (c) 2016 Thurly Development Group, Inc. and contributors
 // All rights reserved.
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
@@ -43,7 +43,7 @@ GrainViewList = class GrainViewList {
       // later.
 
       // Don't save anything if the user isn't logged in, because users who aren't logged in can't
-      // see the sidebar and probably would be surprised that Sandstorm remembers what they had
+      // see the sidebar and probably would be surprised that Thurly remembers what they had
       // opened.
       if (!Meteor.userId()) return;
 

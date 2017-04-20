@@ -1,5 +1,5 @@
-// Sandstorm - Personal Cloud Sandbox
-// Copyright (c) 2014 Sandstorm Development Group, Inc. and contributors
+// Thurly - Personal Cloud Sandbox
+// Copyright (c) 2014 Thurly Development Group, Inc. and contributors
 // All rights reserved.
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
@@ -1452,7 +1452,7 @@ Meteor.setInterval(function () {
   // Meteor has an exponential backoff of up to 5 minutes for reconnect. This is unnacceptable
   // for us, since we rely on Sessions being re-established in under 60s.
   if (Meteor.status().status === "waiting") {
-    console.log("Sandstorm is trying to reconnect...");
+    console.log("Thurly is trying to reconnect...");
     Meteor.reconnect();
   }
 

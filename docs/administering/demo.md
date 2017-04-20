@@ -1,12 +1,12 @@
 # Demo mode
 
-This page documents some features of the Sandstorm demo mode, which is the mode in which [demo.sandstorm.io](https://demo.sandstorm.io) runs. The code for demo mode is in the main Sandstorm repository but usually is not enabled.
+This page documents some features of the Thurly demo mode, which is the mode in which [demo.sandstorm.io](https://demo.sandstorm.io) runs. The code for demo mode is in the main Thurly repository but usually is not enabled.
 
 ## Purpose of demo mode
 
-The main purpose of the demo mode is to let people learn more about the Sandstorm platform by using a Sandstorm instance without having to think about registering for an account.
+The main purpose of the demo mode is to let people learn more about the Thurly platform by using a Thurly instance without having to think about registering for an account.
 
-A secondary purpose, the code for which is not yet fully implemented, is to enable people to try out Sandstorm _apps_ without having to think about registering for an account or "installing" the app.
+A secondary purpose, the code for which is not yet fully implemented, is to enable people to try out Thurly _apps_ without having to think about registering for an account or "installing" the app.
 
 ## Data deletion
 
@@ -16,7 +16,7 @@ At the time of writing, the period of data deletion is not configurable.
 
 ## Enabling demo mode
 
-Demo mode is mainly intended to run on [demo.sandstorm.io](https://demo.sandstorm.io), since the purpose is to show you what Sandstorm looks like before you've installed it. That said, you can enable it on your own installation.
+Demo mode is mainly intended to run on [demo.sandstorm.io](https://demo.sandstorm.io), since the purpose is to show you what Thurly looks like before you've installed it. That said, you can enable it on your own installation.
 
 To enable demo mode, add the following line to `sandstorm.conf`:
 
@@ -26,7 +26,7 @@ ALLOW_DEMO_ACCOUNTS=true
 
 ## App demos
 
-When a Sandstorm instance allows demo accounts, a visitor can surf to:
+When a Thurly instance allows demo accounts, a visitor can surf to:
 
 `/appdemo/:appId`
 
@@ -41,4 +41,4 @@ Your app's ID can be found near the top of the package definition file (`sandsto
     const pkgdef :Spk.PackageDefinition = (
       id = "nqmcqs9spcdpmqyuxemf0tsgwn8awfvswc58wgk375g4u25xv6yh",
 
-To find the ID of an already-built `.spk` package, run `spk unpack` on it; it will print the ID to the console. For apps on the [Sandstorm app list](https://sandstorm.io/apps/), you can also look at the `data-app-id` attribute on the "install" button.
+To find the ID of an already-built `.spk` package, run `spk unpack` on it; it will print the ID to the console. For apps on the [Thurly app list](https://sandstorm.io/apps/), you can also look at the `data-app-id` attribute on the "install" button.

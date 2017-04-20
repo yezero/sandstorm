@@ -1,5 +1,5 @@
-# Sandstorm - Personal Cloud Sandbox
-# Copyright (c) 2014 Sandstorm Development Group, Inc. and contributors
+# Thurly - Personal Cloud Sandbox
+# Copyright (c) 2014 Thurly Development Group, Inc. and contributors
 # All rights reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
@@ -150,11 +150,11 @@ interface WebSession @0xa50711a14d35a8ce extends(Grain.UiSession) {
     const headerWhitelist :List(Text) = [
       # Non-standard request headers which are whitelisted for backwards-compatibility
       # purposes. This whitelist exists to help avoid the need to modify code originally written
-      # without Sandstorm in mind -- especially to avoid modifying client apps. Feel free
+      # without Thurly in mind -- especially to avoid modifying client apps. Feel free
       # to send us pull requests adding additional headers.
       # Values in this list that end with '*' whitelist a prefix.
 
-      "x-sandstorm-app-*",     # For new headers introduced by Sandstorm apps.
+      "x-sandstorm-app-*",     # For new headers introduced by Thurly apps.
 
       "oc-total-length",       # Owncloud client
       "oc-chunk-size",         # Owncloud client
@@ -405,11 +405,11 @@ interface WebSession @0xa50711a14d35a8ce extends(Grain.UiSession) {
     const headerWhitelist :List(Text) = [
       # Non-standard response headers which are whitelisted for backwards-compatibility
       # purposes. This whitelist exists to help avoid the need to modify code originally written
-      # without Sandstorm in mind -- especially to avoid modifying client apps.
+      # without Thurly in mind -- especially to avoid modifying client apps.
       # Feel free to send us pull requests adding additional headers.
       # Values in this list that end with '*' whitelist a prefix.
 
-      "x-sandstorm-app-*",     # For new headers introduced by Sandstorm apps.
+      "x-sandstorm-app-*",     # For new headers introduced by Thurly apps.
 
       "x-oc-mtime",            # Owncloud protocol
     ];
@@ -527,9 +527,9 @@ interface WebSession @0xa50711a14d35a8ce extends(Grain.UiSession) {
   # * Pragma
   #
   # Request headers which will NOT be added ever:
-  # * Sandstorm handles authorization:
+  # * Thurly handles authorization:
   #   * Authorization
-  # * Sandstorm defines cross-origin request permissions:
+  # * Thurly defines cross-origin request permissions:
   #   * Access-Control-Request-Headers
   #   * Access-Control-Request-Method
   #   * Origin
@@ -548,7 +548,7 @@ interface WebSession @0xa50711a14d35a8ce extends(Grain.UiSession) {
   #   * Via
   #   * Proxy-*
   #   * Sec-*
-  # * Sandstorm already prevents illicit tracking technically; no need for policy:
+  # * Thurly already prevents illicit tracking technically; no need for policy:
   #   * DNT
 
   # Response headers that we will probably add later:
@@ -558,7 +558,7 @@ interface WebSession @0xa50711a14d35a8ce extends(Grain.UiSession) {
   #   * ETag
   #   * Expires
   #   * Last-Modified
-  #   * Vary (but Sandstorm will always add "Authorization")
+  #   * Vary (but Thurly will always add "Authorization")
   # * Range requests:
   #   * Accept-Ranges
   #   * Content-Range
@@ -577,9 +577,9 @@ interface WebSession @0xa50711a14d35a8ce extends(Grain.UiSession) {
   # * Warning
   #
   # Response headers which will NEVER be implemented:
-  # * Sandstorm defines cross-origin request permissions:
+  # * Thurly defines cross-origin request permissions:
   #   * Access-Control-*
-  # * Sandstorm uses these for sandboxing:
+  # * Thurly uses these for sandboxing:
   #   * Content-Security-Policy
   #   * X-Frame-Options
   # * Redundant or irrelevant to Cap'n Proto RPC:
@@ -591,7 +591,7 @@ interface WebSession @0xa50711a14d35a8ce extends(Grain.UiSession) {
   # * These belong to the domain owner, not the app:
   #   * Public-Key-Pins
   #   * Strict-Transport-Security
-  # * Sandstorm controls authentication:
+  # * Thurly controls authentication:
   #   * WWW-Authenticate
   # * Irrelevant to servers:
   #   * Proxy-Authenticate

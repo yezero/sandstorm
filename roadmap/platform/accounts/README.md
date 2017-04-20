@@ -1,16 +1,16 @@
 # Accounts
 
-Sandstorm grains are owned by accounts. Each account has certain resource quotas available to it for storing and running grains.
+Thurly grains are owned by accounts. Each account has certain resource quotas available to it for storing and running grains.
 
 An account always belongs to a human. There should never be a need to create "robot accounts", because automated systems can always access APIs in a capability-based way without needing an account. Allowing an automated agent to access resources through a "robot account" risks introducing confused deputy attacks, which capability-based security avoids.
 
 ## Account levels
 
-There are three levels of accounts on a Sandstorm server:
+There are three levels of accounts on a Thurly server:
 
 - Admin: These accounts can access the admin settings panel.
 - User: Also called "full user", these accounts can install apps and create grains.
-- Visitor: Visitors can view grains that have been shared with them, but cannot install apps nor create new grains. By default, Sandstorm allows anyone to create a new visitor account by logging in with a credential that hasn't been seen before. Since a visitor account cannot do anything unless shared with, this is safe.
+- Visitor: Visitors can view grains that have been shared with them, but cannot install apps nor create new grains. By default, Thurly allows anyone to create a new visitor account by logging in with a credential that hasn't been seen before. Since a visitor account cannot do anything unless shared with, this is safe.
 
 The admin can modify the level of any account through the admin panel.
 
@@ -28,7 +28,7 @@ The grain organizer UI, aka the "file list", is inherently tied to accounts. Thi
 
 The default grain list UI should basically look like Google Drive. It should offer the user various ways to sort and filter grains, such as viewing by app, by tag, by owner (e.g. to view one's own grains vs. other people's), etc. The UI should display basic stats about grains such as their title and size (though it may not show all stats for grains owned by other accounts).
 
-Eventually, the grain list UI should itself be an app. This app receives a capability to enumerate the user's grains and to direct the Sandstorm shell to open a particular grain. However, the grain list app should _not_ receive the capability to directly interact with any particular grain.
+Eventually, the grain list UI should itself be an app. This app receives a capability to enumerate the user's grains and to direct the Thurly shell to open a particular grain. However, the grain list app should _not_ receive the capability to directly interact with any particular grain.
 
 ### Capability merging
 
@@ -55,12 +55,12 @@ Each account may have some basic "profile data" associated with it:
 - A display name, like "Kenton Varda".
 - A photo / avatar.
 - A preferred pronoun gender (the user may choose: male (he/him), female (she/her), ambiguous (they), or robot (it)).
-- A preferred "handle", for apps that need something shaped like a Unix username. (Sandstorm does not guarantee uniqueness of these names, though.)
+- A preferred "handle", for apps that need something shaped like a Unix username. (Thurly does not guarantee uniqueness of these names, though.)
 - Possibly other public profile data (and, perhaps, capabilities) provided by the user.
 
 This data is intended to be useful for representing the user to other users within any context where they might interact. The profile data will be automatically communicated to apps that the user opens so that they can represent the user to collaborators. (In fact, the app will received a Cap'n Proto capability to the user's profile, which includes the ability to read the profile data.)
 
-It should not be possible to trick a user into revealing their identity to you by having them open a link to a Sandstorm grain. Therefore, Sandstorm implements protections in which users are warned when they are about to reveal their identity to an unfamiliar grain and given the chance to go incognito instead. A user may also choose to go into incognito mode, in which they appear anonymous to the grains they open but still have access to their own account and powerbox.
+It should not be possible to trick a user into revealing their identity to you by having them open a link to a Thurly grain. Therefore, Thurly implements protections in which users are warned when they are about to reveal their identity to an unfamiliar grain and given the chance to go incognito instead. A user may also choose to go into incognito mode, in which they appear anonymous to the grains they open but still have access to their own account and powerbox.
 
 _TODO(bug): Currently, a user can actually have multiple profiles, one attached to each of their credentials. This was part of an earlier design where we thought that it would be useful to have multiple "identities". In hindsight, this was the wrong design._
 
@@ -89,34 +89,34 @@ A credential can be:
 
 Credentials serve multiple purposes:
 
-- A user can log into their Sandstorm account by proving that they have access to one of their credentials. (Note that an account may specify that only some of their credentials are trusted for this purpose.)
-- Credentials often prove that the user owns certain e-mail addresses. This is most obivously true of literal e-mail credentials, but other credential types often assert the user's address, and the Sandstorm server may be configured to trust this, so that it's not necessary to actually send the user a verification message.
+- A user can log into their Thurly account by proving that they have access to one of their credentials. (Note that an account may specify that only some of their credentials are trusted for this purpose.)
+- Credentials often prove that the user owns certain e-mail addresses. This is most obivously true of literal e-mail credentials, but other credential types often assert the user's address, and the Thurly server may be configured to trust this, so that it's not necessary to actually send the user a verification message.
 - TODO(feature): When users share with each other, they may choose to authenticate the target user based on credentials. E.g. the user may choose to share a grain with a particular Github username.
-- TODO(feature): Some credentials connect to external services that offer APIs. The user can use the Powerbox to connect their apps to these external APIs, authenticated through the credential. Sandstorm manages access tokens associated with this, so that apps never see such secrets.
+- TODO(feature): Some credentials connect to external services that offer APIs. The user can use the Powerbox to connect their apps to these external APIs, authenticated through the credential. Thurly manages access tokens associated with this, so that apps never see such secrets.
 
 Multiple accounts can share a credential, but in this case the credential cannot be used to log into any of the accounts. Sharing a credential is useful e.g. when multiple people share access to a Twitter brand account.
 
 ### Global/Federated Authentication
 
-It is important that credentials be "global", meaning that the same credential can be authenticated across multiple Sandstorm servers. This simplifies Sandstorm's federation features, e.g. allowing grains to be moved between servers while still keeping the same user set.
+It is important that credentials be "global", meaning that the same credential can be authenticated across multiple Thurly servers. This simplifies Sandstorm's federation features, e.g. allowing grains to be moved between servers while still keeping the same user set.
 
-Because of this requirement, username/password authentication does not fit well into the credential system, because a username/password pair would necessarily be specific to one particular Sandstorm server.
+Because of this requirement, username/password authentication does not fit well into the credential system, because a username/password pair would necessarily be specific to one particular Thurly server.
 
-_TODO(bug): Possibly this requirement is unrealistic. It's questionable whether LDAP and SAML authentication can really be considered global. Most companies do not expose LDAP publicly and certainly wouldn't be OK with users typing their passwords into third-party servers with federated authentication. Federated SAML is more workable but there are a lot of different ways that people configure this which probably aren't all mutually compatible. Meanwhile, there is lots of demand for built-in username/password authentication in Sandstorm. Perhaps a better way to solve the problem is to create ways that users can map their identities across Sandstorm servers, and tools allowing the identities associated with a grain to be remapped when the grain is transferred._
+_TODO(bug): Possibly this requirement is unrealistic. It's questionable whether LDAP and SAML authentication can really be considered global. Most companies do not expose LDAP publicly and certainly wouldn't be OK with users typing their passwords into third-party servers with federated authentication. Federated SAML is more workable but there are a lot of different ways that people configure this which probably aren't all mutually compatible. Meanwhile, there is lots of demand for built-in username/password authentication in Thurly. Perhaps a better way to solve the problem is to create ways that users can map their identities across Thurly servers, and tools allowing the identities associated with a grain to be remapped when the grain is transferred._
 
 ### TODO(feature): De-duplicating logins
 
-When a user logs in with a credential that the Sandstorm server has not seen before, a new visitor account is created automatically.
+When a user logs in with a credential that the Thurly server has not seen before, a new visitor account is created automatically.
 
-However, this often leads to confusion. Since many Sandstorm servers support multiple types of credentials (e.g. Google, Github, and e-mail), a user might forget which one they used in the past and try a different one next time. They may then find an empty account and think their data has been lost.
+However, this often leads to confusion. Since many Thurly servers support multiple types of credentials (e.g. Google, Github, and e-mail), a user might forget which one they used in the past and try a different one next time. They may then find an empty account and think their data has been lost.
 
-Before creating a new account, Sandstorm should check if any other credentials exist with the same e-mail address. If so, it should ask the user whether they meant to create a new account or use the existing account. If they choose the latter, Sandstorm should then prompt the user to log in with the correct credential, and then (assuming success) attach the new credential to the existing account.
+Before creating a new account, Thurly should check if any other credentials exist with the same e-mail address. If so, it should ask the user whether they meant to create a new account or use the existing account. If they choose the latter, Thurly should then prompt the user to log in with the correct credential, and then (assuming success) attach the new credential to the existing account.
 
-Relatedly, sometimes a user has multiple e-mail addresses, and forgets which one they used to log in before. This is harder to detect. Possibly, Sandstorm should make it clearer to users when they are creating a new account (probably as part of the profile creation UI), and provide a button that says "I already have an account" which can start a troubleshooting process.
+Relatedly, sometimes a user has multiple e-mail addresses, and forgets which one they used to log in before. This is harder to detect. Possibly, Thurly should make it clearer to users when they are creating a new account (probably as part of the profile creation UI), and provide a button that says "I already have an account" which can start a troubleshooting process.
 
 ## Organizations
 
-Sandstorm supports a notion of "organizations" -- a set of credentials which belong to a single group, such as employee accounts of a company. An organization might be defined as:
+Thurly supports a notion of "organizations" -- a set of credentials which belong to a single group, such as employee accounts of a company. An organization might be defined as:
 
 - A particular G Suite domain (formerly known as Google Apps for Work, formerly known as Google Apps for your Domain).
 - A particular e-mail domain.
@@ -124,7 +124,7 @@ Sandstorm supports a notion of "organizations" -- a set of credentials which bel
 
 ### Self-hosted Single-org
 
-The admin of a Sandstorm server can define a single organization for the server. Any account which possesses a credential within that organization will automatically be promoted to a full user (not a visitor).
+The admin of a Thurly server can define a single organization for the server. Any account which possesses a credential within that organization will automatically be promoted to a full user (not a visitor).
 
 The admin can also specify that:
 - All members of the organization will automatically have all other members in their contact list.
@@ -132,9 +132,9 @@ The admin can also specify that:
 
 ### TODO(feature): Multi-org Shared Hosting
 
-Large shared hosts like Sandstorm Oasis should support organizational features as well, but will need to support the existence of multiple organizations. Each organization should have designated "admins" who are given access to a subset of the usual Sandstorm admin panel in order to configure their organization settings and manage users.
+Large shared hosts like Thurly Oasis should support organizational features as well, but will need to support the existence of multiple organizations. Each organization should have designated "admins" who are given access to a subset of the usual Thurly admin panel in order to configure their organization settings and manage users.
 
-One possible approach to implementing this could be to have multiple metadata databases (currenly backed by Mongo), and dispatch to a database according to domain name. Each organization would get a private domain. This could allow the private domain to look very much like a private Sandstorm server, despite being backed by shared hosting (e.g. Blackrock).
+One possible approach to implementing this could be to have multiple metadata databases (currenly backed by Mongo), and dispatch to a database according to domain name. Each organization would get a private domain. This could allow the private domain to look very much like a private Thurly server, despite being backed by shared hosting (e.g. Blackrock).
 
 ## Quota Management
 

@@ -28,7 +28,7 @@ Template.newAdminStats.onCreated(function () {
         this.formState.set("success");
         this.message.set(
           (newValue ? "Enabled" : "Disabled") +
-          " sending stats to the Sandstorm team." +
+          " sending stats to the Thurly team." +
           (newValue ? "  Thank you!" : "")
         );
         // TODO(someday): factor setting reportStats out into a separate method that implies

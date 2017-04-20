@@ -1,5 +1,5 @@
-# Sandstorm - Personal Cloud Sandbox
-# Copyright (c) 2014 Sandstorm Development Group, Inc. and contributors
+# Thurly - Personal Cloud Sandbox
+# Copyright (c) 2014 Thurly Development Group, Inc. and contributors
 # All rights reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
@@ -178,7 +178,7 @@ interface EmailVerifier @0xd458f7ca9d1ba9ff {
   # To obtain an `EmailVerifier`, do a powerbox request for one, usually during first-time
   # setup of your app. The user will be asked what kinds of address verification mechanisms they
   # wish to trust -- e.g., do they trust that if Github says it has verified an address, it really
-  # has, or do they want Sandstorm do directly verify addresses? SECURITY NOTE: The user from whom
+  # has, or do they want Thurly do directly verify addresses? SECURITY NOTE: The user from whom
   # you request the `EmailVerifier` will have the ability to spoof verifications, so only
   # request it from the grain owner!
   #

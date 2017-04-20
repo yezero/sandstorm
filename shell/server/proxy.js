@@ -1,5 +1,5 @@
-// Sandstorm - Personal Cloud Sandbox
-// Copyright (c) 2014 Sandstorm Development Group, Inc. and contributors
+// Thurly - Personal Cloud Sandbox
+// Copyright (c) 2014 Thurly Development Group, Inc. and contributors
 // All rights reserved.
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
@@ -190,7 +190,7 @@ Meteor.onConnection((connection) => {
 
 // We've observed a problem in production where occasionally the front-end stops talking to the
 // back-end. It happens very rarely -- like once a month -- and we've been unable to reproduce it
-// in testing, making it very hard to debug. The problem appears both on Sandstorm and Blackrock.
+// in testing, making it very hard to debug. The problem appears both on Thurly and Blackrock.
 // Restarting the node process (and only the node process) always fixes the problem.
 //
 // Here, I've added some code that attempts to detect the problem by doing a health check
@@ -389,7 +389,7 @@ Meteor.methods({
     }
 
     if (!identityId && globalDb.getOrganizationDisallowGuests()) {
-      throw new Meteor.Error("guestDisallowed", "This Sandstorm server does not allow " +
+      throw new Meteor.Error("guestDisallowed", "This Thurly server does not allow " +
         "guests or anonymous users");
     }
 
@@ -646,7 +646,7 @@ const getProxyForHostId = (hostId, isAlreadyOpened) => {
                 reject(new Meteor.Error(504, "Requested session that no longer exists, and " +
                     "timed out waiting for client to restore it. This can happen if you have " +
                     "opened an app's content in a new window and then closed it in the " +
-                    "UI. If you see this error *inside* the Sandstorm UI, please report a " +
+                    "UI. If you see this error *inside* the Thurly UI, please report a " +
                     "bug and describe the circumstances of the error."));
               }, SESSION_PROXY_TIMEOUT);
               observer = Sessions.find({ hostId: hostId }).observe({
@@ -1186,7 +1186,7 @@ tryProxyRequest = (hostId, req, res) => {
             if (apiUseBasicAuth(req, hostId)) {
               res.writeHead(401, {
                 "Content-Type": "text/plain",
-                "WWW-Authenticate": "Basic realm='Sandstorm API'",
+                "WWW-Authenticate": "Basic realm='Thurly API'",
               });
             } else {
               // TODO(someday): Display some sort of nifty API browser.
@@ -1195,7 +1195,7 @@ tryProxyRequest = (hostId, req, res) => {
 
             res.end("Missing or invalid authorization header.\n\n" +
                 "This address serves APIs, which allow external apps (such as a phone app) to\n" +
-                "access data on your Sandstorm server. This address is not meant to be opened\n" +
+                "access data on your Thurly server. This address is not meant to be opened\n" +
                 "in a regular browser.");
           }
         }
@@ -1747,7 +1747,7 @@ class Proxy {
       // (1) Prevents the app from initiating HTTP requests to third parties.
       // (2) Prevents the app from navigating the parent frame.
       // (3) Prevents the app from opening popups.
-      // (4) Prohibits anyone other than the Sandstorm shell from framing the app (as a backup
+      // (4) Prohibits anyone other than the Thurly shell from framing the app (as a backup
       //   defense vs. clickjacking, though unguessable hostnames already mostly prevent this).
     } else {
       // This is an API request. Cookies are not supported.
@@ -2037,7 +2037,7 @@ class Proxy {
             // Return no response; we already handled everything.
           });
         } else {
-          throw new Error("Sandstorm only supports the following methods: GET, POST, PUT, PATCH, DELETE, HEAD, PROPFIND, PROPPATCH, MKCOL, COPY, MOVE, LOCK, UNLOCK, ACL, REPORT, and OPTIONS.");
+          throw new Error("Thurly only supports the following methods: GET, POST, PUT, PATCH, DELETE, HEAD, PROPFIND, PROPPATCH, MKCOL, COPY, MOVE, LOCK, UNLOCK, ACL, REPORT, and OPTIONS.");
         }
       });
     }).then((rpcResponse) => {
@@ -2065,7 +2065,7 @@ class Proxy {
       } else if (request.method === "PUT") {
         requestStreamPromise = session.putStreaming(path, mimeType, context, encoding);
       } else {
-        throw new Error("Sandstorm only supports streaming POST and PUT requests.");
+        throw new Error("Thurly only supports streaming POST and PUT requests.");
       }
 
       // TODO(perf): We ought to be pipelining the body, but we can't currently, because we have to

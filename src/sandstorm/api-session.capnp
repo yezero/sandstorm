@@ -1,5 +1,5 @@
-# Sandstorm - Personal Cloud Sandbox
-# Copyright (c) 2014 Sandstorm Development Group, Inc. and contributors
+# Thurly - Personal Cloud Sandbox
+# Copyright (c) 2014 Thurly Development Group, Inc. and contributors
 # All rights reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
@@ -41,7 +41,7 @@ interface ApiSession @0xc879e379c625cdc7 extends(WebSession.WebSession) {
     # expected (so, the tag ID is ApiSession's ID, but the tag value is an ApiSession.PowerboxTag).
     #
     # Usually, this tag is used to request APIs implemented by internet services external to
-    # Sandstorm. However, a Sandstorm grain may advertise itself as supporting a compatible API
+    # Thurly. However, a Thurly grain may advertise itself as supporting a compatible API
     # to the Powerbox, and if so the Powerbox will allow the user to select that grain for such
     # requests. Note that publishing an `ApiSession` has nothing to do with `UiView` or Sandstorm's
     # normal HTTP API support.
@@ -101,9 +101,9 @@ interface ApiSession @0xc879e379c625cdc7 extends(WebSession.WebSession) {
     #
     # When this list is present (even if empty), it indicates that the requested API requires
     # OAuth-based authentication. The HTTP driver will guide the user through connecting their
-    # Sandstorm account to the remote service and requesting the appropriate permissions.
+    # Thurly account to the remote service and requesting the appropriate permissions.
     #
-    # The Sandstorm project maintains an ad hoc mapping of hostnames to OAuth endpoints allowing
+    # The Thurly project maintains an ad hoc mapping of hostnames to OAuth endpoints allowing
     # the HTTP driver to automatically determine what kind of OAuth request to make for a given
     # `canonicalUrl`. For example, if `canonicalUrl` is `https://api.github.com`, the HTTP driver
     # will initiate a Github OAuth handshake. For any URL under apidata.googleusercontent.com, the
@@ -111,7 +111,7 @@ interface ApiSession @0xc879e379c625cdc7 extends(WebSession.WebSession) {
     # make OAuth requests to endpoints not on the list. However, we welcome pull requests to add
     # new endpoints, large or small.
     #
-    # Sandstorm grains offering compatible APIs may wish to list the OAuth scopes they support.
+    # Thurly grains offering compatible APIs may wish to list the OAuth scopes they support.
     # Powerbox matching rules state that when a Powerbox query and potential matching descriptor
     # both contain a field of list-of-struct type, then they are treated as sets, and the match
     # must advertise a superset of the request. Therefore, if you list OAuth scopes when

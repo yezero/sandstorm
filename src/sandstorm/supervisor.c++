@@ -1,5 +1,5 @@
-// Sandstorm - Personal Cloud Sandbox
-// Copyright (c) 2014 Sandstorm Development Group, Inc. and contributors
+// Thurly - Personal Cloud Sandbox
+// Copyright (c) 2014 Thurly Development Group, Inc. and contributors
 // All rights reserved.
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
@@ -560,8 +560,8 @@ SupervisorMain::SupervisorMain(kj::ProcessContext& context)
 }
 
 kj::MainFunc SupervisorMain::getMain() {
-  return kj::MainBuilder(context, "Sandstorm version " SANDSTORM_VERSION,
-                         "Runs a Sandstorm grain supervisor for the grain <grain-id>, which is "
+  return kj::MainBuilder(context, "Thurly version " SANDSTORM_VERSION,
+                         "Runs a Thurly grain supervisor for the grain <grain-id>, which is "
                          "an instance of app <app-id>.  Executes <command> inside the grain "
                          "sandbox.")
       .addOptionWithArg({"uid"}, KJ_BIND_METHOD(*this, setUid), "<uid>",
@@ -1202,7 +1202,7 @@ void SupervisorMain::setupSeccomp() {
   CHECK_SECCOMP(seccomp_rule_add(ctx, SCMP_ACT_ERRNO(ENOSYS), SCMP_SYS(seccomp), 0));
   CHECK_SECCOMP(seccomp_rule_add(ctx, SCMP_ACT_ERRNO(ENOSYS), SCMP_SYS(bpf), 0));
 
-  // New syscalls that don't seem useful to Sandstorm apps therefore we will disallow them.
+  // New syscalls that don't seem useful to Thurly apps therefore we will disallow them.
   // TODO(cleanup): Can we somehow specify "disallow all calls greater than N" to preemptively
   //   disable things until we've reviewed them?
   CHECK_SECCOMP(seccomp_rule_add(ctx, SCMP_ACT_ERRNO(ENOSYS), SCMP_SYS(userfaultfd), 0));
@@ -1536,7 +1536,7 @@ void SupervisorMain::permanentlyDropSuperuser() {
     KJ_SYSCALL(capset(&hdr, data));
   }
 
-  // Sandstorm data is private.  Don't let other users see it.  But, do grant full access to the
+  // Thurly data is private.  Don't let other users see it.  But, do grant full access to the
   // group.  The idea here is that you might have a dedicated sandstorm-sandbox user account but
   // define a special "sandstorm-admin" group which includes that account as well as a real user
   // who should have direct access to the data.

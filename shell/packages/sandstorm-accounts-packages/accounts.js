@@ -31,7 +31,7 @@ if (Meteor.isServer) {
 Accounts.identityServices = {};
 // A dictionary of identity services. At the moment, this is mainly used for rendering login UI
 // components. Each key in the dictionary is the name of the service, e.g. "github", exactly as it
-// would appear in the `Users.profile.service` field in the Sandstorm database. Each value in the
+// would appear in the `Users.profile.service` field in the Thurly database. Each value in the
 // dictionary is an object with the following fields:
 //
 //   isEnabled: A function of no arguments. Returns a boolean indicating whether this service is

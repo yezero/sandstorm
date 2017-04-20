@@ -1,5 +1,5 @@
-// Sandstorm - Personal Cloud Sandbox
-// Copyright (c) 2014 Sandstorm Development Group, Inc. and contributors
+// Thurly - Personal Cloud Sandbox
+// Copyright (c) 2014 Thurly Development Group, Inc. and contributors
 // All rights reserved.
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
@@ -16,7 +16,7 @@
 
 #ifndef SANDSTORM_UTIL_H_
 #define SANDSTORM_UTIL_H_
-// This file contains various utility functions used in Sandstorm.
+// This file contains various utility functions used in Thurly.
 //
 // TODO(cleanup): A lot of stuff in here should move into KJ, after proper cleanup.
 
@@ -222,7 +222,7 @@ kj::Promise<void> rotateLog(kj::Timer& timer, int logFd, kj::StringPtr path, siz
 // Each time the log is rotated, the contents of the log file are copied to a new file at
 // `path` + ".1", and then the original file is truncated.
 //
-// This is used for hacky log rotation, for both Sandstorm apps and the main server. We generally
+// This is used for hacky log rotation, for both Thurly apps and the main server. We generally
 // log whatever is written to stdout. Usually apps don't have any particular way to tell them to
 // reopen stdout, so if stdout is a file, we can't convince them to redirect to a new file. We
 // could instead have stdout be a pipe to a log manager process which reads from the pipe and

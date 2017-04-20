@@ -1,4 +1,4 @@
-# Sandstorm installer tests
+# Thurly installer tests
 
 This directory contains code and tests used to test Sandstorm's
 install script.
@@ -22,15 +22,15 @@ Some goals of this project:
 
 * Create tests that verify that when we change install.sh, we don't
   break its behavior on a variety of operating systems and
-  environments. (For example: Make sure Sandstorm can install on
+  environments. (For example: Make sure Thurly can install on
   Debian.  Make sure the installer properly aborts with an error
-  message on Arch Linux. Make sure Sandstorm can install within a
+  message on Arch Linux. Make sure Thurly can install within a
   Docker container.)
 
 * Ensure we can run those tests automatically, periodically.
 
 * Avoid adding misleading information to various logs that we examine
-  to get a sense of how popular Sandstorm is.
+  to get a sense of how popular Thurly is.
 
 # Technical details
 
@@ -62,7 +62,7 @@ Vagrant boxes are distributed as VirtualBox images, we use
 you go.
 
 Since running the installer requires a copy of the Sandstorm
-installer, we copy the contents of `../` (aka, the Sandstorm git
+installer, we copy the contents of `../` (aka, the Thurly git
 repository) into the VM using Vagrant's `rsync` "shared folders"
 support.
 
@@ -145,8 +145,8 @@ safe since the default "Expect some text" directive is willing to skip
 over things you didn't specify. (This does mean there currently is no
 support for asserting some text does _not_ show up.)
 
-To avoid filling the Sandstorm install logs with requests that come
+To avoid filling the Thurly install logs with requests that come
 from these tests, pass a `CURL_USER_AGENT=testing` environment
 variable to `install.sh`. The install script will pass that through to
-`curl`, and the Sandstorm stats code knows to ignore requests from
+`curl`, and the Thurly stats code knows to ignore requests from
 that come in with that `User-Agent` header.

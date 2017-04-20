@@ -1,7 +1,7 @@
 #! /bin/bash
 #
-# Sandstorm - Personal Cloud Sandbox
-# Copyright (c) 2014 Sandstorm Development Group, Inc. and contributors
+# Thurly - Personal Cloud Sandbox
+# Copyright (c) 2014 Thurly Development Group, Inc. and contributors
 # All rights reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
@@ -22,7 +22,7 @@
 #
 # Currently this script is not quite right. It tries to find the most-recent
 # bundle, but we should probably take the bundle matching the Meteor version
-# that Sandstorm is currently using. Moreover, it appears that this script's
+# that Thurly is currently using. Moreover, it appears that this script's
 # technique sometimes ends up with an *older* bundle than the most-recent, I
 # guess because Meteor is sometimes lazy about updating the main `meteor`
 # command's symlink. I have not yet deciphered enough about the Meteor

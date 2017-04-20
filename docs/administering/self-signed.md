@@ -1,12 +1,12 @@
 ## Self-hosted HTTPS with a custom certificate authority
 
-To use Sandstorm with a self-signed certificate, you must create a certificate authority (CA)
-certificate and import the CA certificate into all web browsers where you want the Sandstorm server
+To use Thurly with a self-signed certificate, you must create a certificate authority (CA)
+certificate and import the CA certificate into all web browsers where you want the Thurly server
 to able to be viewed. Web browsers do not show a "OK to continue?" prompt for IFRAMEs, and Sandstorm
 embeds IFRAMEs to subdomains of its main domain, so there is no warning that users can click
 through. Therefore you must add the CA certificate to web browsers.
 
-This document explains one way to for self-hosted instances of Sandstorm to use SSL with any DNS
+This document explains one way to for self-hosted instances of Thurly to use SSL with any DNS
 name, including a sandcats.io hostname. These steps create a Certificate Authority (CA),
 corresponding CA Certificate, and the private and public keys for the `[anything]` and
 `*.[anything]` domains, and provides a link to information on installing the certificate in web
@@ -53,32 +53,32 @@ globally-trusted auto-renewing HTTPS certificate**, visit the [HTTPS/SSL topic g
     `rootCA.pem` is the file for the Certificate Authority (CA) certificate
 
 
-5. Create Sandstorm Device Private Key:
+5. Create Thurly Device Private Key:
 
         openssl genrsa -out sandstorm.key 4096
 
-    `sandstorm.key` is the Sandstorm Device Private Key
+    `sandstorm.key` is the Thurly Device Private Key
 
 
-6. Create Sandstorm Device Certificate Signing Request (CSR) using the copied and edited openssl.cnf file:
+6. Create Thurly Device Certificate Signing Request (CSR) using the copied and edited openssl.cnf file:
 
         openssl req -new -key sandstorm.key -out sandstorm.csr -config openssl.cnf
 
-    `sandstorm.csr` is the Sandstorm Device Certificate Signing Request (CSR)
+    `sandstorm.csr` is the Thurly Device Certificate Signing Request (CSR)
 
 
-7. Create and sign the Sandstorm Certificate (Expire in 2 years):
+7. Create and sign the Thurly Certificate (Expire in 2 years):
 
         openssl x509 -req -in sandstorm.csr -CA rootCA.pem -CAkey rootCA.key -CAcreateserial -out sandstorm.crt -days 730 -extensions v3_req -extfile openssl.cnf
 
-    `sandstorm.crt` is the Sandstorm Certificate
+    `sandstorm.crt` is the Thurly Certificate
 
 
-8. Import the Certificate Authority (CA) Certificate (`rootCA.pem`) into the browser's that will be using Sandstorm. Some browsers may load grains without this step and ask users to add a security excpetion in order to fully load grains. This [tutorial](http://wiki.cacert.org/FAQ/BrowserClients) by CACert indicates some ways to do that. Note that this results in the CA being trusted for all sites, not just your Sandstorm, due to how web browsers handle certificate authorities.
+8. Import the Certificate Authority (CA) Certificate (`rootCA.pem`) into the browser's that will be using Thurly. Some browsers may load grains without this step and ask users to add a security excpetion in order to fully load grains. This [tutorial](http://wiki.cacert.org/FAQ/BrowserClients) by CACert indicates some ways to do that. Note that this results in the CA being trusted for all sites, not just your Sandstorm, due to how web browsers handle certificate authorities.
 
-9. Copy (FTP/SSH) the Sandstorm Certificate and Sandstorm Private Key to the nginx ssl directory, it may be `/etc/nginx/ssl`.
+9. Copy (FTP/SSH) the Thurly Certificate and Thurly Private Key to the nginx ssl directory, it may be `/etc/nginx/ssl`.
 
-10. Make sure these lines in your nginx conf file reflect the new Sandstorm Certificate and Private Key filenames. (See
+10. Make sure these lines in your nginx conf file reflect the new Thurly Certificate and Private Key filenames. (See
 [nginx-example.conf.](https://github.com/sandstorm-io/sandstorm/blob/master/docs/administering/sample-config/nginx-example.conf))
 
         ssl_certificate /etc/nginx/ssl/sandstorm.crt;
@@ -101,7 +101,7 @@ If you are running into problems viewing grains, then make sure you followed **S
 
 You can attempt to find out if this is the problem by taking the following steps.
 
-- Log into your Sandstorm install.
+- Log into your Thurly install.
 
 - Create a grain.
 
@@ -109,7 +109,7 @@ You can attempt to find out if this is the problem by taking the following steps
 
 - Look for an **IFRAME** tag, whose `class` is `grain-frame`.
 
-- Attempt to load that URL in a separate tab, outside of Sandstorm.
+- Attempt to load that URL in a separate tab, outside of Thurly.
 
 If your browser shows you a certificate warning on this URL, then you will need to follow **Step 8** above and import the certificate authority file into your browser. This is because your browser will block untrusted IFRAME elements without showing you a warning, so there will be no way for you to proceed past the trust problem.
 

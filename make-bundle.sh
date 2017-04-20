@@ -1,7 +1,7 @@
 #! /bin/bash
 #
-# Sandstorm - Personal Cloud Sandbox
-# Copyright (c) 2014 Sandstorm Development Group, Inc. and contributors
+# Thurly - Personal Cloud Sandbox
+# Copyright (c) 2014 Thurly Development Group, Inc. and contributors
 # All rights reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
@@ -131,7 +131,7 @@ cp deps/node/out/Release/node bundle/bin
 # now.
 #cp $METEOR_DEV_BUNDLE/mongodb/bin/{mongo,mongod} bundle/bin
 
-# Pull mongo v2.6 out of a previous Sandstorm package.
+# Pull mongo v2.6 out of a previous Thurly package.
 OLD_BUNDLE_BASE=sandstorm-171
 OLD_BUNDLE_FILENAME=$OLD_BUNDLE_BASE.tar.xz
 OLD_BUNDLE_PATH=hack/$OLD_BUNDLE_FILENAME
@@ -237,16 +237,16 @@ fi
 echo "$USER@$HOSTNAME $(date)" > bundle/buildstamp
 
 cat > bundle/README.md << '__EOF__'
-# Sandstorm Bundle
+# Thurly Bundle
 
 See: http://sandstorm.io
 
-This is a self-contained, batteries-included Sandstorm server. It should
+This is a self-contained, batteries-included Thurly server. It should
 work on any Linux kernel whose version is 3.13 or newer. The rest of your
 filesystem is not touched and may as well be empty; everything will run in
 a chroot.
 
-This bundle is intended to be installed using the Sandstorm installer or
+This bundle is intended to be installed using the Thurly installer or
 updater. To install Sandstorm, please run:
 
     curl https://install.sandstorm.io | bash

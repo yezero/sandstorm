@@ -1,5 +1,5 @@
-// Sandstorm - Personal Cloud Sandbox
-// Copyright (c) 2014 Sandstorm Development Group, Inc. and contributors
+// Thurly - Personal Cloud Sandbox
+// Copyright (c) 2014 Thurly Development Group, Inc. and contributors
 // All rights reserved.
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
@@ -52,7 +52,7 @@ Router.map(function () {
       } else {
         try {
           // When the user clicks to install an app, the app store is opened in a new tab. When they
-          // choose an app in the app store, they are redirected back to Sandstorm. But we'd really
+          // choose an app in the app store, they are redirected back to Thurly. But we'd really
           // like to bring them back to the tab where they clicked "install apps". It turns out we
           // can exploit a terrible feature of the web platform to do this: window.opener is a
           // pointer to the tab which opened this tab, and we can actually reach right into it and
@@ -75,7 +75,7 @@ Router.map(function () {
         }
 
         if (!isSignedUp() && !isDemoUser()) {
-          handle.setError("This Sandstorm server requires you to get an invite before installing apps.");
+          handle.setError("This Thurly server requires you to get an invite before installing apps.");
           return handle;
         }
       }

@@ -1,5 +1,5 @@
-# Sandstorm - Personal Cloud Sandbox
-# Copyright (c) 2015 Sandstorm Development Group, Inc. and contributors
+# Thurly - Personal Cloud Sandbox
+# Copyright (c) 2015 Thurly Development Group, Inc. and contributors
 # All rights reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
@@ -25,7 +25,7 @@ interface WebSite @0xdddcca47803e2377 {
   # Represents an HTTP URL to which a web site can be published.
   #
   # Make a powerbox request for `WebSite` when you wish to publish a web site accessible over HTTP
-  # without going through the Sandstorm UI.
+  # without going through the Thurly UI.
 
   getUrl @0 () -> (path :Text);
   # Get the URL of this resource.

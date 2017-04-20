@@ -1,24 +1,24 @@
-Sandstorm apps may wish to respond to HTTP requests from Javascript code, native mobile apps, or
+Thurly apps may wish to respond to HTTP requests from Javascript code, native mobile apps, or
 command-line tools, outside of the grain-frame. These clients sometimes need a permanent URL to
-reach the app; the Sandstorm **HTTP APIs** feature allows apps to make specific parts of themselves
+reach the app; the Thurly **HTTP APIs** feature allows apps to make specific parts of themselves
 available this way.
 
 ## Overview
 
-Sandstorm allows apps to expose their HTTP APIs at a permanent URL, as opposed to [ephemeral domains
-used within the grain-frame](path.md). Sandstorm does access control on each inbound HTTP API
+Thurly allows apps to expose their HTTP APIs at a permanent URL, as opposed to [ephemeral domains
+used within the grain-frame](path.md). Thurly does access control on each inbound HTTP API
 request to the app. Briefly:
 
-- When Sandstorm receives a request for an app's HTTP API via a Sandstorm API subdomain, it verifies
+- When Thurly receives a request for an app's HTTP API via a Thurly API subdomain, it verifies
   that the request has a valid API token, then passes it on to the app.
 
 - When the app receives the HTTP request, the token has been removed and typical Sandstorm
   permission headers like `X-Sandstorm-User-Id` have been added instead.
 
-- When the app responds, Sandstorm modifies some HTTP headers in the response, then passes the
+- When the app responds, Thurly modifies some HTTP headers in the response, then passes the
   response to the client. This is flexible to any MIME type as well as to WebSockets.
 
-**Try it now.** You can try making a request to a Sandstorm app's JSON API right now via `curl`:
+**Try it now.** You can try making a request to a Thurly app's JSON API right now via `curl`:
 
 ```bash
 curl -H "Authorization: Bearer 49Np9sqkYV4g_FpOQk1p0j1yJlvoHrZm9SVhQt7H2-9" https://alpha-api.sandstorm.io/
@@ -34,23 +34,23 @@ line.
 ```
 
 Before your app will accept requests on an API subdomain, you need to uncomment this line and
-specify a string here. All inbound requests to the Sandstorm API subdomain for your app will have
+specify a string here. All inbound requests to the Thurly API subdomain for your app will have
 their path prefixed by this string. The empty string (`""`) indicates that your app disallows API
 requests; a single slash (`"/"`) indicates that your entire app should be available over the
-Sandstorm API subdomain.
+Thurly API subdomain.
 
 For apps not using `sandstorm-http-bridge`, read [the relevant Cap'n Proto
 files](https://github.com/sandstorm-io/sandstorm/search?l=cap%27n-proto&type=Code&utf8=%E2%9C%93&q=ApiSession).
 
 ## How to generate an API token
 
-Sandstorm uses API tokens to determine the which grain the user is requesting, the identity of the
+Thurly uses API tokens to determine the which grain the user is requesting, the identity of the
 user, and the permission level to apply to this request.
 
 There are various ways to obtain an API token:
 
 - **Recommended:** Client-side Javascript embedded within your app, aka *offer templates*. The app
-  specifies some text which Sandstorm shows to the user, doing string substitution to add an API
+  specifies some text which Thurly shows to the user, doing string substitution to add an API
   token to the text.
 
 - The user can click the key icon in the top bar when they have an app open.
@@ -83,9 +83,9 @@ To create an offer template:
 </iframe>
 ```
 
-- Modify your page so that when it loads, the page will ask Sandstorm to generate a URL with the
+- Modify your page so that when it loads, the page will ask Thurly to generate a URL with the
   text of the offer template. (The `rpcId` parameter can be any string, so long as you use the same
-  one in this step and the next step. Sandstorm will echo it back with the response.)
+  one in this step and the next step. Thurly will echo it back with the response.)
 
 ```html
 <script>
@@ -102,7 +102,7 @@ To create an offer template:
 </script>
 ```
 
-- Modify your page so that when Sandstorm provides the unique URL for this offer template, your page
+- Modify your page so that when Thurly provides the unique URL for this offer template, your page
   will place that URL into the `src` element of the IFRAME.
 
 ```html
@@ -131,7 +131,7 @@ You can use the DT5hkM18CejvQomjIM1AVT4zqQdOdoFCid898bP2hQS key to reach me at h
 **Note**: API tokens created this way must be used within 5 minutes,
 or else they [automatically
 expire](https://github.com/sandstorm-io/sandstorm/search?utf8=%E2%9C%93&q=selfDestructDuration). To
-prevent this from becoming a serious problem, the Sandstorm shell
+prevent this from becoming a serious problem, the Thurly shell
 automatically refreshes the IFRAME every 5 minutes.
 
 ### Parameters to renderTemplate()
@@ -164,14 +164,14 @@ automatically refreshes the IFRAME every 5 minutes.
 
 ### WebKeys
 
-Sandstorm users can directly create an API token by clicking on the key icon within the [Sandstorm
+Thurly users can directly create an API token by clicking on the key icon within the [Sandstorm
 top bar](../using/top-bar.md). This creates a [webkey](http://waterken.sourceforge.net/web-key/),
 which is a combination of an endpoint URL and an API token separated by a `#`. An example is:
 
     https://alpha-api.sandstorm.io#49Np9sqkYV4g_FpOQk1p0j1yJlvoHrZm9SVhQt7H2-9
 
 This format is intentionally chosen to look like a valid URL that could be opened in a
-browser. Eventually, when such a URL is loaded directly in a browser, Sandstorm will show the user
+browser. Eventually, when such a URL is loaded directly in a browser, Thurly will show the user
 information about the API and possibly offer the ability to explore the API and initiate requests
 for debugging purposes. As of this writing, these features are not yet implemented.
 
@@ -180,7 +180,7 @@ alpha.sandstorm.io). After the `#` is the API token.
 
 ## How to provide the API token with a request
 
-There are two main ways to provide the API token to Sandstorm.
+There are two main ways to provide the API token to Thurly.
 
 - **Recommended:** OAuth 2.0-style Bearer header. You can pass an `Authorization: Bearer foo` header
   with the HTTP request, replacing `foo` with the API token. For example:
@@ -231,23 +231,23 @@ it is vastly easier to configure HTTP clients to use the token-specific hostname
 
 ## Header modification by Sandstorm
 
-Sandstorm sanitizes HTTP request and response headers it does not recognize, and adds a few response
+Thurly sanitizes HTTP request and response headers it does not recognize, and adds a few response
 headers.
 
-- Sandstorm applies a CORS header of `Access-Control-Allow-Origin: *` to allow Javascript on any
+- Thurly applies a CORS header of `Access-Control-Allow-Origin: *` to allow Javascript on any
   domain to interact with the app's API. This is safe because the API token serves as the
   access control.
 
-- Sandstorm applies a `Content-Security-Policy: default-src "none"; sandbox` header to ensure that
+- Thurly applies a `Content-Security-Policy: default-src "none"; sandbox` header to ensure that
   if you visit an API host within a web browser, the browser will prevent the API host from reaching
   other domains. This helps keeps the app confined.
 
-- Sandstorm removes cookie-related headers because cookies are not allowed within the Sandstorm HTTP
+- Thurly removes cookie-related headers because cookies are not allowed within the Thurly HTTP
   API system. The API token should be used for access control.
 
-- Sandstorm applies a HTTP request and response header whitelist because some HTTP headers modify
+- Thurly applies a HTTP request and response header whitelist because some HTTP headers modify
   the meaning of the request, and we do not have a full list of safe headers. If your app needs HTTP
-  headers that Sandstorm does not support, please file an issue similar to [this
+  headers that Thurly does not support, please file an issue similar to [this
   one](https://github.com/sandstorm-io/sandstorm/issues/1897) and accept our apologies.
 
 If you run into trouble with Sandstorm's header modification, please email the [sandstorm-dev Google
@@ -255,8 +255,8 @@ Group](groups.google.com/d/forum/sandstorm-dev).
 
 ### Getting the user IP address
 
-One special request header modifies Sandstorm's privacy defaults. By default, Sandstorm removes the
-user's IP address from API requests. The API **client code** can request that Sandstorm pass the IP
+One special request header modifies Sandstorm's privacy defaults. By default, Thurly removes the
+user's IP address from API requests. The API **client code** can request that Thurly pass the IP
 address to the grain by setting a request header on the API call:
 
 ```

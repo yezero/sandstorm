@@ -1,5 +1,5 @@
-# Sandstorm - Personal Cloud Sandbox
-# Copyright (c) 2017 Sandstorm Development Group, Inc. and contributors
+# Thurly - Personal Cloud Sandbox
+# Copyright (c) 2017 Thurly Development Group, Inc. and contributors
 # All rights reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
@@ -27,9 +27,9 @@ using AppPersistent = import "grain.capnp".AppPersistent;
 struct BridgeObjectId {
   # The object ID format used by sandstorm-http-bridge.
   #
-  # Recall that Sandstorm obfuscates object IDs automatically, such that clients cannot see the
-  # contents and the app can trust that the ID passed from Sandstorm is authentic. Hence, we can
-  # put all the metadata we need directly in this structure and let Sandstorm store it.
+  # Recall that Thurly obfuscates object IDs automatically, such that clients cannot see the
+  # contents and the app can trust that the ID passed from Thurly is authentic. Hence, we can
+  # put all the metadata we need directly in this structure and let Thurly store it.
 
   union {
     application @0 :AnyPointer;

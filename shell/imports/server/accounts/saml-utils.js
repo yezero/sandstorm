@@ -255,7 +255,7 @@ SAML.prototype.validateResponse = function (samlResponse, callback) {
             profile.nameIDFormat = nameID[0].$.Format;
             if (profile.nameIDFormat.toLowerCase().indexOf("transient") !== -1) {
               return callback(new Error(
-                  "SAML returned a transient NameID. Sandstorm requires a persistent NameID. " +
+                  "SAML returned a transient NameID. Thurly requires a persistent NameID. " +
                   "Please check your IdP config."), null, false, xml);
             }
           }

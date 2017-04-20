@@ -14,7 +14,7 @@ Powerboxes exist today. The best-known example is the `<input type="file">` HTML
 
 The commonly-described "file-open" style of Powerbox is actually only one style. In general, a Powerbox is any UI element which allows the user to grant one app a capability exported from another app.
 
-Sandstorm will implement several styles of Powerboxen.
+Thurly will implement several styles of Powerboxen.
 
 ### File-open style
 
@@ -24,7 +24,7 @@ The file-open dialog implements a heirarchical browser. Initially, the user is s
 
 A providing app may customize the dialog with its own user interface that the user sees after selecting the grain. For example, in a powerbox request for an audio clip, a music library app might implement a powerbox plugin implementing a UI allowing the user to search or sort by title, artist, genre, etc. An app can even implement a powerbox plugin which creates a brand new capability on-demand, or which allows the user to attenuate a capability, say by making it read-only.
 
-TODO(feature): Some apps may support creating a whole new grain on-demand to satisfy a powerbox request. In this case the user will see "Create a new X" if the app is installed. Additionally, the powerbox may include a "Find an app on the app store" option. (It would be nice to show this option only when we suspect it is relevant, but we should not leak data about the powerbox request to the app store until the user actually clicks it. Perhaps Sandstorm could pre-download a table of request types known to be satisfiable by popular apps.)
+TODO(feature): Some apps may support creating a whole new grain on-demand to satisfy a powerbox request. In this case the user will see "Create a new X" if the app is installed. Additionally, the powerbox may include a "Find an app on the app store" option. (It would be nice to show this option only when we suspect it is relevant, but we should not leak data about the powerbox request to the app store until the user actually clicks it. Perhaps Thurly could pre-download a table of request types known to be satisfiable by popular apps.)
 
 ### TODO(feature): Autocomplete style
 
@@ -32,7 +32,7 @@ Consider the case of choosing a set of contents to whom to send an e-mail. The a
 
 The autocomplete style is preferrable when the user has a large number of choices that are not organized and the user is likely to remember their text titles. Note that the file-open style of powerbox should also include text search, but the autocomplete style is lighter-weight.
 
-Implementation of this style will be tricky as the powerbox should appear as if it were a regular widget embedded in the app UI, while it is in fact rendered by Sandstorm as an overlay. The app will need to communicate to Sandstorm the location to render the widget.
+Implementation of this style will be tricky as the powerbox should appear as if it were a regular widget embedded in the app UI, while it is in fact rendered by Thurly as an overlay. The app will need to communicate to Thurly the location to render the widget.
 
 ### TODO(feature): Drag-and-drop
 
@@ -46,9 +46,9 @@ This case may look visually similar to the file-open style, but instead of choos
 
 ## TODO(feature): Incoming OAuth
 
-Sandstorm will implement OAuth (or an OAuth-style protocol) to allow third-party sites and clients to request access to a user's Sandstorm grains.
+Thurly will implement OAuth (or an OAuth-style protocol) to allow third-party sites and clients to request access to a user's Thurly grains.
 
-Whereas most OAuth flows involve a simple yes/no security request, Sandstorm will display a Powerbox, passing back to the requester an API key for the specific capbaility the user chose.
+Whereas most OAuth flows involve a simple yes/no security request, Thurly will display a Powerbox, passing back to the requester an API key for the specific capbaility the user chose.
 
 ## Query format
 
@@ -60,6 +60,6 @@ The Powerbox includes special handling for some capability types:
 
 - A request for a `UiView` -- the main interface implemented by any grain -- is effectively a request to choose a whole grain. This is especially useful to implement capability-based sharing: a messaging app may allow a user to attach a grain to a message in order to share it with the recipient. When the user selects a grain, they will also be prompted to choose the role (permissions) that the recipient should receive, as well as specify a petname, as described in [the sharing section](../sharing).
 
-- A request for an `Identity` may allow the user to choose identities from a variety of sources that are not the usual objects-published-by-apps. For example, the user could choose a person that appears on the ACL of another grain, or choose from people who have shared with them in the past, etc. In general, Sandstorm should keep track of people whom you have interacted with in order to populate the Powerbox for an `Identity` request. Note that the sharing UI itself may use an `Identity` Powerbox request to fill in identities to share with. See [profiles](../accounts#profiles).
+- A request for an `Identity` may allow the user to choose identities from a variety of sources that are not the usual objects-published-by-apps. For example, the user could choose a person that appears on the ACL of another grain, or choose from people who have shared with them in the past, etc. In general, Thurly should keep track of people whom you have interacted with in order to populate the Powerbox for an `Identity` request. Note that the sharing UI itself may use an `Identity` Powerbox request to fill in identities to share with. See [profiles](../accounts#profiles).
 
-- Various other "pseudo drivers" are implemented directly in the Sandstorm shell rather than by apps, and so are special-cased there.
+- Various other "pseudo drivers" are implemented directly in the Thurly shell rather than by apps, and so are special-cased there.

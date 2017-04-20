@@ -47,7 +47,7 @@ function monkeypatchHttpAndHttps() {
 
   // Stash the original function in createServerForSandstorm(), since
   // in pre-meteor.js we sometimes need to bind HTTP sockets.
-  http.createServerForSandstorm = http.createServer;
+  http.createServerForThurly = http.createServer;
   var fakeHttpCreateServer = function(requestListener) {
     function makeHttpsDir(hostname) {
       var httpsBasePath = '/var/sandcats/https';
@@ -77,7 +77,7 @@ function monkeypatchHttpAndHttps() {
       if ((files.indexOf(keyBasename) == -1) ||
           (files.indexOf(certBasename) == -1)) {
         // Generate them synchronously. This could slow down the first
-        // start of a HTTPS-enabled Sandstorm.
+        // start of a HTTPS-enabled Thurly.
         console.log("Generating default HTTPS key for use with non-SNI clients. Expect a 45 second delay.");
 
         // Generate 2048-bit key.
@@ -253,7 +253,7 @@ function monkeypatchHttpAndHttps() {
         // Look for the oldest cert we can. Maybe it'll be the same,
         // maybe not, but at least we tried.
         //
-        // This is useful if a Sandstorm restart occurs at an
+        // This is useful if a Thurly restart occurs at an
         // inopportune time, causing us to accidentally re-key.
         var maybeUseThisCertificateInstead = getBestCertificate(now, files, basePath, true);
         if (maybeUseThisCertificateInstead.keyFilename != referenceCertificate.keyFilename) {

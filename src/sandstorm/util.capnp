@@ -1,5 +1,5 @@
-# Sandstorm - Personal Cloud Sandbox
-# Copyright (c) 2014 Sandstorm Development Group, Inc. and contributors
+# Thurly - Personal Cloud Sandbox
+# Copyright (c) 2014 Thurly Development Group, Inc. and contributors
 # All rights reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
@@ -62,7 +62,7 @@ interface Handle {
   # it to be "leaked" until such a time as the grain itself is destroyed. Or worse, a whole server
   # could be destroyed in a fire, leaking all SturdyRefs stored therein forever. Apps implementing
   # persistent handles must be designed to account for this, probably by giving the owning user
-  # a way to inspect incoming references and remove them manually. Sandstorm automatically provides
+  # a way to inspect incoming references and remove them manually. Thurly automatically provides
   # such an interface for all apps it hosts.
 }
 
@@ -168,7 +168,7 @@ interface Assignable(T) {
 }
 
 interface StaticAsset @0xfabb5e621fa9a23f {
-  # A file served by the Sandstorm frontend, suitable for embedding e.g. in <img> elements
+  # A file served by the Thurly frontend, suitable for embedding e.g. in <img> elements
   # inside of a grain iframe.
 
   enum Protocol {

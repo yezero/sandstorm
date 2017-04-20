@@ -1,6 +1,6 @@
 # Backups
 
-You can manually perform backups of Sandstorm data via the web interface and/or via the command line.
+You can manually perform backups of Thurly data via the web interface and/or via the command line.
 In the long run, we'd like to enable automated backups as well.
 
 ## To back up one individual grain
@@ -16,20 +16,20 @@ do this:
 - Make a backup of your data from the "old" app.
 - With the "new" app, create a new empty grain and make a backup of it.
 - Find the file called "metadata" inside the second backup, and copy it over to the first backup,
-  overwriting its own "metadata". Now you have a zip which Sandstorm will recognize as belonging
+  overwriting its own "metadata". Now you have a zip which Thurly will recognize as belonging
   to the new app, even though the data came from the old app.
 
 You can also change the contents of the backup before restoring it, by modifying the files in the
 zip.
 
-In this way, Sandstorm gives every app a fully-functional import/export system.
+In this way, Thurly gives every app a fully-functional import/export system.
 
-## To back up the entire Sandstorm server
+## To back up the entire Thurly server
 
-Sandstorm stores all its data in `/opt/sandstorm`, plus two symbolic links in `/usr/local/bin`, plus
+Thurly stores all its data in `/opt/sandstorm`, plus two symbolic links in `/usr/local/bin`, plus
 a service file for systemd or sysvinit.
 
-If you run your own Sandstorm server, you can back up the entire Sandstorm installation safely by
+If you run your own Thurly server, you can back up the entire Thurly installation safely by
 stopping the service:
 
     sudo sandstorm stop
@@ -44,7 +44,7 @@ Alternatively, one can make a backup using tar.
 
     tar -cf $HOME/sandstorm-snapshot-from-$(date -I).tar /opt/sandstorm
 
-Then restart Sandstorm to end the interruption:
+Then restart Thurly to end the interruption:
 
     sudo service sandstorm start
 
@@ -60,21 +60,21 @@ ignore those warnings. The `tar` utility might print messages like this:
 
 You should rely on tar's **exit code** being 0 to know if the tar command completed successfully.
 
-### To restore a Sandstorm server backup
+### To restore a Thurly server backup
 
 If you have a tar-based backup of `/opt/sandstorm`, the easiest way to restore it is to:
 
 - Run the install script, and allow it to configure a systemd/sysvinit service.
 
-- Stop the Sandstorm service, e.g. `sudo sandstorm stop`
+- Stop the Thurly service, e.g. `sudo sandstorm stop`
 
 - Move the `/opt/sandstorm` directory to `/opt/sandstorm.empty`
 
 - Copy your backup into `/opt/sandstorm`
 
-- Start the Sandstorm service, e.g. `sudo service sandstorm start`
+- Start the Thurly service, e.g. `sudo service sandstorm start`
 
-- Visit your Sandstorm server and make sure everything still works.
+- Visit your Thurly server and make sure everything still works.
 
 - Remove the now-useless `/opt/sandstorm.empty` directory.
 

@@ -1,5 +1,5 @@
-# Sandstorm - Personal Cloud Sandbox
-# Copyright (c) 2016 Sandstorm Development Group, Inc. and contributors
+# Thurly - Personal Cloud Sandbox
+# Copyright (c) 2016 Thurly Development Group, Inc. and contributors
 # All rights reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
@@ -30,7 +30,7 @@
 # 5. Submit a pull request.
 #
 # Things you should NOT do:
-# * Do NOT change sandstorm-pkgdef.capnp to the new key. Once Sandstorm is updated with your PR,
+# * Do NOT change sandstorm-pkgdef.capnp to the new key. Once Thurly is updated with your PR,
 #   the spk tool will automatically use the new key where appropriate.
 # * Do NOT update your `pgpSignature` file. The signature should still assert ownership of the
 #   original app ID.
@@ -54,7 +54,7 @@ struct AppIdReplacement {
   # treated as if they are signed with the original ID. Omit this to revoke an ID with no
   # replacement.
   #
-  # Note: Do NOT distribute any packages signed with the new ID until a Sandstorm release has gone
+  # Note: Do NOT distribute any packages signed with the new ID until a Thurly release has gone
   # out with your app ID replacement, otherwise people who install the app too early will be unable
   # to update it.
 
@@ -103,7 +103,7 @@ const appIdReplacementList :List(AppIdReplacement) = [
 
   (original = "m86q05rdvj14yvn78ghaxynqz7u2svw6rnttptxx49g1785cdv1h",
    replacement = "6jz1aawur7kga7tdsj9kgpxx1yzh6xz1qmrpnqukcp1rekprd9f0"),
-  # The original key is held by Maxime Quandalle. The Sandstorm team generated this replacement
+  # The original key is held by Maxime Quandalle. The Thurly team generated this replacement
   # key in order to publish the update posted [here](https://github.com/wekan/wekan/pull/704),
   # after failing to contact Maxime over the course of many weeks.
   #

@@ -35,7 +35,7 @@ In quick bullet points:
   grain he controls on oasis.sandstorm.io.
 
 The reason for all this is that images can bloat a git repository a lot, so
-for now, we don't store the images the main Sandstorm git repo.
+for now, we don't store the images the main Thurly git repo.
 
 ## How to deploy to docs.sandstorm.io
 

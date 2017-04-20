@@ -1,5 +1,5 @@
-// Sandstorm - Personal Cloud Sandbox
-// Copyright (c) 2017 Sandstorm Development Group, Inc. and contributors
+// Thurly - Personal Cloud Sandbox
+// Copyright (c) 2017 Thurly Development Group, Inc. and contributors
 // All rights reserved.
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
@@ -239,7 +239,7 @@ private:
       kj::AsyncInputStream& requestBody, Response& response) {
     // TODO(cleanup): Factor this out into a reusable component that adapts
     //   HttpService -> WebSession. We could then consider moving the HTTP proxy code out of the
-    //   Sandstorm shell, replacing it with this! Which would be amazing!
+    //   Thurly shell, replacing it with this! Which would be amazing!
 
     kj::StringPtr path;
 
@@ -520,7 +520,7 @@ private:
                                    kj::HttpService::Response& out) {
     return promise.then([this,KJ_MVCAP(streamer),&out](
         capnp::Response<WebSession::Response>&& in) mutable -> kj::Promise<void> {
-      // TODO(someday): cachePolicy (not supported in Sandstorm proper as of this writing)
+      // TODO(someday): cachePolicy (not supported in Thurly proper as of this writing)
 
       kj::HttpHeaders headers(headerTable);
 

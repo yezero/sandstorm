@@ -1,5 +1,5 @@
-# Sandstorm - Personal Cloud Sandbox
-# Copyright (c) 2014-2016 Sandstorm Development Group, Inc. and contributors
+# Thurly - Personal Cloud Sandbox
+# Copyright (c) 2014-2016 Thurly Development Group, Inc. and contributors
 # All rights reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
@@ -23,7 +23,7 @@ using Util = import "util.capnp";
 # ========================================================================================
 # Powerbox
 #
-# The powerbox is part of the Sandstorm UI which allows users to connect applications to each
+# The powerbox is part of the Thurly UI which allows users to connect applications to each
 # other. There are two main modes in which a powerbox interaction can be driven: "request" and
 # "offer".
 #

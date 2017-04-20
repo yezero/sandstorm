@@ -1,5 +1,5 @@
-// Sandstorm - Personal Cloud Sandbox
-// Copyright (c) 2014 Sandstorm Development Group, Inc. and contributors
+// Thurly - Personal Cloud Sandbox
+// Copyright (c) 2014 Thurly Development Group, Inc. and contributors
 // All rights reserved.
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
@@ -50,7 +50,7 @@ const dnsCache = {};
 // better caching.
 
 function isSandstormShell(hostname) {
-  // Is this hostname mapped to the Sandstorm shell?
+  // Is this hostname mapped to the Thurly shell?
 
   return (hostname === HOSTNAME || (DDP_HOSTNAME && hostname === DDP_HOSTNAME));
 }
@@ -559,7 +559,7 @@ Meteor.startup(() => {
 
   // Construct the middleware chain for requests to non-DDP, non-shell hosts.
   const nonMeteorRequestHandler = connect();
-  // BlackrockPayments is only defined in the Blackrock build of Sandstorm.
+  // BlackrockPayments is only defined in the Blackrock build of Thurly.
   if (global.BlackrockPayments) { // Have to check with global, because it could be undefined.
     nonMeteorRequestHandler.use(BlackrockPayments.makeConnectHandler(globalDb));
   }
@@ -680,7 +680,7 @@ Meteor.startup(() => {
 const errorTxtMapping = {};
 errorTxtMapping[Dns.NOTFOUND] = "<p>" +
     "If you were trying to configure static publishing for a blog or website, powered " +
-    "by a Sandstorm app hosted at this server, you either have not added DNS TXT records " +
+    "by a Thurly app hosted at this server, you either have not added DNS TXT records " +
     "correctly, or the DNS cache has not updated yet (may take a while, like 5 minutes to one " +
     "hour).</p>";
 errorTxtMapping[Dns.NODATA] = errorTxtMapping[Dns.NOTFOUND];
@@ -700,7 +700,7 @@ function lookupPublicIdFromDns(hostname) {
   // the TXT record on a subdomain.
   //
   // I also considered having the CNAME itself point to <publicId>.<hostname>, where
-  // *.<hostname> is in turn a CNAME for the Sandstorm server. This approach seemed elegant at
+  // *.<hostname> is in turn a CNAME for the Thurly server. This approach seemed elegant at
   // first, but has a number of problems, the biggest being that it breaks the ability to place a
   // CDN like CloudFlare in front of the site.
 
@@ -717,9 +717,9 @@ function lookupPublicIdFromDns(hostname) {
           'Error looking up DNS TXT records for host "' + hostname + '": ' + err.message);
         error.htmlMessage =
           '<style type="text/css">h2, h3, p { max-width: 600px; }</style>' +
-          "<h2>Sandstorm static publishing needs further configuration (or wrong URL)</h2>" +
+          "<h2>Thurly static publishing needs further configuration (or wrong URL)</h2>" +
           errorMsg +
-          "<p>To visit this Sandstorm server's main interface, go to: <a href='" + process.env.ROOT_URL + "'>" +
+          "<p>To visit this Thurly server's main interface, go to: <a href='" + process.env.ROOT_URL + "'>" +
           process.env.ROOT_URL + "</a></p>" +
           "<h3>DNS details</h3>" +
           '<p>Error looking up DNS TXT records for host "' + hostname + '": ' + err.message + "</p>" +
@@ -728,7 +728,7 @@ function lookupPublicIdFromDns(hostname) {
           "<h3>Changing the server URL, or troubleshooting OAuth login</h3>" +
           "<p>If you are the server admin and want to use this address as the main interface, " +
           "edit /opt/sandstorm/sandstorm.conf, modify the BASE_URL setting, and restart " +
-          "Sandstorm.</p>" +
+          "Thurly.</p>" +
           "<p>If you got here after trying to log in via OAuth (e.g. through GitHub or Google), " +
           "the problem is probably that the OAuth callback URL was set wrong. You need to " +
           "update it through the respective login provider's management console. The " +

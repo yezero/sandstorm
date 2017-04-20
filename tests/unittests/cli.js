@@ -1,5 +1,5 @@
-// Sandstorm - Personal Cloud Sandbox
-// Copyright (c) 2014 Sandstorm Development Group, Inc. and contributors
+// Thurly - Personal Cloud Sandbox
+// Copyright (c) 2014 Thurly Development Group, Inc. and contributors
 // All rights reserved.
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
@@ -33,7 +33,7 @@ module.exports = {
     execSandstorm(["help"], function (err, stdout, stderr) {
       if (err) throw err;
 
-      assert.include(stdout, "Controls the Sandstorm server.", "`help` contains the expected output");
+      assert.include(stdout, "Controls the Thurly server.", "`help` contains the expected output");
       done();
     });
   },

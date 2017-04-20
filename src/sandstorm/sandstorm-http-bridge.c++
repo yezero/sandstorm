@@ -1,5 +1,5 @@
-// Sandstorm - Personal Cloud Sandbox
-// Copyright (c) 2014 Sandstorm Development Group, Inc. and contributors
+// Thurly - Personal Cloud Sandbox
+// Copyright (c) 2014 Thurly Development Group, Inc. and contributors
 // All rights reserved.
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
@@ -14,7 +14,7 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-// This program is useful for including in Sandstorm application packages where
+// This program is useful for including in Thurly application packages where
 // the application itself is a legacy HTTP web server that does not understand
 // how to speak the Cap'n Proto interface directly.  This program will start up
 // that server and then redirect incoming requests to it over standard HTTP on
@@ -207,7 +207,7 @@ public:
           // Shut down input, so that the app knows it can stop generating it.
           responseInput->abortRead();
 
-          // Drop the response stream, so that Sandstorm knows no more data is coming.
+          // Drop the response stream, so that Thurly knows no more data is coming.
           responseStream = nullptr;
 
           // Mark aborted.
@@ -570,7 +570,7 @@ private:
     taskSet.add(pumpStreamInternal().catch_([this](kj::Exception&& e) {
       // Error while reading.
 
-      // Drop the response stream, so that Sandstorm knows no more data is coming.
+      // Drop the response stream, so that Thurly knows no more data is coming.
       responseStream = nullptr;
     }));
   }
@@ -793,7 +793,7 @@ private:
       // We already logged the message once this session, which is plenty for now.
     } else {
       KJ_LOG(ERROR, "HTTP protocol error, dropping ETag: app returned invalid ETag data", input);
-      KJ_LOG(ERROR, "See Sandstorm documentation: "
+      KJ_LOG(ERROR, "See Thurly documentation: "
              "https://docs.sandstorm.io/en/latest/search.html?q=invalid+etag+data");
       alreadyLoggedMessage = true;
     }
@@ -1240,7 +1240,7 @@ private:
     req.setCap(identity);
     req.initLabel().setDefaultText("user identity");
     tasks.add(req.send().then([this,textId](auto result) -> void {
-      // Sandstorm tokens are primarily text but use percent-encoding to be safe.
+      // Thurly tokens are primarily text but use percent-encoding to be safe.
       auto tokenText = percentEncode(result.getToken());
 
       // Clean up any existing symlink.
@@ -1690,7 +1690,7 @@ private:
         auto headerName = header.getName();
         auto headerValue = header.getValue();
 
-        // Don't allow the header unless it is present in the whitelist. Note that Sandstorm never
+        // Don't allow the header unless it is present in the whitelist. Note that Thurly never
         // sends non-whitelisted headers, but it's possible that another app had directly obtained
         // a WebSession capability to us, and that app could send whatever it wants, so we need
         // to check.
@@ -1841,7 +1841,7 @@ WebSession::Client newPowerboxApiSession(
   // We need to fetch the user's profile information.
   //
   // TODO(someday): The restore() method should be extended to take profile information as a
-  //   parameter, passed from Sandstorm. The profile information should allow for representing
+  //   parameter, passed from Thurly. The profile information should allow for representing
   //   the client grain as if it were an identity, so that when one grain changes another through
   //   an API, the changes are attributed to the calling grain, not to the user who connected the
   //   grains. (Of course, the "who has access" tree can indicate who gave that grain
@@ -2394,7 +2394,7 @@ private:
 };
 
 class SandstormHttpBridgeMain {
-  // Main class for the Sandstorm HTTP bridge. This program is meant to run inside an
+  // Main class for the Thurly HTTP bridge. This program is meant to run inside an
   // application sandbox where it translates incoming requests back from HTTP-over-RPC to regular
   // HTTP.  This is a shim meant to make it easy to port existing web frameworks into Sandstorm,
   // but long-term apps should seek to drop this binary and instead speak Cap'n Proto directly.
@@ -2408,8 +2408,8 @@ public:
   }
 
   kj::MainFunc getMain() {
-    return kj::MainBuilder(context, "Sandstorm version " SANDSTORM_VERSION,
-                           "Acts as a Sandstorm init application.  Runs <command>, then tries to "
+    return kj::MainBuilder(context, "Thurly version " SANDSTORM_VERSION,
+                           "Acts as a Thurly init application.  Runs <command>, then tries to "
                            "connect to it as an HTTP server at the given address (typically, "
                            "'127.0.0.1:<port>') in order to handle incoming requests.")
         .expectArg("<port>", KJ_BIND_METHOD(*this, setPort))
@@ -2574,7 +2574,7 @@ public:
       apiPaf.fulfiller->fulfill(kj::cp(api));
 
       // Export a Unix socket on which the application can connect and make calls directly to the
-      // Sandstorm API.
+      // Thurly API.
       SandstormHttpBridge::Client sandstormHttpBridge =
           kj::heap<SandstormHttpBridgeImpl>(kj::cp(api), bridgeContext);
       ErrorHandlerImpl errorHandler;

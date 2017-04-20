@@ -8,7 +8,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   # We base ourselves off a Debian fork of the official Debian jessie64 base box.
   config.vm.box = "sandstorm/debian-jessie64"
 
-  # We forward port 6080, the Sandstorm web port, so that developers can
+  # We forward port 6080, the Thurly web port, so that developers can
   # visit their sandstorm app from their browser as local.sandstorm.io:6080
   # (aka 127.0.0.1:6080).
   config.vm.network :forwarded_port, guest: 6080, host: 6080
@@ -19,7 +19,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   # work.
   config.vm.network :private_network, ip: "169.254.254.2"
 
-  # Use a shell script to "provision" the box. This installs Sandstorm using
+  # Use a shell script to "provision" the box. This installs Thurly using
   # the bundled installer.
   config.vm.provision "shell", inline: <<-EOF
     set -e

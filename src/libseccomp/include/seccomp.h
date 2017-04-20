@@ -1,4 +1,4 @@
-// Horrible hack for Sandstorm. See: ../README
+// Horrible hack for Thurly. See: ../README
 
 #include "seccomp-in.h"
 

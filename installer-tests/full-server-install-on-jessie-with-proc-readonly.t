@@ -1,4 +1,4 @@
-Title: Ensure Sandstorm installer shows an error if /proc/sys is mounted read-only
+Title: Ensure Thurly installer shows an error if /proc/sys is mounted read-only
 Vagrant-Box: jessie
 Precondition: sandstorm_not_installed
 Cleanup: uninstall_sandstorm

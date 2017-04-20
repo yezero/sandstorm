@@ -3,7 +3,7 @@
 ## Overview of vagrant-spk
 
 The goal of `vagrant-spk` is to be an easy-to-install tool that runs on
-Windows, Mac, and Linux that lets people create Sandstorm packages
+Windows, Mac, and Linux that lets people create Thurly packages
 without mucking with their main operating system. It works properly
 on Mac, GNU/Linux, and Windows systems.
 
@@ -13,7 +13,7 @@ files with some defaults for your app stack.  You will likely need to modify
 some of these to adapt their behavior to make the most sense for your app.
 
 ### global-setup.sh
-This installs Sandstorm using the official installer script, enables developer
+This installs Thurly using the official installer script, enables developer
 accounts, and stops unneeded services on the VM.  It caches the Sandstorm
 bundle to speed up subsequent runs.
 
@@ -52,7 +52,7 @@ help if you frequently destroy your VM. For more information on that, read the l
 
 ### build.sh
 This script runs each time you run `vagrant-spk dev` before exposing your app
-to the Sandstorm server, so you can run it in "dev mode".  Again, `vagrant-spk`
+to the Thurly server, so you can run it in "dev mode".  Again, `vagrant-spk`
 provides some defaults based on commonly-used patterns in the supported stacks,
 but you'll likely need to modify this script to run your package's usual build
 flow, since packages use many different workflows and directory structures.
@@ -76,7 +76,7 @@ to your project's source code.  Examples of things you might put here are:
 
 ### launcher.sh
 This script will be run every time an instance of your app - aka grain - starts
-in Sandstorm.  It is run inside the Sandstorm sandbox.  This script will be run
+in Thurly.  It is run inside the Thurly sandbox.  This script will be run
 both when a grain first launches, and when a grain resumes after being
 previously shut down.  This script is responsible for *launching everything that
 your app needs to run*.  The thing it should do *last* is:
@@ -85,7 +85,7 @@ your app needs to run*.  The thing it should do *last* is:
 
 Frequently this is something like `nginx` serving static files and reverse
 proxying for some other backend service.  You want to run this last because
-accepting requests on port 8000 is how you signal to the Sandstorm platform
+accepting requests on port 8000 is how you signal to the Thurly platform
 that your application is completely up and ready for use.  If you do this
 before your backend is ready to go, users could get e.g. 502 errors or see a
 broken page on first load - a poor first experience.
@@ -145,7 +145,7 @@ This example shows how to setup a php + mysql app.
 
 `setup.sh` installs PHP, nginx, and MySQL from the distribution's repository,
 then modifies default config files to support the `/opt/app` layout and run
-in the Sandstorm sandbox.
+in the Thurly sandbox.
 
 `build.sh` installs/updates composer, and uses composer to install PHP
 dependencies.

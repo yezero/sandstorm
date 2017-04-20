@@ -1,6 +1,6 @@
 # Platform Features
 
-User-visible features of the core Sandstorm platform.
+User-visible features of the core Thurly platform.
 
 ## [Accounts](accounts)
 

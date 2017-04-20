@@ -1,10 +1,10 @@
 # Blackrock
 
-Blackrock allows a cluster of machines to act as a single Sandstorm instance.
+Blackrock allows a cluster of machines to act as a single Thurly instance.
 
 Goals:
 
-* Treat anywhere from 2 to ~2^16 colocated machines (or VM instances) as a single Sandstorm instance with a user interface essentially the same as a single-machine Sandstorm instance.
+* Treat anywhere from 2 to ~2^16 colocated machines (or VM instances) as a single Thurly instance with a user interface essentially the same as a single-machine Thurly instance.
 * Enforce per-user (and perhaps per-app) quotas on storage space and RAM usage.
 * Allow machines to be added to or removed from the cluster dynamically, with machine roles automatically assigned and updated as needed.
 * Avoid any user disruption or data loss when a machine dies.
@@ -73,11 +73,11 @@ There will be a lot of room for development of algorithms and heuristics here.
 
 ### Shells (aka Front-ends)
 
-Shell machines run the Sandstorm shell UI, a Meteor app. In the code, these are refered to as "frontends", an arguably incorrect name.
+Shell machines run the Thurly shell UI, a Meteor app. In the code, these are refered to as "frontends", an arguably incorrect name.
 
 ### Mongo
 
-Unfortunately, the Sandstorm shell currently depends on Mongo as a database. Mongo machines will run this database, with one master and the rest being slaves.
+Unfortunately, the Thurly shell currently depends on Mongo as a database. Mongo machines will run this database, with one master and the rest being slaves.
 
 TODO(feature): The database is synced back to object storage as well.
 
@@ -87,7 +87,7 @@ TODO(project): Long-term, we should seek to replace Mongo with our own storage i
 
 _(Not implemented as of Feb 2017: Currently we manually set up one or more machines running a reverse proxy (nginx, HAProxy, etc.) which forward requests to shell machines. These machines aren't managed by the Blackrock master.)_
 
-Gateways bridge to the public internet (or to the broader corporate network outside of the Sandstorm cluster). This breaks down into a few jobs:
+Gateways bridge to the public internet (or to the broader corporate network outside of the Thurly cluster). This breaks down into a few jobs:
 
 * Receive incoming HTTP requests, terminate SSL on those requests, and forward them to the shell or directly to grains.
 * Implement a Cap'n Proto interface for establishing and accepting TCP connections as well as engaging in UDP traffic with the outside world. Such connections will be prohibited from connecting to other machines inside the cluster. This capability can then be handed off to a device driver in order to give it *external* network access without giving it any internal network access.

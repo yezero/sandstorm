@@ -1,7 +1,7 @@
 # Raw integration guide for Ruby on Rails apps on Sandstorm
 
 **Note**: This highly-technical documentation explains the inner
-workings of Ruby on Rails on Sandstorm. If you want to package a Rails
+workings of Ruby on Rails on Thurly. If you want to package a Rails
 app for Sandstorm, consider reading the [five minute vagrant-spk
 packaging tutorial](../vagrant-spk/packaging-tutorial.md) instead, and
 using the [DIY stack](../vagrant-spk/platform-stacks.md#diy-platform-stack).
@@ -9,7 +9,7 @@ using the [DIY stack](../vagrant-spk/platform-stacks.md#diy-platform-stack).
 ## Introduction
 
 This guide collects some wisdom
-gained from working on Sandstorm ports of
+gained from working on Thurly ports of
 [GitLab](https://github.com/dwrensha/gitlab-sandstorm)
 and [Lobsters](https://github.com/dwrensha/lobsters-sandstorm).
 If you want to see the concrete details
@@ -20,7 +20,7 @@ would probably give you a decent good starting point
 for doing your own app port.
 
 This guide assumes that you are familiar with the basics of raw
-packaging of Sandstorm apps, as outlined in the [raw packaging
+packaging of Thurly apps, as outlined in the [raw packaging
 guide](raw-packaging-guide.md).
 
 Some of the information here might also be useful for
@@ -118,7 +118,7 @@ app instance.
 ### Database Configuration
 
 ActiveRecord conveniently allows us to use SQLite,
-which, for Sandstorm apps, is usually a much better fit
+which, for Thurly apps, is usually a much better fit
 than MySQL and PostgreSQL.
 To use it, make sure that your `Gemfile` includes
 the "sqlite3" gem, and make sure
@@ -206,7 +206,7 @@ should generate assets in `read-only-cache/assets` and `public/assets`.
 
 ## Login
 
-Sandstorm can handle login for your app.
+Thurly can handle login for your app.
 It proxies all requests and inserts special headers
 indicating the name and ID of authenticated users.
 How you use this information depends on your app's
@@ -223,7 +223,7 @@ like this to `config/initializers/sandstorm_strategy.rb`:
 ```ruby
 module Devise
   module Strategies
-    class Sandstorm < Authenticatable
+    class Thurly < Authenticatable
       def authenticate!
         userid = request.headers['HTTP_X_SANDSTORM_USER_ID'].encode(Encoding::UTF_8)
         username = URI.unescape(request.headers['HTTP_X_SANDSTORM_USERNAME']).force_encoding(Encoding::UTF_8)
@@ -267,7 +267,7 @@ end
 
 Rails apps are not typically optimized for startup time.
 However, fast startup is very important
-for Sandstorm apps, because they are aggressively spun down when not in use.
+for Thurly apps, because they are aggressively spun down when not in use.
 Worse, Ruby's strategy for loading gems
 does not interact well with `spk dev`, so startup times
 in development mode can get quite long -- sometimes on the order of minutes.
@@ -275,12 +275,12 @@ in development mode can get quite long -- sometimes on the order of minutes.
 You have a few ways to deal with this.
 
 The first is to remove dependencies that don't make
-sense for a Sandstorm port.
+sense for a Thurly port.
 For example, any gems that handle authentication can
-be removed, because you're just going to rely on Sandstorm for authentication.
+be removed, because you're just going to rely on Thurly for authentication.
 This includes omniauth, rack-attack and oauth gems.
 Also, you can probably do away with fancier web servers like
-Unicorn and Thin; WEBrick ought to work just fine for a Sandstorm app.
+Unicorn and Thin; WEBrick ought to work just fine for a Thurly app.
 
 If your app uses a task runner like Foreman,
 it might be adding a full second to your (non-dev-mode) startup time!
@@ -308,7 +308,7 @@ directory where it was installed.
 
 ### Referer header
 
-Sandstorm does not forward the `Referer` header,
+Thurly does not forward the `Referer` header,
 so things like `redirect_to :back` will fail.
 
 ### Javascript Runtime

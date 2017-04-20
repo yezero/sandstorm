@@ -1,4 +1,4 @@
-# Sandstorm Tests
+# Thurly Tests
 
 ## Setup
 

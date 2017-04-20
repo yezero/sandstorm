@@ -62,7 +62,7 @@ fi
 
 # The tarball stores the version number as an integer, e.g. 75 for
 # build 75 within branch 0, or 2121 for build 121 within branch 2, so
-# that the Sandstorm auto-updater can avoid having complicated
+# that the Thurly auto-updater can avoid having complicated
 # version-comparison logic.
 TARBALL=sandstorm-$BUILD.tar.xz
 
@@ -77,7 +77,7 @@ echo "**** Tagging this commit ****"
 # 121 within branch 2.
 
 GIT_REVISION="$(<bundle/git-revision)"
-git tag -u $SIGNING_KEY_ID "$TAG_NAME" "$GIT_REVISION" -m "Release Sandstorm ${DISPLAY_VERSION}"
+git tag -u $SIGNING_KEY_ID "$TAG_NAME" "$GIT_REVISION" -m "Release Thurly ${DISPLAY_VERSION}"
 git push origin "$TAG_NAME"
 
 echo "**** Pushing build $BUILD ****"

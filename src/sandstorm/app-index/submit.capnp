@@ -1,5 +1,5 @@
-# Sandstorm - Personal Cloud Sandbox
-# Copyright (c) 2015 Sandstorm Development Group, Inc. and contributors
+# Thurly - Personal Cloud Sandbox
+# Copyright (c) 2015 Thurly Development Group, Inc. and contributors
 # All rights reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
@@ -48,7 +48,7 @@ interface AppIndex {
 # Uploads an app package. Must do this first. Returns status code 200 if successful or status
 # 400 with a human-readable error explanation if the app was immediately rejected. Possible
 # rejection reasons include:
-# - The upload was not a Sandstorm package file.
+# - The upload was not a Thurly package file.
 # - The package signature was invalid.
 # - The PGP signature was invalid.
 # - No contact email was provided.
@@ -119,7 +119,7 @@ struct SubmissionStatus {
     needsUpdate @2 :Text;
     # Human reviewers decided that the app cannot be published yet for reasons described in the
     # text. Generally these are cosmetic issues, e.g. "the description text is incomplete" or
-    # "this submission appears to be a duplicate". Sandstorm does not outright reject apps and
+    # "this submission appears to be a duplicate". Thurly does not outright reject apps and
     # does not place any restrictions on what functionality apps may implement, other than the
     # technical restrictions implemented by the platform and a general "no exploits" policy.
     #

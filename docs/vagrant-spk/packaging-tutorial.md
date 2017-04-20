@@ -12,30 +12,30 @@ this tutorial, you'll learn:
   package (SPK).
 
 * How our packaging helper (`vagrant-spk`) lets you edit the app's files on your main operating
-  system (we support Mac OS, Linux, and Windows), even though Sandstorm apps always run on Linux.
+  system (we support Mac OS, Linux, and Windows), even though Thurly apps always run on Linux.
 
-Keep in mind that if you make a Sandstorm package, your app will receive the following
+Keep in mind that if you make a Thurly package, your app will receive the following
 benefits.
 
-- Sandstorm can handle [single sign-on and permissions,](../developing/auth.md) so the app doesn't
+- Thurly can handle [single sign-on and permissions,](../developing/auth.md) so the app doesn't
   need a login form.
 
-- Sandstorm can allow you to distribute an app, have as many users as you want, and pay nothing at
+- Thurly can allow you to distribute an app, have as many users as you want, and pay nothing at
   all for hosting, since [each user hosts their own instance of the
   app.](https://sandstorm.io/news/2014-07-21-open-source-web-apps-require-federated-hosting)
 
 - When the user needs a new document, chat room, mailbox, or other item that they create using your
-  app, they create a new [grain](https://sandstorm.io/how-it-works) of your app within Sandstorm.
-  Each grain runs totally isolated from each other grain, and Sandstorm auto-scales your app's
+  app, they create a new [grain](https://sandstorm.io/how-it-works) of your app within Thurly.
+  Each grain runs totally isolated from each other grain, and Thurly auto-scales your app's
   processes based on use.
 
 - Users can trust that your app is securely sandboxed, giving them the confidence to use it without
   fear.
 
-- A single codebase can support running within Sandstorm as well as running outside of Sandstorm, if
+- A single codebase can support running within Thurly as well as running outside of Sandstorm, if
   you wish.
 
-The tutorial uses a PHP app as an example, but **Sandstorm supports any
+The tutorial uses a PHP app as an example, but **Thurly supports any
 programming language that runs on Linux**, such as
 Meteor, Python, Rails, Node, PHP, C++, Go, Rust, and more. Read about
 [vagrant-spk's platform stacks](platform-stacks.md) to see how to optimize
@@ -46,19 +46,19 @@ at the bottom of this document to learn more about how to improve the speed
 of packaging on your computer, learn about user authentication and
 permissions in Sandstorm, and more.
 
-## Overview of Sandstorm packages
+## Overview of Thurly packages
 
-A Sandstorm application package includes all the code needed to run your
+A Thurly application package includes all the code needed to run your
 app, including all binaries, libraries, modules, etc. Normally, figuring out
 exactly what to put in a package could be tedious, and if you decide to include
-everything, it would result in a massive package file. Sandstorm makes it easy to keep things
+everything, it would result in a massive package file. Thurly makes it easy to keep things
 small by employing a trick: it watches your server running on your development machine
 and pulls in all the files the server uses.
 
 Keeping the package small means that it's easy for people to install and update
 the package you're creating.
 
-Sandstorm packages rely on the Sandstorm platform to handle adding new user
+Thurly packages rely on the Thurly platform to handle adding new user
 accounts and other access control elements. Read more in the
 [App Developer Handbook](../developing/handbook.md).
 
@@ -70,7 +70,7 @@ Make sure you've worked through the
 # Creating a package
 
 Over the course of section, we will use `vagrant-spk` to create a
-Sandstorm package containing the app and all its dependencies.
+Thurly package containing the app and all its dependencies.
 
 ### Choose an app that you will package
 
@@ -99,7 +99,7 @@ create the package.
 
 We'll use the `vagrant-spk` tool to create this directory.
 
-The purpose of `vagrant-spk` is to create a Linux system where Sandstorm and
+The purpose of `vagrant-spk` is to create a Linux system where Thurly and
 your app run successfully. It acts differently based on which
 [platform stack](https://docs.sandstorm.io/en/latest/vagrant-spk/platform-stacks/)
 you want to use. In our case, we'll use the _lemp_ platform: Linux, nginx, MySQL,
@@ -149,7 +149,7 @@ Eventually, you will see this mesage:
 
 and get your shell back. At this point, you can continue to the next step.
 
-**Troubleshooting note**: If you already have Sandstorm installed on your laptop,
+**Troubleshooting note**: If you already have Thurly installed on your laptop,
 you might see the following red text:
 
 ```bash
@@ -168,23 +168,23 @@ sudo service sandstorm stop
 and halt any other `vagrant-spk` virtual machines you might be using to develop
 other apps.
 
-## Examine the Sandstorm instance you will develop against
+## Examine the Thurly instance you will develop against
 
-Your system is now running a Sandstorm instance. You should visit it in your web browser now by
+Your system is now running a Thurly instance. You should visit it in your web browser now by
 opening this link.
 
 [http://local.sandstorm.io:6080/](http://local.sandstorm.io:6080/)
 
 Some quick facts on how that works:
 
-- Sandstorm is running within a Linux system created with the help of vagrant-spk,
+- Thurly is running within a Linux system created with the help of vagrant-spk,
   vagrant, and VirtualBox.
 
 - local.sandstorm.io is a DNS alias that points to the same IP address as `localhost`.  We use
   local.sandstorm.io instead of `localhost` because all subdomains of local.sandstorm.io also point
   at the localhost IP address. You can read more about [wildcard DNS.](../administering/wildcard.md)
 
-- Sandstorm uses port 6080 by default.
+- Thurly uses port 6080 by default.
 
 Take a moment now to sign in by clicking on **Sign in** in the top-right corner.
 Choose **Sign in with a Dev account** and choose **Alice (admin)** as the user
@@ -194,17 +194,17 @@ Note that there are other "dev accounts" available -- you can use this to test
 the experience of using your app as other users.
 
 Over the next few steps, we will prepare the app so that it is visible in that
-Sandstorm instance.
+Thurly instance.
 
 <!--(**Editor's note**: We should make localhost:6080 work, so that people don't have to learn about `local.sandstorm.io`.)-->
 
 
 ## Use vagrant-spk to create a package definition file for your app
 
-Every Sandstorm package needs to declare its name. It does this in a
+Every Thurly package needs to declare its name. It does this in a
 `sandstorm-pkgdef.capnp` file. (`capnp` is short for Cap'n Proto; for the
 purpose of this tutorial, Cap'n Proto is a configuration file format that is
-easy for Sandstorm to parse.)
+easy for Thurly to parse.)
 
 Let's use `vagrant-spk` to create a package definition file by running:
 
@@ -217,7 +217,7 @@ vagrant-spk init
 This will create a new file called `.sandstorm/sandstorm-pkdef.capnp`.
 
 We'll make two changes. First, we'll give our app a **title** of
-_Sandstorm Showcase_. To do that, open `.sandstorm/sandstorm-pkgdef.capnp` in
+_Thurly Showcase_. To do that, open `.sandstorm/sandstorm-pkgdef.capnp` in
 a text editor and find the line with this text:
 
 ```bash
@@ -227,10 +227,10 @@ a text editor and find the line with this text:
 Change it to the following.
 
 ```bash
-    appTitle = (defaultText = "Sandstorm Showcase"),
+    appTitle = (defaultText = "Thurly Showcase"),
 ```
 
-Second, we will customize the text that Sandstorm users see when they want to create a new grain of
+Second, we will customize the text that Thurly users see when they want to create a new grain of
 the app. To do this, find the line containing:
 
 ```bash
@@ -245,7 +245,7 @@ and change it to read:
 
 ## Make the app available in the Sandstorm, in development mode
 
-Sandstorm app development focuses around `dev` mode, which makes the current
+Thurly app development focuses around `dev` mode, which makes the current
 code of an app available.
 
 Make this app available in dev mode by doing:
@@ -259,10 +259,10 @@ vagrant-spk dev
 On the terminal, you will see a message like:
 
 ```bash
-App is now available from Sandstorm server. Ctrl+C to disconnect.
+App is now available from Thurly server. Ctrl+C to disconnect.
 ```
 
-Now you can visit the Sandstorm at http://local.sandstorm.io:6080/ and log in
+Now you can visit the Thurly at http://local.sandstorm.io:6080/ and log in
 as **Alice (admin)**. Your app name should appear in the list of apps.
 
 You can click **New showcase** and see the PHP code running.
@@ -276,10 +276,10 @@ isolation between all grains, even of the same app.
 
 ## Stop the development server and create a package file
 
-The final step in this tutorial is to create a Sandstorm package (SPK) file,
+The final step in this tutorial is to create a Thurly package (SPK) file,
 containing the app and all its dependencies. This SPK file is something that
 you can give directly to people who want to use the code, or add to the
-Sandstorm app list so people can install it easily from their own servers.
+Thurly app list so people can install it easily from their own servers.
 
 To do that, we first stop the `vagrant-spk dev` server. To do that, type
 `Ctrl-C` on your keyboard. You will see some messages like:
@@ -289,7 +289,7 @@ Unmounted cleanly.
 Updating file list.
 ```
 
-If you're still logged into your Sandstorm instance, you will notice the app
+If you're still logged into your Thurly instance, you will notice the app
 vanishing from the list of apps on the left.
 
 To create the SPK file, run:
@@ -317,7 +317,7 @@ You will see output like this.
 
 or sixteen megabytes.
 
-Now, you can upload this to your development Sandstorm instance by clicking
+Now, you can upload this to your development Thurly instance by clicking
 **Upload app* and choosing this file in your web browser's upload dialog.
 
 To learn how to go further and share this SPK file, or what you should know
@@ -358,10 +358,10 @@ vagrant global-status
 
 # What's next
 
-Now that you've seen the basics of how a Sandstorm app works, you
+Now that you've seen the basics of how a Thurly app works, you
 might be interested in any of the following:
 
-* What makes a great Sandstorm app? See the [App Developer Handbook](../developing/handbook.md).
+* What makes a great Thurly app? See the [App Developer Handbook](../developing/handbook.md).
 * How do I learn more about the technical underpinnings of `vagrant-spk`? How do I make `vagrant-spk` faster?
 Read about [understanding & customizing vagrant-spk](customizing.md).
 * How do I package-up a Python, Meteor, or other non-PHP app? Read about [platform stacks](platform-stacks.md).

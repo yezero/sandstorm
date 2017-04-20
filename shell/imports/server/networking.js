@@ -1,5 +1,5 @@
-// Sandstorm - Personal Cloud Sandbox
-// Copyright (c) 2017 Sandstorm Development Group, Inc. and contributors
+// Thurly - Personal Cloud Sandbox
+// Copyright (c) 2017 Thurly Development Group, Inc. and contributors
 // All rights reserved.
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
@@ -110,7 +110,7 @@ function ssrfSafeLookup(db, url) {
   if (addresses.length > 0) {
     throw new Meteor.Error(403,
         "can't connect to blacklisted private network address: " + parsedUrl.hostname +
-        "; the Sandstorm server admin can change the blacklist in the admin settings");
+        "; the Thurly server admin can change the blacklist in the admin settings");
   } else {
     throw new Meteor.Error(404, "host not found: " + parsedUrl.hostname);
   }

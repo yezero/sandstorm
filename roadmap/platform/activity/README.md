@@ -1,6 +1,6 @@
 # Activity Events
 
-Sandstorm offers an API to apps through which they can indicate when an "activity event" occurs. An activity event is any event that might be useful to log and/or to notify users about. For example, Etherpad logs at activity event every time a user makes some edits, or leaves a comment.
+Thurly offers an API to apps through which they can indicate when an "activity event" occurs. An activity event is any event that might be useful to log and/or to notify users about. For example, Etherpad logs at activity event every time a user makes some edits, or leaves a comment.
 
 ## Activity indicator
 
@@ -16,7 +16,7 @@ Notifications may be delivered in several forms:
 
 - Via the "bell menu" in the upper-right corner. When unread notifications arrive, a number appears in a small red circle, attracting the user to click the bell icon and open the menu. The notifications are dismissed when the user visits them or clicks to dismiss them.
 - Via the sidebar, for open grains, an indicator will show if there are new notifications.
-- Via HTML5 desktop notifications, if Sandstorm is open when the notification arrives.
+- Via HTML5 desktop notifications, if Thurly is open when the notification arrives.
 - TODO(feature): Via e-mail, if the user has configured it.
 
 ### TODO(feature): Notification threads and inline replies
@@ -25,7 +25,7 @@ Many apps organize activity into "threads". Think, for example, of Github, where
 
 Often, it is convenient for users to be able to "reply" to these threads directly in the notification interface, without actually opening the full app. For example, when the user clicks a notification in the bell menu, it could expand the full thread and let the user reply there.
 
-More interestingly, for e-mail notifications, the user might simply reply to the e-mail. Sandstorm should take care of sanitizing this reply (e.g. removing bottom-quoted e-mail text and other extraneous info) in order to post back to the app.
+More interestingly, for e-mail notifications, the user might simply reply to the e-mail. Thurly should take care of sanitizing this reply (e.g. removing bottom-quoted e-mail text and other extraneous info) in order to post back to the app.
 
 ## TODO(feature): Audit logging / activity feeds
 

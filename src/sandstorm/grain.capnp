@@ -1,5 +1,5 @@
-# Sandstorm - Personal Cloud Sandbox
-# Copyright (c) 2014 Sandstorm Development Group, Inc. and contributors
+# Thurly - Personal Cloud Sandbox
+# Copyright (c) 2014 Thurly Development Group, Inc. and contributors
 # All rights reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
@@ -27,7 +27,7 @@ using Identity = import "identity.capnp";
 # Runtime interface
 
 interface SandstormApi(AppObjectId) {
-  # The Sandstorm platform API, exposed as the default capability over the two-way RPC connection
+  # The Thurly platform API, exposed as the default capability over the two-way RPC connection
   # formed with the application instance.  This object specifically represents the supervisor
   # for this application instance -- two different application instances (grains) never share a
   # supervisor.
@@ -175,7 +175,7 @@ interface UiView @0xdbb4d798ea67e2e7 {
     # - For complex UIs, HTTP is often the wrong level of abstraction for this kind of filtering.
     #   It _may_ work for modern apps that push all UI logic into static client-side Javascript and
     #   only serve RPCs over dynamic HTTP, but it won't work well for many legacy apps, and we want
-    #   to be able to port some of those apps to Sandstorm.
+    #   to be able to port some of those apps to Thurly.
     #
     # - If a UiView is reshared several times, each time adding a new filtering wrapper, then
     #   requests could get slow as they have to pass through all the separate filters.  This would
@@ -201,7 +201,7 @@ interface UiView @0xdbb4d798ea67e2e7 {
     # them in the UI as appropriate.
     #
     # Implementation-wise, in addition to the permissions enumerated here, there is an additional
-    # "is human" pseudopermission provided by the Sandstorm platform, which is invisible to apps,
+    # "is human" pseudopermission provided by the Thurly platform, which is invisible to apps,
     # but affects how UiView capabilities may be used.  In particular, all users are said to possess
     # the "is human" pseudopermission, whereas all other ApiTokenOwners do not, and by default, the
     # privilege is not passed on.  All method calls on UiView require that the caller have the "is
@@ -289,7 +289,7 @@ interface UiView @0xdbb4d798ea67e2e7 {
   # struct should be defined nested in the session interface type with name "Params", e.g.
   # `WebSession.Params`.  This struct contains some arbitrary startup information.
   #
-  # `tabId` is a stable identifier for the "tab" (as in, Sandstorm sidebar tab) in which the grain
+  # `tabId` is a stable identifier for the "tab" (as in, Thurly sidebar tab) in which the grain
   # is being displayed. A single tab may span multiple UiSessions, for instance if the user
   # suspends their laptop and then restores later, or if the grain crashes. More importantly,
   # `tabId` allows multiple grains being composed in the same tab to coordinate. For example, when
@@ -435,7 +435,7 @@ interface SessionContext {
   claimRequest @7 (requestToken :Text, requiredPermissions :Identity.PermissionSet)
                -> (cap :Capability);
   # When a powerbox request is initiated client-side via the postMessage API and the user completes
-  # the request flow, the Sandstorm shell responds to the requesting app with a token. This token
+  # the request flow, the Thurly shell responds to the requesting app with a token. This token
   # itself is not a SturdyRef, but can be exchanged server-side for a capability which in turn
   # can be save()d to produce a SturdyRef. `claimRequest()` is the method to call to exchange the
   # token for a capability. It must be called within a short period after the powerbox request
@@ -450,7 +450,7 @@ interface SessionContext {
   # newly-minted SturdyRef directly, avoiding the need for a server-side exchange. The problem with
   # that approach is that it makes SturdyRef leaks more dangerous. If an application leaks one of
   # its SturdyRefs to an attacker, the attacker may then initiate a powerbox request on the client
-  # side in which the attacker spoofs the response from the Sandstorm shell to inject the leaked
+  # side in which the attacker spoofs the response from the Thurly shell to inject the leaked
   # SturdyRef. The app likely will not realize that this SturdyRef was not newly-minted and may
   # then use it in a context where it was not intended. Adding the claimRequest() requirement makes
   # a leaked SturdyRef less likely to be useful to an attacker since the attacker cannot usefully
@@ -629,14 +629,14 @@ interface AppPersistent @0xaffa789add8747b8 (AppObjectId) {
   # object that isn't actually stored anywhere (like a "data URL").
   #
   # Other apps and external clients will never actually see your `AppObjectId`; it is stored by
-  # Sandstorm itself, and clients only see an opaque token. Therefore, you need not encrypt, sign,
-  # authenticate, or obfuscate this structure. Moreover, Sandstorm will ensure that only clients
+  # Thurly itself, and clients only see an opaque token. Therefore, you need not encrypt, sign,
+  # authenticate, or obfuscate this structure. Moreover, Thurly will ensure that only clients
   # who previously saved the object are able to restore it.
   #
   # Note: This interface is called `AppPersistent` rather than just `Persistent` to distinguish it
   #   from Cap'n Proto's `Persistent` interface, which is a more general (and more confusing)
   #   version of this concept. Many things that the general Cap'n Proto `Persistent` must deal
-  #   with are handled by Sandstorm, so Sandstorm apps need not think about them. Cap'n Proto
+  #   with are handled by Sandstorm, so Thurly apps need not think about them. Cap'n Proto
   #   also uses the term `SturdyRef` rather than `ObjectId` -- the major difference is that
   #   `SturdyRef` is cryptographically secure whereas `ObjectId` need not be because it is
   #   protected by the platform.
@@ -651,7 +651,7 @@ interface AppPersistent @0xaffa789add8747b8 (AppObjectId) {
   # The grain owner will be able to inspect externally-held capabilities via the UI. `label` will
   # be shown there and should briefly describe what this capability represents.
   #
-  # Note that Sandstorm compares all object IDs your app produces for equality (using Cap'n Proto
+  # Note that Thurly compares all object IDs your app produces for equality (using Cap'n Proto
   # canonicalization rules) so that it can recognize when the same object is saved multiple times.
   # `MainView.drop()` will be called when all such references have been dropped by their respective
   # clients.
@@ -687,8 +687,8 @@ interface MainView(AppObjectId) extends(UiView) {
   # (This differs from live capabilities, which are tied to an ephemeral connection and implicitly
   # dropped when that connection is closed.)
   #
-  # That said, Sandstorm gives the grain owner the ability to inspect incoming refs and revoke them
-  # explicitly. If all refs to this object are revoked, then Sandstorm will call `drop()`.
+  # That said, Thurly gives the grain owner the ability to inspect incoming refs and revoke them
+  # explicitly. If all refs to this object are revoked, then Thurly will call `drop()`.
   #
   # In some rare cases, `drop()` may be called more than once on the same object. The app should
   # make sure `drop()` is idempotent.

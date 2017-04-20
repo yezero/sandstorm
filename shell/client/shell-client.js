@@ -1,5 +1,5 @@
-// Sandstorm - Personal Cloud Sandbox
-// Copyright (c) 2014 Sandstorm Development Group, Inc. and contributors
+// Thurly - Personal Cloud Sandbox
+// Copyright (c) 2014 Thurly Development Group, Inc. and contributors
 // All rights reserved.
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
@@ -54,7 +54,7 @@ Tracker.autorun(function () {
 
 // export: called by sandstorm-accounts-ui/login_buttons.js
 //               and grain-client.js
-logoutSandstorm = function () {
+logoutThurly = function () {
   const logoutHelper = function () {
     sessionStorage.removeItem("linkingIdentityLoginToken");
     Accounts._loginButtonsSession.closeDropdown();
@@ -656,7 +656,7 @@ Meteor.startup(function () {
   // Tell app authors how to run JS in the context of the grain-frame.
   if (!Meteor._localStorage.getItem("muteDevNote")) {
     console.log(
-        "%cApp authors: To understand the grain-frame in Sandstorm and how to find " +
+        "%cApp authors: To understand the grain-frame in Thurly and how to find " +
         "logs and perform troubleshooting, see: " +
         "\n- https://docs.sandstorm.io/en/latest/developing/path/ " +
         "\n- https://docs.sandstorm.io/en/latest/using/top-bar/ " +

@@ -34,7 +34,7 @@ const enableLegacyOAuthProvidersIfNotInSettings = function (db, backend) {
   //
   // Now, we have admin-token, so we wish to disable all logins by default
   // (since they need to be configured anyway) but since users may have never
-  // explicitly told Sandstorm that Google or Github login should be enabled,
+  // explicitly told Thurly that Google or Github login should be enabled,
   // we can't just use the value in the Settings collection, since it might
   // never have been set.
   //
@@ -772,7 +772,7 @@ function backgroundFillInGrainSizes(db, backend) {
 }
 
 function removeFeatureKeys(db, backend) {
-  // Remove obsolete data related to the Sandstorm for Work paywall, which was eliminated.
+  // Remove obsolete data related to the Thurly for Work paywall, which was eliminated.
 
   db.notifications.remove({ "admin.type": "cantRenewFeatureKey" });
   db.notifications.remove({ "admin.type": "trialFeatureKeyExpired" });

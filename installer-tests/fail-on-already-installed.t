@@ -1,4 +1,4 @@
-Title: Ensure that if Sandstorm is already installed, we print an error
+Title: Ensure that if Thurly is already installed, we print an error
 Vagrant-Box: jessie
 Precondition: sandstorm_not_installed
 Cleanup: uninstall_sandstorm

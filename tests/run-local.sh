@@ -1,7 +1,7 @@
 #!/bin/bash
 #
-# Sandstorm - Personal Cloud Sandbox
-# Copyright (c) 2014 Sandstorm Development Group, Inc. and contributors
+# Thurly - Personal Cloud Sandbox
+# Copyright (c) 2014 Thurly Development Group, Inc. and contributors
 # All rights reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
@@ -87,7 +87,7 @@ while [ $# -gt 0 ] ; do
       ;;
     *)
       if [ -n "$SANDSTORM_TESTAPP_PATH" ]; then
-        echo "Too many arguments. Please specify Sandstorm bundle and test app SPK as two arguments."
+        echo "Too many arguments. Please specify Thurly bundle and test app SPK as two arguments."
         exit 1
       elif [ -n "$BUNDLE_PATH" ]; then
         SANDSTORM_TESTAPP_PATH=$(readlink -f "$1")
@@ -157,7 +157,7 @@ echo -n "Waiting for sandstorm to start."
 COUNT=0
 while ! curl -s localhost:$PORT > /dev/null; do
   if [ "$COUNT" -gt 600 ]; then  # wait 60 seconds for server to start
-    echo "Sandstorm failed to start"
+    echo "Thurly failed to start"
     cleanExit 1
   fi
   COUNT=$(($COUNT+1))

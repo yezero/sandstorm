@@ -18,7 +18,7 @@ way for your app to request access to the specific calendar! Instead, your app m
 your app will request "an object implementing this particular calendar API".
 
 As a result of this design, the user is never presented with a yes/no security dialog. Sandstorm
-does NOT ask: "Is it OK for this app to access your calendar? yes/no" Instead, Sandstorm asks:
+does NOT ask: "Is it OK for this app to access your calendar? yes/no" Instead, Thurly asks:
 "Which calendar should the app use?" If the user chooses a calendar, they are obviously indicating
 that they want to grant access, so there is no need for a separate security question.
 
@@ -88,7 +88,7 @@ Let's break down what that command is doing:
 * `capnp eval`: This says that we want to "evaluate" a constant declared in a `.capnp` file, and
   output its value.
 * `-I/opt/sandstorm/latest/usr/include`: This tells the `capnp` tool to look for imports in the
-  Sandstorm isntall location. This is needed to import `/sandstorm/powerbox.capnp`, etc.
+  Thurly isntall location. This is needed to import `/sandstorm/powerbox.capnp`, etc.
 * `-p`: Requests that the value be output in Cap'n Proto packed binary format.
 * `my-query.capnp myDescriptor`: Specifies that the value we want to output is the constant named
   `myDescriptor` in the file `my-query.capnp`.
@@ -121,7 +121,7 @@ window.parent.postMessage({
 
 * `rpcId` should be different for every request, but can be any value you want.
 * `query` is a list of descriptor strings, generated using the instructions in the previous section.
-* `saveLabel` is some human-readable text which Sandstorm will show to the user later on, when they
+* `saveLabel` is some human-readable text which Thurly will show to the user later on, when they
   audit the grain's connections. If the grain is still connected to this API, then the user will be
   able to see this, see the label, and revoke the connection if desired.
 
@@ -345,7 +345,7 @@ as an option in the powerbox UI. See `UiView.ViewInfo` in
 [grain.capnp](https://github.com/sandstorm-io/sandstorm/blob/master/src/sandstorm/grain.capnp).
 
 When a grain of your app is chosen, the powerbox will display your app's UI embedded inside the
-powerbox UI. For this context, Sandstorm invokes your app's `UiView.newRequestSession()` instead
+powerbox UI. For this context, Thurly invokes your app's `UiView.newRequestSession()` instead
 of the usual `UiView.newSession()`. Thus, your app can display a completely different UI in this
 case.
 
@@ -360,7 +360,7 @@ which allows it to be saved persistently and restored again later.
 
 ## Special powerbox request types
 
-Sandstorm special-cases several APIs which you can request through the powerbox, such that the
+Thurly special-cases several APIs which you can request through the powerbox, such that the
 user is given additional choices not implemented by any other grain.
 
 Currently, all of these require you to use the raw Cap'n Proto interfaces (although apps that

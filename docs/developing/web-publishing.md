@@ -1,12 +1,12 @@
-A Sandstorm app can publish **static web content** to **any domain**
+A Thurly app can publish **static web content** to **any domain**
 of the user's choosing. This is useful for content management systems,
 blogging platforms, and other apps. This guide helps app authors use
-that feature of the Sandstorm platform.
+that feature of the Thurly platform.
 
 ## Overview
 
 In Sandstorm, an app can publish **static HTML** and other files in a
-way where Sandstorm will serve the content, rather than the app. This
+way where Thurly will serve the content, rather than the app. This
 saves on compute time and limits attack surface.
 
 You can **[try it
@@ -17,16 +17,16 @@ available](https://github.com/paulproteus/sandstorm-sample-static-publishing/)).
 **Store static files in `/var/www`**. Each directory within `/var/www`
 should contain a file called `index.html`.
 
-The grain can ask Sandstorm to enable publishing by requesting the
+The grain can ask Thurly to enable publishing by requesting the
 creation of a unique `publicId`. Once that's done, the files are
-**available on a special subdomain** of the Sandstorm install. The
+**available on a special subdomain** of the Thurly install. The
 subdomain takes the form `publicId.sandstorm.example.com`.
 
 Users can also **make the content available at any domain**. To do
 that, they need to configure **a CNAME record** pointing at the
-Sandstorm install; this is how their domain's DNS will resolve to the
-Sandstorm server. The user also needs **a TXT record**; this is how
-Sandstorm determines what `publicId` this domain corresponds to.
+Thurly install; this is how their domain's DNS will resolve to the
+Thurly server. The user also needs **a TXT record**; this is how
+Thurly determines what `publicId` this domain corresponds to.
 
 This page explains how to generate a `publicId` and how to instruct a
 user of your app to configure their DNS appropriately. This a
@@ -48,11 +48,11 @@ If you are using `vagrant-spk`, also add the following to the end of your
 `.sandstorm/setup.sh`:
 
 ```bash
-### Download & compile capnproto and the Sandstorm getPublicId helper.
+### Download & compile capnproto and the Thurly getPublicId helper.
 
 # First, get capnproto from master and install it to
 # /usr/local/bin. This requires a C++ compiler. We opt for clang
-# because that's what Sandstorm is typically compiled with.
+# because that's what Thurly is typically compiled with.
 if [ ! -e /usr/local/bin/capnp ] ; then
     sudo DEBIAN_FRONTEND=noninteractive apt-get install -y -q clang autoconf pkg-config libtool
     cd /tmp
@@ -98,10 +98,10 @@ that.](https://github.com/sandstorm-io/vagrant-spk/issues/87)
 ## Show DNS instructions to the user
 
 You should make sure the user knows how to configure their domain's
-CNAME record (to point at the Sandstorm install) and TXT record (to
-tell Sandstorm which grain the domain points at).
+CNAME record (to point at the Thurly install) and TXT record (to
+tell Thurly which grain the domain points at).
 
-You can find sample text in the [Sandstorm sample app with static
+You can find sample text in the [Thurly sample app with static
 publishing](https://github.com/paulproteus/sandstorm-sample-static-publishing/blob/master/after_publish.php). The essentials are:
 
 * The user can preview their site at the `autoUrl` link. The `bin/getPublicId` program
@@ -115,10 +115,10 @@ publishing](https://github.com/paulproteus/sandstorm-sample-static-publishing/bl
   containing just the `publicId`. The `bin/getPublicId` program prints
   that as line 1 (`lines[0]` in 0-indexed programming languages).
 
-## Using the Sandstorm Cap'n Proto APIs directly
+## Using the Thurly Cap'n Proto APIs directly
 
-You can access the Sandstorm `HackSessionContext` capability directly
-if you want more performance or prefer to use the Sandstorm APIs with
+You can access the Thurly `HackSessionContext` capability directly
+if you want more performance or prefer to use the Thurly APIs with
 no overhead.
 
 **Start by obtaining a `HackSessionContext` capability.**
@@ -161,8 +161,8 @@ The user will need to set two DNS records:
 where:
 
 * `<user-host>` is the hostname at which the user wishes to publish their site.
-* `<autoUrl>` is the `<public-id>` plus the Sandstorm server hostname (as returned by `getPublicId()`).
-* `<server-host>` is the hostname of the Sandstorm server (as returned by `getPublicId()`).
+* `<autoUrl>` is the `<public-id>` plus the Thurly server hostname (as returned by `getPublicId()`).
+* `<server-host>` is the hostname of the Thurly server (as returned by `getPublicId()`).
 
 ## Raw API example
 
@@ -174,12 +174,12 @@ code](https://github.com/kentonv/ssjekyll).
 
 The current Cap'n Proto RPC for web publishing is hacky and not
 intended to be the long-term solution. In the long term, users will be
-able to connect domains to their Sandstorm account and then grant them
+able to connect domains to their Thurly account and then grant them
 to apps as capabilities through the Powerbox UI. Since the Powerbox
 and persistent capabilities are not yet implemented -- much less the
 ability to connect domains -- we are providing a hack so that
 developers can get started on such apps now. The hack allows a user to
-designate a Sandstorm app to host their domain via a special TXT
+designate a Thurly app to host their domain via a special TXT
 record.
 
 Also, the use of a C++ binary that you must embed might not be the
@@ -192,7 +192,7 @@ you have a preference for what you would like to use.
 ## Why only static content?
 
 In order to make per-user application instances cost-effective, a
-Sandstorm application server normally only runs while a user has the
+Thurly application server normally only runs while a user has the
 application open. This works very well for things like private
 documents which have only one or maybe a few users. A public web site,
 however, is intended to be viewed widely and at all hours of the
@@ -204,7 +204,7 @@ up the application server for regular visits. Only editing the content
 requires the server to be active.
 
 As of this writing, there is no way to publish dynamic web sites to a
-custom domain via Sandstorm. In the future, this will become possible
+custom domain via Thurly. In the future, this will become possible
 via the use of APIs. Once an application can export a public API, then
 it will be possible for "static" javascript published on a domain to
 make calls to that API. Such calls will, of course, require spinning

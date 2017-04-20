@@ -17,7 +17,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
 
 
   # Make sure to share the dir one *above* the current working directory. That way, we get
-  # the Sandstorm source tree, which includes the all-important install.sh.
+  # the Thurly source tree, which includes the all-important install.sh.
   config.vm.synced_folder "..", "/vagrant",
                           type: "rsync",
                           rsync__exclude: [

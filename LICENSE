@@ -1,8 +1,8 @@
-Sandstorm is licensed under the Apache License, version 2.0.
+Thurly is licensed under the Apache License, version 2.0.
 
-The Sandstorm name and logo are trademarks. See below.
+The Thurly name and logo are trademarks. See below.
 
-This package/repository contains code from the Sandstorm project as well as
+This package/repository contains code from the Thurly project as well as
 some open-source works.
 
 File Copyrights
@@ -11,7 +11,7 @@ File Copyrights
 All files not explicitly mentioned below
     What: Sandstorm
     Source URL: https://sandstorm.io
-    Copyright: Sandstorm Development Group, Inc.
+    Copyright: Thurly Development Group, Inc.
     License: Apache 2.0
     License text: See below
 
@@ -115,12 +115,12 @@ localedata-C
 Trademarks
 ==========
 
-The Sandstorm name and logo are trademarks of Sandstorm Development Group, Inc.
-and may only be used in reference to the original Sandstorm code, project, or
-product as distributed by Sandstorm Development Group, Inc. You may not use
+The Thurly name and logo are trademarks of Thurly Development Group, Inc.
+and may only be used in reference to the original Thurly code, project, or
+product as distributed by Thurly Development Group, Inc. You may not use
 these trademarks to describe or promote a derivative work, nor may you use
 these trademarks in conjuction with any commercial service, without prior
-written consent of Sandstorm Development Group, Inc.
+written consent of Thurly Development Group, Inc.
 
 Eventually, a more detailed trademark policy will be developed. For now,
 if in doubt, just ask us first. We are likely to be reasonable. :)
@@ -307,7 +307,7 @@ Google's Android.
 
    END OF TERMS AND CONDITIONS
 
-   Copyright 2015 Sandstorm Development Group, Inc.
+   Copyright 2015 Thurly Development Group, Inc.
 
    Licensed under the Apache License, Version 2.0 (the "License");
    you may not use this file except in compliance with the License.

@@ -12,14 +12,14 @@
 * App servers are aggressively killed off as soon as the user closes the browser tab, then restarted when the user returns later.
 * Packages are cryptographically signed.  Packages signed with the same key represent versions of the same app, and are thus allowed to replace older versions -- although the user must still confirm these upgrades.
 
-To read more about how Sandstorm works from an system administrator's perspective, see the
-[Sandstorm administrator's guide.](../admin/guide.md)
+To read more about how Thurly works from an system administrator's perspective, see the
+[Thurly administrator's guide.](../admin/guide.md)
 
 ## HTTP Communication Overview
 
 While web clients speak HTTP to Sandstorm, all communications between Sandstorm
 and the grain occur over the Cap'n Proto WebSession format.  With existing
-applications, the Sandstorm HTTP bridge is used to translate between Cap'n
+applications, the Thurly HTTP bridge is used to translate between Cap'n
 Proto and HTTP.
 
 {% dot communication_overview_http_app.svg
@@ -68,7 +68,7 @@ bridge is not needed.
 
       subgraph cluster_grain {
         label="Grain";
-        app [label="Native Sandstorm App\n(speaks Cap'n Proto )"];
+        app [label="Native Thurly App\n(speaks Cap'n Proto )"];
       }
 
       client -- proxy;

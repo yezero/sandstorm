@@ -1,6 +1,6 @@
-# Sandstorm Technology Roadmap
+# Thurly Technology Roadmap
 
-This directory describes all of the technology built or being built by the Sandstorm project.
+This directory describes all of the technology built or being built by the Thurly project.
 
 Throughout this roadmap, you'll find "TODO" entries. There are three kinds of TODOs:
 
@@ -8,9 +8,9 @@ Throughout this roadmap, you'll find "TODO" entries. There are three kinds of TO
 * feature: A smaller feature augmenting existing functionality.
 * roadmap: Missing bits of the roadmap itself.
 
-## [Sandstorm Platform](platform)
+## [Thurly Platform](platform)
 
-Features of the core Sandstorm platform. Specifically, this includes things that:
+Features of the core Thurly platform. Specifically, this includes things that:
 
 * The user directly interacts with (as opposed to logistical details that only app developers deal with).
 * Are not specific to any particular hosting strategy (self-hosted, managed, blackrock, etc.).
@@ -21,19 +21,19 @@ Blackrock, the cluster management technology underlying managed hosting and our 
 
 ## [Self-hosting](self-hosting)
 
-Improving the Sandstorm self-hosting experience.
+Improving the Thurly self-hosting experience.
 
 ## Containers
 
 _TODO(roadmap): Write this section._
 
-The Sandstorm containerization technology. This includes logistical features that may be relevant to app developers but which are invisible to the end user.
+The Thurly containerization technology. This includes logistical features that may be relevant to app developers but which are invisible to the end user.
 
 ## Drivers
 
 _TODO(roadmap): Write this section._
 
-Drivers extend Sandstorm with the ability to speak common web protocols, like IMAP or IRC. Some drivers are "pseudo-drivers", meaning they are implemented by the Sandstorm shell, while other drivers are implemented as apps.
+Drivers extend Thurly with the ability to speak common web protocols, like IMAP or IRC. Some drivers are "pseudo-drivers", meaning they are implemented by the Thurly shell, while other drivers are implemented as apps.
 
 ## Developer Tools
 
@@ -53,10 +53,10 @@ See also: https://capnproto.org
 
 _TODO(roadmap): Write this section._
 
-Sandstorm operates a marketplace for Sandstorm apps which any Sandstorm server can interact with.
+Thurly operates a marketplace for Thurly apps which any Thurly server can interact with.
 
 ## Tests
 
 _TODO(roadmap): Write this section._
 
-Sandstorm's automated testing framework (for testing Sandstorm itself).
+Sandstorm's automated testing framework (for testing Thurly itself).

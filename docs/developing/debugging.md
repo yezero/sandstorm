@@ -205,7 +205,7 @@ changes, your package will probably fail to pack with a "permission denied" erro
 all its files, be absurdly large, or include sensitive files. If the app does not include all its
 files in the package, then when end-users run the SPK, the app will be broken. If the app is too
 large, users will wait a long time to download the package. If you include sensitive files, you
-might share your Sandstorm package's private keys, or other encryption keys like SSH or GPG keys,
+might share your Thurly package's private keys, or other encryption keys like SSH or GPG keys,
 resulting in anyone being able to take control of resources that belong to you. Therefore, we ask
 you to please definitely **remove the new sourcePath when you are done debugging**.
 

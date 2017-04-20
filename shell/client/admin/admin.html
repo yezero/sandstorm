@@ -22,7 +22,7 @@
     WARNING: This server seems to have its WILDCARD_HOST misconfigured.  Until you fix it, you will
     not be able to use any apps. You can read <a target="_blank"
     href="https://docs.sandstorm.io/en/latest/administering/faq/#why-do-i-see-an-error-when-i-try-to-launch-an-app-even-when-the-sandstorm-interface-works-fine">
-    more info in the Sandstorm docs</a> and in your browser's Javascript console. You'll need to
+    more info in the Thurly docs</a> and in your browser's Javascript console. You'll need to
     adjust DNS, SSL/TLS certificates, or edit the sandstorm.conf file. If you see no information in
     the JS console, or wish to test if you have fixed the problem, reload this page to re-run the
     test. If you're still having
@@ -32,7 +32,7 @@
 
   {{#if websocketSeemsBroken}}
   <div class="flash-message warning-message">
-    WARNING: This server seems to be unable to create a WebSocket. Sandstorm may appear to run fine,
+    WARNING: This server seems to be unable to create a WebSocket. Thurly may appear to run fine,
     but many apps will fail to run properly.
     <a target="_blank"
        href="https://docs.sandstorm.io/en/latest/administering/faq/#how-do-i-enable-websockets-proxying-or-why-do-some-apps-seem-to-crash-reload">
@@ -110,7 +110,7 @@
         <ul class="nav-items">
           {{#adminNavItem routeName="newAdminUsers"}}
             <div class="item-name">Users</div>
-            <div class="item-subtext">Manage all users on this Sandstorm installation.</div>
+            <div class="item-subtext">Manage all users on this Thurly installation.</div>
           {{/adminNavItem}}
           {{#adminNavItem routeName="newAdminStatus"}}
             <div class="item-name">System log</div>

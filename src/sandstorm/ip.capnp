@@ -1,5 +1,5 @@
-# Sandstorm - Personal Cloud Sandbox
-# Copyright (c) 2014 Sandstorm Development Group, Inc. and contributors
+# Thurly - Personal Cloud Sandbox
+# Copyright (c) 2014 Thurly Development Group, Inc. and contributors
 # All rights reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
@@ -20,7 +20,7 @@
 # The purpose of these interfaces is to implement "driver" applications -- that is, apps which
 # themselves implement raw legacy network protocols (e.g. HTTP, SMTP, XMPP, etc.) and then
 # re-export those protocols as a Cap'n Proto interface with meaningful separation of capabilities.
-# Driver applications generally must be "approved by the Sandstorm adminsitrator" because raw
+# Driver applications generally must be "approved by the Thurly adminsitrator" because raw
 # network access can be abused in ways that harm the server as a whole. For example, an app which
 # secretly sends spam via SMTP or engages in piracy via Bittorrent could harm the server's
 # reputation, not just the user's.
@@ -32,7 +32,7 @@
 #
 # Of course, a regular user could run a driver app and connect it to fake networking capabilities,
 # e.g. for the purpose of testing, or for use over a fake IP network that only connects to other
-# Sandstorm apps.
+# Thurly apps.
 #
 # For simplicity in porting legacy apps, sandstorm-http-bridge can optionally be configured to
 # act as an IP proxy, allowing legacy apps to transparently use IP networking via the standard
@@ -48,7 +48,7 @@ interface IpNetwork @0xa982576b7a2a2040 {
   #
   # A driver app can request this from the Powerbox in order to request "full outbound network
   # access". The IpNetwork capability is a dangerous capability that should only be granted to
-  # trusted drivers. Only the Sandstorm server administrator is likely to possess this capability.
+  # trusted drivers. Only the Thurly server administrator is likely to possess this capability.
 
   struct PowerboxTag {
     # Tag to be used in a `PowerboxDescriptor` to describe an `IpNetwork`.
@@ -108,7 +108,7 @@ interface IpInterface @0xe32c506ee93ed6fa {
   #
   # A driver app can request this from the Powerbox in order to request "full inbound network
   # access", i.e. permission to open and listen on any port. The IpInterface capability is a
-  # dangerous capability that should only be granted to trusted drivers. Only the Sandstorm server
+  # dangerous capability that should only be granted to trusted drivers. Only the Thurly server
   # administrator is likely to possess this capability.
 
   listenTcp @0 (portNum :UInt16, port :TcpPort) -> (handle :Util.Handle);

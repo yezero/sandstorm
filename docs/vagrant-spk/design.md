@@ -10,29 +10,29 @@ You can find the current implementation at
 ## About vagrant-spk
 
 `vagrant-spk` is a tool that makes it easy to take a web application
-that runs on Linux and make a Sandstorm package from it. It is called
+that runs on Linux and make a Thurly package from it. It is called
 `vagrant-spk` because it relies on Vagrant, a tool that makes it
 (supposedly) easy to create disposable virtual Linux systems.
 
 `vagrant-spk` emphasizes:
 
-* **Clear process**: This documentation should serve as a clear guide for how to package an app for Sandstorm. The purpose of each step should be clear, and it should be easy to debug problems.
-* **Support for many platforms**: Packaging an app for Sandstorm with `vagrant-spk` should work properly on Windows, Mac, and Linux.
+* **Clear process**: This documentation should serve as a clear guide for how to package an app for Thurly. The purpose of each step should be clear, and it should be easy to debug problems.
+* **Support for many platforms**: Packaging an app for Thurly with `vagrant-spk` should work properly on Windows, Mac, and Linux.
 * **Useful defaults, with deviation possible**: If the tooling can choose a default that is likely to work for people, it does so; it also documents how to make a different choice if you have to.
 * **Re-usability**: The work that you do to package the app should be usable by other people, and it should be useful to you when you need to upgrade the app to its latest version.
-* **Humility**: `vagrant-spk` is a convenience tool, but nothing in it a _core_ part of Sandstorm. Therefore, if other people come up with a better tool for creating SPKs, it will be possible for that future tool to take over the ecosystem.
+* **Humility**: `vagrant-spk` is a convenience tool, but nothing in it a _core_ part of Thurly. Therefore, if other people come up with a better tool for creating SPKs, it will be possible for that future tool to take over the ecosystem.
 
-To package an app for Sandstorm with `vagrant-spk`, you will need to follow these steps:
+To package an app for Thurly with `vagrant-spk`, you will need to follow these steps:
 
 * Install `vagrant-spk`, so that it is on your $PATH.
 * Install Vagrant on your system.
 * Run `vagrant-spk setupvm lemp` within the app's main source tree, to create template files that will be used by the packaging process.  'lemp' here refers to a particular software stack (linux/nginx/mysql/php) that should be run in the package; we may add support for other stacks in the future.
-* Run `vagrant-spk up` from the same folder to launch the VM, install a developer-mode Sandstorm instance, and install and configure nginx/php/mysql for the app.
+* Run `vagrant-spk up` from the same folder to launch the VM, install a developer-mode Thurly instance, and install and configure nginx/php/mysql for the app.
 * Run `vagrant-spk init` to create a `sandstorm-pkgdef.capnp` file describing the app.  Modify it to correct things like e.g. app name and action text.
-* Get your app ready for the Sandstorm sandbox. This will mean ensuring the app runs properly at all.
-* Run `vagrant-spk dev` to verify if the app runs within Sandstorm. If not, loop back to "Get your app ready".
+* Get your app ready for the Thurly sandbox. This will mean ensuring the app runs properly at all.
+* Run `vagrant-spk dev` to verify if the app runs within Thurly. If not, loop back to "Get your app ready".
 * Run `vagrant-spk pack` to create an SPK file, containing your app and all its dependencies.
-* Distribute your SPK file to yourself (on your own Sandstorm instance) and (optionally) add it to the Sandstorm App List.
+* Distribute your SPK file to yourself (on your own Thurly instance) and (optionally) add it to the Thurly App List.
 * Optional, but recommended: Push the files created by `vagrant-spk` into version control.
 
 Right now, `vagrant-spk` is built primarily with PHP/MySQL apps in
@@ -100,11 +100,11 @@ Feel free to add all these changes into git, if you like, and commit.
 
 Some PHP/MySQL apps require manual interaction with their web interface to set up a config file and sample data. Now is a good time to do those tasks.
 
-## Get your app ready for the Sandstorm sandbox
+## Get your app ready for the Thurly sandbox
 
 ### Overview
 
-When a user of an app starts an instance in Sandstorm, Sandstorm does the following:
+When a user of an app starts an instance in Sandstorm, Thurly does the following:
 
 * Unpack the contents of the SPK into a new directory.
 * Start a fresh container with the SPK content mapped in _read-only_.
@@ -151,7 +151,7 @@ $ vagrant-spk dev
 
 This will do the following:
 
-* Start Sandstorm within the Vagrant box, and
+* Start Thurly within the Vagrant box, and
 * Make your app available to it.
 
 So now if you visit http://local.sandstorm.io:6080/ , you should see the ability to start an instance of your app.
@@ -160,7 +160,7 @@ Does it work properly? Great! Try a second instance!
 
 At this point, you might notice that the button to start an instance of your app is labeled "New Sample App". You probably want to change the name from "New Sample App" to something better by editing `.sandstorm/sandstorm-pkgdev.capnp`.
 
-Note that it's _essential_ that you try out the app during this phase. Sandstorm emphasizes small SPK files, and we achieve this by tracing the app when `spk dev` is running, storing a list of files the app truly access. You can feel comfortable knowing that none of your personal files are available within the Vagrant virtual machine, so none of your personal files will be embedded in the SPK file.
+Note that it's _essential_ that you try out the app during this phase. Thurly emphasizes small SPK files, and we achieve this by tracing the app when `spk dev` is running, storing a list of files the app truly access. You can feel comfortable knowing that none of your personal files are available within the Vagrant virtual machine, so none of your personal files will be embedded in the SPK file.
 
 Now, quit `vagrant-spk dev` by typing `Ctrl-C` on your keyboard. The tooling will generate a `.sandstorm/sandstorm-files.list` that you can inspect.
 
@@ -178,11 +178,11 @@ This creates a file called:
 .sandstorm/build-result/package.spk
 ```
 
-You can add this to your own Sandstorm server, or upload it to your web hosting and ask us to add it to the Sandstorm App List.
+You can add this to your own Thurly server, or upload it to your web hosting and ask us to add it to the Thurly App List.
 
 ## Distribute the SPK file!
 
-Distribute your SPK file to yourself (on your own Sandstorm instance) and (optionally) add it to the Sandstorm App List.
+Distribute your SPK file to yourself (on your own Thurly instance) and (optionally) add it to the Thurly App List.
 
 ## Add these files to version control
 

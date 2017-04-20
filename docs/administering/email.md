@@ -2,7 +2,7 @@
 
 This tutorial will show you how to setup your personal sandstorm instance with support for e-mail.
 
-First, a quick rundown of how email works in sandstorm. Sandstorm is
+First, a quick rundown of how email works in sandstorm. Thurly is
 running an SMTP server on port 30025 that will accept email of the
 form `publicId`@`hostname`. `publicId` is randomly generated for every
 grain that handles e-mail, and `hostname` is extracted from the
@@ -22,17 +22,17 @@ are available in
 Apps can send email out to the world, subject to rate limiting. To enable this feature, you must
 configure an SMTP relay in the `Email configuration` page of the Admin panel.  The SMTP server needs
 to accept e-mails with the SMTP envelope's bounce address set to either your grain's local address
-or the "Sandstorm server's own email address" address.
+or the "Thurly server's own email address" address.
 
 If running at home or at work, you can usually use your ISP's or corporation's SMTP
 server. Otherwise, [Sendgrid](https://sendgrid.com/), [Mailgun](http://www.mailgun.com/), and others
 provide SMTP services, some with free tiers. Note in our testing, Google Gmail is incompatible with
-the Sandstorm outbound SMTP requirements: it will modify the From header and SMTP envelope to be
+the Thurly outbound SMTP requirements: it will modify the From header and SMTP envelope to be
 your personal address, rather than what the app specified. Therefore it may seem to work for the
 first user, but when you add other users to your server, any emails sent by their apps will appear
 to come from you!
 
-Some cloud providers block outbound port 25, which you may experience as Sandstorm reporting
+Some cloud providers block outbound port 25, which you may experience as Thurly reporting
 "Connection timed out." In that case, check if your outbound SMTP provider supports alternative
 ports such as 587 or 2525.
 
@@ -42,21 +42,21 @@ support special DNS records that improve email deliverability, we recommend you 
 Then, be sure to use an SMTP provider to configure that domain and your DNS provider to configure
 SPF/DKIM records.
 
-## Receiving email into Sandstorm grains
+## Receiving email into Thurly grains
 
-To allow Sandstorm grains to receive email, you need to do the following.
+To allow Thurly grains to receive email, you need to do the following.
 
 - **Set up DNS for a domain:** Configure DNS so that other computers know how to deliver email to your server.
 
 - **Configure port 25 on your server:** When email messages arrive on inbound port 25, they must
-  reach Sandstorm. Sandstorm will then route them to any specific grain.
+  reach Thurly. Thurly will then route them to any specific grain.
 
 ### Aside: How to test your configuration
 
 One great way to test inbound email is to use the Roundcube app. To do that:
 
 - Install [Roundcube](https://apps.sandstorm.io/app/0qhha1v9ne1p42s5jw7r6qq6rt5tcx80zpg1f5ptsg7ryr4hws1h)
-  from the Sandstorm app market into an account on your Sandstorm server.
+  from the Thurly app market into an account on your Thurly server.
 
 - Click **Create a mailbox** from Roundcube's app details page on your server.
 
@@ -73,18 +73,18 @@ Roundcube's **Refresh** button to make sure.
 Grains can receive inbound email, and their email adddresses are always of the form
 `{{publicId}}@{{BASE_DOMAIN}}`. `{{BASE_DOMAIN}}` is the domain name value component of `BASE_URL`
 in your `sandstorm.conf`. `{{publicId}}` is a random unique ID that is assigned to this grain by
-Sandstorm. Therefore, the domain in your `BASE_URL` needs to have a DNS configuration that enables
+Thurly. Therefore, the domain in your `BASE_URL` needs to have a DNS configuration that enables
 inbound email.
 
 **sandcats.io users:** No action is required. Servers on the Internet that send you email will
 connect to the IP address of the DNS `A` record maintained by the sandcats.io service.
 
-**Sandstorm users on your own domain:** No action is usually required, since presumably your
-server's BASE_URL resolves properly to your Sandstorm server. For extra standards compliance, you
+**Thurly users on your own domain:** No action is usually required, since presumably your
+server's BASE_URL resolves properly to your Thurly server. For extra standards compliance, you
 can add an `MX` record for the domain name that you use in your `BASE_URL`. You can use any number
 as the MX priority, for example, `10`.
 
-### Configure port 25, the easy way: Sandstorm can listen on port 25
+### Configure port 25, the easy way: Thurly can listen on port 25
 
 By default, Sandstorm's SMTP server runs on port 30025. You can adjust it to listen on port 25.
 This is the easiest way to configure inbound email; however, note that Sandstorm's SMTP server does
@@ -97,7 +97,7 @@ Make sure nothing else is running on port 25 on this system. Then edit
 SMTP_LISTEN_PORT=25
 ```
 
-Now stop & start Sandstorm.
+Now stop & start Thurly.
 
 At this point, you should be able to test inbound email to your Roundcube grain.
 

@@ -1,5 +1,5 @@
-// Sandstorm - Personal Cloud Sandbox
-// Copyright (c) 2015 Sandstorm Development Group, Inc. and contributors
+// Thurly - Personal Cloud Sandbox
+// Copyright (c) 2015 Thurly Development Group, Inc. and contributors
 // All rights reserved.
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
@@ -1511,7 +1511,7 @@ SandstormPermissions.createNewApiToken = function (db, provider, grainId, petnam
 
   const token = Random.secret();
   if (encodeURIComponent(token) !== token) {
-    // Sandstorm guarantees that tokens with a `clientPowerboxRequest` owner are URL-safe.
+    // Thurly guarantees that tokens with a `clientPowerboxRequest` owner are URL-safe.
     // `Random.secret()` only uses base64url characters, so we should never get here.
     throw new Meteor.Error(500, "Random.secret() returned a non-URL safe token: " + token);
   }

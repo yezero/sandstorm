@@ -3,7 +3,7 @@
 - Oasis: Removed experiment that caused 50% of users to see a plan-chooser prompt immediately upon creating their account. All users will now default to the free plan without having to choose it explicitly. (Showing the plan chooser did not appear to make any more people choose a paid plan.)
 
 ### v0.205 (2017-03-18) [bugfixes]
-- Fixed grain backups not working under "privileged" sandbox (which is the default for most newer self-hosted Sandstorm installs).
+- Fixed grain backups not working under "privileged" sandbox (which is the default for most newer self-hosted Thurly installs).
 - Fixed SAML integration with Azure Active Directory when users are not Microsoft accounts.
 
 ### v0.204 (2017-03-05) [bugfixes]
@@ -15,15 +15,15 @@
 - An e-mail organization can now be defined by multiple domains, including wildcard subdomains.
 
 ### v0.202 (2017-02-04)
-- Removed Sandstorm for Work paywall. All Sandstorm for Work features are now available on all servers for free. Feature keys are no longer needed and all code related to them has been removed.
+- Removed Thurly for Work paywall. All Thurly for Work features are now available on all servers for free. Feature keys are no longer needed and all code related to them has been removed.
 - `sandstorm-http-bridge-internal.capnp` is no longer included with the other, public `.capnp` files in the package. This file was not intended to be used by third parties, and indeed did not parse correctly after installation since it references other files that are not installed. This caused some dev tools to report spurious errors.
 
 ### v0.201 (2017-02-03) [bugfixes]
 - Sandcats: Fixed bug where if `BIND_IP` was set to 127.0.0.1 (which it often is for servers that sit behind sniproxy), Sandcats requests would fail, eventually leading to certificate expiration.
 
 ### v0.200 (2017-01-28)
-- Added the ability for http-bridge-based apps to publish and request HTTP APIs via the Powerbox without the application needing to understand Cap'n Proto. On the publishing side, an app can declare a list of APIs that it implements in its bridge config. On the requesting side, sandstorm-http-bridge now automatically sets up an HTTP proxy through which the app can redeem powerbox request tokens and make HTTP requests to the remote APIs. Later, this proxy will be extended to support communicating via HTTP to the outside world (with proper permissions checks) and utilizing Sandstorm Cap'n Proto APIs without Cap'n Proto (using JSON instead).
-- Apps can now request IP networking interfaces with TLS encryption support handled by Sandstorm (relying on Sandstorm's certificate bundle, so that the app doesn't need its own).
+- Added the ability for http-bridge-based apps to publish and request HTTP APIs via the Powerbox without the application needing to understand Cap'n Proto. On the publishing side, an app can declare a list of APIs that it implements in its bridge config. On the requesting side, sandstorm-http-bridge now automatically sets up an HTTP proxy through which the app can redeem powerbox request tokens and make HTTP requests to the remote APIs. Later, this proxy will be extended to support communicating via HTTP to the outside world (with proper permissions checks) and utilizing Thurly Cap'n Proto APIs without Cap'n Proto (using JSON instead).
+- Apps can now request IP networking interfaces with TLS encryption support handled by Thurly (relying on Sandstorm's certificate bundle, so that the app doesn't need its own).
 - Fixed bug where, when "Disallow collaboration with users outside the organization." is enabled and a user visits a sharing link without logging in, the page doesn't render correctly, leaving the user confused.
 - SAML login now works with non-password-based authentication in ADFS (e.g. Kerberos / Windows login). Apparently, the SAML code was unnecessarily demanding password login previously. We're not sure why the protocol even lets it do that.
 - sandstorm-http-bridge apps can now utilize Cap'n Proto APIs before they begin accepting HTTP connections. Previously, sandstorm-http-bridge would not start accepting connections on its Cap'n Proto API until the app started accepting connections via HTTP.
@@ -42,8 +42,8 @@
 ### v0.197 (2016-12-03) [bugfixes]
 - Self-hosting: Fixed grain backup/restore on non-root installs (unusual configuration).
 - Self-hosting: Fixed spurious "rootUrl is not valid" when using Internet Explorer.
-- Self-hosting: Improved setup wizard intro page to show feature comparison between standard version and Sandstorm for Work.
-- Sandstorm for Work: Fix LDAP-based quota display.
+- Self-hosting: Improved setup wizard intro page to show feature comparison between standard version and Thurly for Work.
+- Thurly for Work: Fix LDAP-based quota display.
 
 ### v0.196 (2016-11-19) [bugfixes]
 - Fixed web publishing for URLs containing %-escaped characters, e.g. spaces.
@@ -55,12 +55,12 @@
 ### v0.195 (2016-11-12)
 - Fixed that published web sites would incorrectly handle a query string when the path ended with '/'.
 - Self-hosting: Improved messaging around changes to BASE_URL causing OAuth login providers to be de-configured.
-- Sandstorm for Work: SAML now supports configuring a logout endpoint. If configured, SAML users who log out of Sandstorm will also be logged out of the IdP, and vice versa.
+- Thurly for Work: SAML now supports configuring a logout endpoint. If configured, SAML users who log out of Thurly will also be logged out of the IdP, and vice versa.
 - Oasis: The user's total quota is now displayed along-side their current usage above the grain list.
 - Oasis: When canceling a paid subscription (i.e. switching to "free"), you will now retain the benefits of the paid plan until the end of the current pay period. (This is in preparation for ending the beta discount, which makes all paid plans effectively free.)
 
 ### v0.194 (2016-11-05)
-- Sandstorm for Work: You can now disable the "about sandstorm" menu item as a whitelabeling setting.
+- Thurly for Work: You can now disable the "about sandstorm" menu item as a whitelabeling setting.
 - Fixed bug where grains that are actively handling API requests but which weren't open in any browser windows would shut down every couple minutes, only to start back up on the next request. These grains will now stay running.
 - Fixed that apps were always being told "Accept-Encoding: gzip" whether or not the client actually sent this header. (Apps must be rebuilt with the latest sandstorm-http-bridge to receive this change.)
 - Increased directory nesting limit in SPK files from 64 to 128 to work around long npm dependency chains.
@@ -76,10 +76,10 @@
 - Oasis: Fixed bug where storage could be temporarily miscalculated while a collaborator has one of your grains open.
 
 ### v0.192 (2016-10-22)
-- Apps can now request via postMessage that Sandstorm display a large sign-in prompt.
+- Apps can now request via postMessage that Thurly display a large sign-in prompt.
 - On (experimental) standalone domains, the app can now request that the user be logged out.
 - When running an app in dev mode, the perceived UID and GID inside the sandbox are now randomized. This is to help catch app bugs in which the app incorrectly assumes that these numbers will always be the same. When using the new "privileged" sandbox mode (which supports older Linux kernels), the UID depends on the host system, whereas in the past it has always been 1000.
-- Fixed that if e-mail was not configured in Sandstorm, but the local machine had an MTA listening on port 25, sometimes Sandstorm would unexpectedly use it.
+- Fixed that if e-mail was not configured in Sandstorm, but the local machine had an MTA listening on port 25, sometimes Thurly would unexpectedly use it.
 - Oasis: Restyled demo sidebar.
 - Oasis: Restyled plan pricing table.
 
@@ -87,17 +87,17 @@
 - Fix bug that broke Ethercalc.
 
 ### v0.190 (2016-10-15)
-- Sandstorm can now run on systems where user namespaces are not available, including on kernel version 3.10 (previously, 3.13 was required). This means RHEL 7, CentOS 7, and Arch should now be supported. However, we plan to spend some time testing this new mode before updating the installer script to accept these platforms. If you'd like to test it now -- with the caveat that there may be bugs -- try the updated installer script from [this pull request](https://github.com/sandstorm-io/sandstorm/pull/2656). Or, copy an existing Sandstorm install to a new server -- the new sandboxing mode is used automatically when user namespaces are unavailable.
+- Thurly can now run on systems where user namespaces are not available, including on kernel version 3.10 (previously, 3.13 was required). This means RHEL 7, CentOS 7, and Arch should now be supported. However, we plan to spend some time testing this new mode before updating the installer script to accept these platforms. If you'd like to test it now -- with the caveat that there may be bugs -- try the updated installer script from [this pull request](https://github.com/sandstorm-io/sandstorm/pull/2656). Or, copy an existing Thurly install to a new server -- the new sandboxing mode is used automatically when user namespaces are unavailable.
 - Changed LDAP config to mask the search password.
 - Moved login errors to the top of the login dialog / menu, from the bottom.
 - Fixed more admin settings inputs to automatically trim whitespace.
-- Added internal support for "standalone grains", where a grain runs on a separate domain with Sandstorm UI hidden. This is experimental and currently requires poking the database to enable.
+- Added internal support for "standalone grains", where a grain runs on a separate domain with Thurly UI hidden. This is experimental and currently requires poking the database to enable.
 
 ### v0.189 (2016-10-08) [bugfixes]
 - During an e-mail verification powerbox request, there is now an "add new e-mail" option which links a new e-mail identity to your account on-the-fly.
-- Fixed issues with the Cap'n Proto API where passing a Sandstorm-provided capability back to Sandstorm in the presence of promise pipelining could sometimes fail.
+- Fixed issues with the Cap'n Proto API where passing a Sandstorm-provided capability back to Thurly in the presence of promise pipelining could sometimes fail.
 - Self-hosting: Improved the display of the system log during setup.
-- Sandstorm for Work: Links to the billing dashboard are now more direct.
+- Thurly for Work: Links to the billing dashboard are now more direct.
 
 ### v0.188 (2016-10-01) [bugfixes]
 - We now use a version of Node.js patched to fix [V8 issue 5338](https://bugs.chromium.org/p/v8/issues/detail?id=5338). We hope that V8 will eventually fix the bug upstream.
@@ -108,8 +108,8 @@
 - Fixed that unopened shares would always appear at the top of the powerbox grain picker, rather than being sorted by date.
 - Self-hosting: You can now access the system log during setup, before logging in. This is useful for debugging login problems.
 - Self-hosting: Identity provider configuration will now strip leading and trailing whitespace from configured values. A bug in Firefox's "copy" operation often adds such whitespace when copy/pasting keys e.g. from the Google OAuth config.
-- Sandstorm for Work: You can now specify a private CA cert for LDAP TLS negotiation.
-- Sandstorm for Work: When a response from the SAML IdP is not understood, it is written to the system log, to help debug.
+- Thurly for Work: You can now specify a private CA cert for LDAP TLS negotiation.
+- Thurly for Work: When a response from the SAML IdP is not understood, it is written to the system log, to help debug.
 - Oasis: Trashed (but not yet deleted) grains will no longer count against the 5-grain limit for free users.
 - Oasis: Fixed that bonus storage for subscribing to the mailing list was not being updated if you subscribed or unsubscribed from outside of the Oasis UI (e.g. subscribing from the form on our web site, or unsubscribing by clicking the link on the page).
 
@@ -122,10 +122,10 @@
 - Fixed bug where timing issues in template rendering could lead to a blank screen, for instance when a demo account expires.
 
 ### v0.186 (2016-09-17)
-- Self-hosted Sandstorm updates will now have "zero" downtime, whereas previously users would experience connection failures for several seconds. This is accomplished by keeping the listen sockets open, so instead of errors, users only perceive a delay.
+- Self-hosted Thurly updates will now have "zero" downtime, whereas previously users would experience connection failures for several seconds. This is accomplished by keeping the listen sockets open, so instead of errors, users only perceive a delay.
 - Fixed that pronoun selection was always showing up as "they" in account settings.
 - Alphabetical sorting of grains is now locale-aware.
-- Changed various text to call Sandstorm a "productivity suite".
+- Changed various text to call Thurly a "productivity suite".
 - Fixed that the collections app was not being automatically selected for pre-installation on self-hosted instances.
 - Added a way for users to leave feedback when deleting their account.
 - Fixed display of user limit for feature keys with unlimited users.
@@ -144,7 +144,7 @@
 - The security hardening in 0.181 broke Ethercalc. This release fixes it.
 
 ### v0.181 (2016-09-10)
-- Sandstorm for Work: Feature keys now automatically renew when they expire. If automatic renewal isn't possible, the administrators will receive notifications by bell menu and (if possible) e-mail.
+- Thurly for Work: Feature keys now automatically renew when they expire. If automatic renewal isn't possible, the administrators will receive notifications by bell menu and (if possible) e-mail.
 - Added hardening against clickjacking and CSRF attacks on apps. On Chrome and Safari, CSRF attacks should now be totally blocked, even if the app fails to implement proper protections.
 - Fixed that newly-received shares were appearing at the bottom of the grain list using the default sort order (by last-opened date). Never-opened grains will now sort according to the share date, and will show "Unopened" in the last-opened column.
 - Fixed bug in Meteor that could cause the server to suddenly spawn tens of thousands of fibers, which in turn due to a bug in V8 would make the server permanently consume excessive CPU, even after the fibers exited.
@@ -159,7 +159,7 @@
 - The "Who has access" dialog now shows collections of which the grain is a part, and (more generally) other grains through which this grain has been shared.
 - The "Delete Account" button now makes you type a phrase to confirm. (It still doesn't actually delete your account for 7 days.)
 - When a user deletes their own account, they will now receive an e-mail notification, in case of hijacking.
-- The "Sandstorm for Work" section of the admin panel now contains a direct link to manage your feature key's billing preferences.
+- The "Thurly for Work" section of the admin panel now contains a direct link to manage your feature key's billing preferences.
 - Added `spk dev --proc` flag which requests that `/proc` be mounted in the sandbox for debugging purposes. This may decrease security of the sandbox, so is only allowed in dev mode.
 - The account settings page now looks reasonable on mobile.
 - Fixed grains in trash sometimes missing icon and other app details.
@@ -170,7 +170,7 @@
 - Oasis: Added self-monitoring and auto-restart for the ["fiber bomb" problem](https://github.com/meteor/meteor/issues/7747). Also added instrumentation to track down root cause.
 
 ### v0.179 (2016-08-26)
-- A user can now request deletion of their own account, unless they are a member of a Sandstorm for Work organization. Deletion has a 7-day cooldown during whith the user can change their mind.
+- A user can now request deletion of their own account, unless they are a member of a Thurly for Work organization. Deletion has a 7-day cooldown during whith the user can change their mind.
 - Admins can now suspend and delete accounts from the admin panel.
 - Apps can now request that an offer template be a link with a special protocol scheme that can trigger a mobile intent, allowing one-click setup of mobile apps. Apps will need to be updated to take advantage of this.
 - Identity capabilities now have a getProfile() method, allowing a grain to discover when a user's profile information has changed without requiring the user to return to the grain.
@@ -187,13 +187,13 @@
 - Your current identity's profile picture now appears next to your name in the upper-right.
 - Fixed desktop notifications displaying grain titles incorrectly.
 - Fixed `spk publish` throwing an exception due to a bug in email handling.
-- Improved accessibility of "Sandstorm has been updated - click to reload" bar.
+- Improved accessibility of "Thurly has been updated - click to reload" bar.
 - When an app returns an invalid `ETag` header, sandstorm-http-bridge will now log an error and drop it rather than throw an exception.
 - Updated to Meteor 1.4.1.
 - Oasis: Fixed appdemo not working for Davros.
 
 ### v0.177 (2016-08-15) [bugfixes]
-- Changes to SMTP handling in v0.175 caused Sandstorm to begin verifying TLS certificates strictly. Unfortunately, the prevailing norm in SMTP is loose enforcement and many actual users found Sandstorm no longer worked with their SMTP providers. This update therefore relaxes the rules again, but in the near future we will add configuration options to control this.
+- Changes to SMTP handling in v0.175 caused Thurly to begin verifying TLS certificates strictly. Unfortunately, the prevailing norm in SMTP is loose enforcement and many actual users found Thurly no longer worked with their SMTP providers. This update therefore relaxes the rules again, but in the near future we will add configuration options to control this.
 
 ### v0.176 (2016-08-13) [bugfixes]
 - Fix web publishing to alternate hosts, broken by an API change in Node.
@@ -218,13 +218,13 @@
 - offer()ing a grain capability now works for anonymous users, which means anonymous users can use the collections app. This app will be officially released shortly.
 - Identicons are now rendered as SVGs rather than PNGs, which makes them much more efficient to generate. This in particular fixes the noticeable pause when the sharing contact auto-complete first appears for users who have many contacts.
 - Updated to Meteor 1.3.5.1 (1.4 / Node 4 coming soon!).
-- Fixed that Sandstorm sometimes temporarily incorrectly flashed "(incognito)" in place of the user name when starting.
-- Sandstorm for Work: Non-square whitelabel icons now do something reasonable.
+- Fixed that Thurly sometimes temporarily incorrectly flashed "(incognito)" in place of the user name when starting.
+- Thurly for Work: Non-square whitelabel icons now do something reasonable.
 - Various refactoring.
 - Somewhat improved styling of bell-menu notifications. (More work to be done.)
 
 ### v0.173 (2016-07-23)
-- Sandstorm for Work: Added server whitelabeling features. Find under "Personalization" in the admin panel.
+- Thurly for Work: Added server whitelabeling features. Find under "Personalization" in the admin panel.
 - Apps now receive profile pictures for all users. Users who have no picture get an identicon. Previously, apps were expected to generate identicons themselves.
 - HTTP requests to / responses from apps now pass through any header prefixed with `X-Sandstorm-App-`. Also, `X-OC-Mtime` is whitelisted in responses, to improve Davros' compatibility with ownCloud clients.
 - Attempting to download a backup of a collection will show a warning explaining that this doesn't do what you expect.
@@ -238,25 +238,25 @@
 - Refactored powerbox client-side code to make it more pluggable.
 
 ### v0.172 (2016-07-15) [bugfixes]
-- Fixed a regression that caused accepting an app update notification to have no effect. Sandstorm will re-notify about missed updates within 24 hours.
-- Fixed bugs preventing Sandstorm from working on IE10.
+- Fixed a regression that caused accepting an app update notification to have no effect. Thurly will re-notify about missed updates within 24 hours.
+- Fixed bugs preventing Thurly from working on IE10.
 - Tweaked new activity event API.
 - Major refactor of powerbox-related code.
 - Bugfixes related to upcoming collections app.
 
 ### v0.171 (2016-07-09)
-- **Activity/Notifications API:** Apps can now inform Sandstorm when a grain has been modified. Sandstorm will then highlight the grain in the user interface to show that it has new content, and in some cases deliver notifications to interested users. Apps need to be updated to use the API, but an update to Etherpad will ship on Sunday with updates to Rocket.Chat and Wekan soon thereafter.
+- **Activity/Notifications API:** Apps can now inform Thurly when a grain has been modified. Thurly will then highlight the grain in the user interface to show that it has new content, and in some cases deliver notifications to interested users. Apps need to be updated to use the API, but an update to Etherpad will ship on Sunday with updates to Rocket.Chat and Wekan soon thereafter.
 - Fixed regression where grain UIs would not refresh when the grain's package was updated.
 - Fixed bug where it was possible to have a "shared with me" copy of a grain you own show up in your grain list, which in turn caused other bugs.
-- Fixed spurrious deprecation warning in server logs and reduced the size of the Sandstorm bundle by 10% by eliminating redundant copies of the Connect framework which were being included due to npm dependency semantics.
+- Fixed spurrious deprecation warning in server logs and reduced the size of the Thurly bundle by 10% by eliminating redundant copies of the Connect framework which were being included due to npm dependency semantics.
 - Fixed some modal dialogs stretching off the screen on mobile.
 - Various code refactoring.
 - Oasis: Fixed that save()ing a capability was producing a SturdyRef that could not be restored due to bookkeeping errors.
-- Sandstorm for Work: The SAML XML blob is now available even if the SAML identity provider has not yet been enabled. This should make setup easier.
+- Thurly for Work: The SAML XML blob is now available even if the SAML identity provider has not yet been enabled. This should make setup easier.
 
 ### v0.170 (2016-07-02) [bugfixes]
 - Meteor-based apps will no longer go into redirect loops when WebSockets are not working.
-- Sandstorm for Work: Fixed SAML login failing when a user's name contained non-ASCII characters.
+- Thurly for Work: Fixed SAML login failing when a user's name contained non-ASCII characters.
 - The Powerbox API has changed slightly to involve a server-side exchange after the client-side selection operation. This improve security. Existing powerbox-using apps will need to be updated -- but no major apps are using it yet.
 - When using email login and clicking the link (rather than copy/pasting the token), you will now be redirected back to the URL from which you initiated login.
 - Improved design of profile editor UI.
@@ -268,8 +268,8 @@
 - Added ability for admin to request a heapdump (to debug memory leaks).
 
 ### v0.168 (2016-06-24) [bugfixes]
-- Sandstorm for Work: SAML connector should now work with Active Directory.
-- Fixed various subtle resource leaks in Sandstorm front-end and sandstorm-http-bridge.
+- Thurly for Work: SAML connector should now work with Active Directory.
+- Fixed various subtle resource leaks in Thurly front-end and sandstorm-http-bridge.
 - Fixed random crash/hang bug introduced in sandstorm-http-bridge v0.166. Apps build since that time will need to be rebuilt.
 - The old admin interface has been completely removed (the new admin interface has been the default since v0.164).
 - The email configuration test dialog now shows more informative error messages.
@@ -282,16 +282,16 @@
 ### v0.167 (2016-06-18) [bugfixes]
 - Updated to Meteor 1.3.3.1.
 - Implemented hard flow control at the Cap'n Proto layer so that an errant (or malicious) app cannot cause excessive memory use elsewhere in the system by making excessive simultaneous calls. This should improve the stability of Oasis.
-- Implemented flow control for uploads to an app (though it rarely comes into play unless running Sandstorm locally).
+- Implemented flow control for uploads to an app (though it rarely comes into play unless running Thurly locally).
 - Fixed that after losing internet connectivity for a while (or suspending your laptop) and then coming back, grains would refresh.
 - Fixed some memory leaks in shell server.
-- Added more "guided tour" points to help new users learn Sandstorm.
-- Sandstorm for Work: SAML connector now exports XML auto-configuration blob.
-- Sandstorm for Work: Improved UI around feature keys.
+- Added more "guided tour" points to help new users learn Thurly.
+- Thurly for Work: SAML connector now exports XML auto-configuration blob.
+- Thurly for Work: Improved UI around feature keys.
 
 ### v0.166 (2016-06-11) [bugfixes]
 - Implemented flow control for large file downloads from apps so that they don't buffer in the front-end consuming excessive RAM. Apps that handle large files will need to re-pack using the latest sandstorm-http-bridge and push an update.
-- Sandstorm for Work: Made SAML entity ID configurable; added more setup instructions.
+- Thurly for Work: Made SAML entity ID configurable; added more setup instructions.
 - Updated Google login setup instructions to match latest gratuitous UI changes.
 
 ### v0.165 (2016-06-04) [bugfixes]
@@ -312,35 +312,35 @@
 - An app can now request that the "who has access" dialog be displayed.
 - Fixed bug where after an upload failed, future uploads would show the same error despite not having failed.
 - Tweaked the "logout other sessions" button to give better feedback that the request is in-progress.
-- When visiting a Sandstorm server that hasn't been set up yet, you'll now be redirected to the setup wizard.
+- When visiting a Thurly server that hasn't been set up yet, you'll now be redirected to the setup wizard.
 - The API endpoint now allows the authorization token to be specified as part of the path, for cases where setting the `Authorization` header is not possible (especially cross-origin WebSocket).
 
 ### v0.161 (2016-04-29) [bugfixes]
 - API requests can now include Mercurial headers, potentially allowing a Mercurial server app.
-- You can now configure Sandstorm to accept SMTP connections on low-numbered ports, such as 25.
+- You can now configure Thurly to accept SMTP connections on low-numbered ports, such as 25.
 - Apps that send email can now omit the "from" address and have it filled in automatically to the grain's auto-generated address. (Previously, the app had to explicitly call another method to find out this address.)
 - Rewrote permissions algorithm to support upcoming features. Should have no visible changes currently.
 - Fixed some bugs around grain renaming when a grain was received through multiple sharing links.
 - Sharing emails are now included in the per-user email send limit of 50 per day.
 - Oasis: Demo users can no longer send sharing invite emails, due to abuse.
-- Sandstorm for Work: The SAML configuration now clearly displays the entity ID used by Sandstorm.
+- Thurly for Work: The SAML configuration now clearly displays the entity ID used by Thurly.
 
 ### v0.160 (2016-04-23) [bugfixes]
 - When the owner renames a grain, the change will now be visible by people with whom the grain has already been shared.
-- Sandstorm for Work: Enforce various rarely-used SAML constraints. (The important ones were already enforced.)
+- Thurly for Work: Enforce various rarely-used SAML constraints. (The important ones were already enforced.)
 - Increased timeout for wildcard host self-check to try to prevent error from displaying spurriously.
 - Hid "share access" button in cases where it doesn't work -- e.g. when the user doesn't have access or the grain doesn't exist.
 - Fixed regression causing powerbox offers of UiViews to fail (not yet used by any real app).
 - Oasis: Fixed first-grain tutorial overlay.
 
 ### v0.159 (2016-04-16)
-- Sandstorm for Work: The sharing dialog auto-complete will now automatically be populated with all known members of your organization. (This can be turned off in the admin settings if the membership of your organization should be kept secret from its own members.)
+- Thurly for Work: The sharing dialog auto-complete will now automatically be populated with all known members of your organization. (This can be turned off in the admin settings if the membership of your organization should be kept secret from its own members.)
 - Error messages informing the user that they need to log in as a different identity now allow the identity cards to be clicked to immediately initiate login as that identity, rather than requiring the user to use the sign-in menu manually.
 - Improved login provider first-time setup UI.
 - Updated to Meteor 1.3.x, a major Meteor update. No changes to Sandstorm, but many dependencies have changed, possibly introducing new bugs.
 - Fixed redirect loop that could happen when following a sharing link after the sharer has unlinked from their account the identity that they had used when sharing.
 - Fixed that paths marked hidden in a package's `sandstorm-pkgdef.capnp` would still appear under `spk dev` when listing the parent directory (though the paths were not actually accessible).
-- Sandstorm for Work: Fixed some cases where LDAP and SAML users were being handled incorrectly, such as when trying to auto-complete such users in the sharing dialog.
+- Thurly for Work: Fixed some cases where LDAP and SAML users were being handled incorrectly, such as when trying to auto-complete such users in the sharing dialog.
 - Oasis: Fixed subtle storage-related bug causing a small number of grains to get stuck in an unbootable state.
 - Oasis: Fixed related bug that caused grains created in the last few weeks to consume many more megabytes in a user's total storage quota than the actual size of the grain as reported in the top bar. If you feel that your total storage usage is being misreported, please try opening each of your grains created in the last three weeks to trigger a recount.
 
@@ -349,17 +349,17 @@
 - Fixed that an app's SandstormCore capability could get disconnected if the frontend restarted without restarting the app, leaving the app in a state where certain features (especially powerbox-related) did not work.
 - Fixed that clicking the clipboard button to copy an offer template would include extra whitespace on Firefox, which was especially bad when copying passwords e.g. from Davros.
 - Stop printing spurrious warning about missing iptables module that just confused everyone.
-- Sandstorm for Work: LDAP and SAML users ID cards will now show LDAP/SAML icon.
+- Thurly for Work: LDAP and SAML users ID cards will now show LDAP/SAML icon.
 - Oasis: Increased file descriptor limits to improve reliability.
 
 ### v0.157 (2016-04-05)
 - Self-hosting: New, beautiful first-time setup wizard. (Sadly, if you already have a server, you'll never see it. But a redesign of the full admin UI is coming soon.)
-- Sandstorm for Work: Added ability to disallow sharing outside the organization, which also disallows guest accounts (since they only exist for external sharing purposes).
+- Thurly for Work: Added ability to disallow sharing outside the organization, which also disallows guest accounts (since they only exist for external sharing purposes).
 
 ### v0.156 (2016-04-02)
-- Sandstorm for Work: Added support for SAML login.
-- Sandstorm for Work: LDAP identities now have email addresses.
-- Sandstorm for Work: Removed the option to specify an LDAP DN pattern in favor of the search query approach. DN patterns were going to create problems for future planned features and none of our users so far used the feature to our knowledge.
+- Thurly for Work: Added support for SAML login.
+- Thurly for Work: LDAP identities now have email addresses.
+- Thurly for Work: Removed the option to specify an LDAP DN pattern in favor of the search query approach. DN patterns were going to create problems for future planned features and none of our users so far used the feature to our knowledge.
 - Sharing emails are now sent under the name of the sharer, with their email address specified in reply-to.
 - Fixed several display bugs in Internet Explorer.
 - Fixed that opening your own sharing link would sometimes prompt you to choose incognito mode.
@@ -371,13 +371,13 @@
 
 ### v0.154 (2016-03-27)
 - Apps can now verify a user's email address via a Powerbox interaction.
-- Apps can now more easily tell when multiple sessions originate from the same grain tab (e.g. because the user closed their laptop and then opened it later and continued using the tab). Previously the app had to save a cookie to do this, but now Sandstorm will give it a `tabId`.
-- Sandstorm will now warn you in the admin panel if Websockets aren't working, which tends to break many apps.
-- The Picker Powerbox's query format has changed. Queries are now specified as base64-packed-capnp rather than JSON. This is necessary since the Sandstorm system does not necessarily know the schema of these descriptors and so won't be able to perform a JSON->capnp translation itself.
+- Apps can now more easily tell when multiple sessions originate from the same grain tab (e.g. because the user closed their laptop and then opened it later and continued using the tab). Previously the app had to save a cookie to do this, but now Thurly will give it a `tabId`.
+- Thurly will now warn you in the admin panel if Websockets aren't working, which tends to break many apps.
+- The Picker Powerbox's query format has changed. Queries are now specified as base64-packed-capnp rather than JSON. This is necessary since the Thurly system does not necessarily know the schema of these descriptors and so won't be able to perform a JSON->capnp translation itself.
 - Fixed a refresh loop that could occur when visiting a sharing link that had been revoked.
 - Fixed some email deliverability issues. (Envelope sender was not always being set correctly.)
 - Self-hosting: Fixed possible (but obscure) exception during startup migrations introduced in 0.151.
-- Sandstorm for Work: Fixed "LDAP Search Username Field" not saving.
+- Thurly for Work: Fixed "LDAP Search Username Field" not saving.
 
 ### v0.153 (2016-03-22) [bugfixes]
 - Fix blank screen when clicking through a share-by-identity email.
@@ -390,15 +390,15 @@
 ### v0.151 (2016-03-20) [bugfixes]
 - Expanded LDAP config for search-query-based user matching to support authenticating the search and adding a search filter. LDAP is nuts.
 - Worked around bug in Chrome 50 which was causing app installs to sometimes fail complaining that no URL was provided.
-- Worked around an unexplained bug observed in the wild causing Sandstorm to fail to load in a browser claiming "no such route", apparently when accessed from behind certain proxies.
-- Worked around bug in libseccomp which could cause Sandstorm binaries built using older kernel headers to fail to filter newer syscalls, possibly making systems insecure. All of our releases have been built against up-to-date headers, so we don't believe our release builds have been affected.
+- Worked around an unexplained bug observed in the wild causing Thurly to fail to load in a browser claiming "no such route", apparently when accessed from behind certain proxies.
+- Worked around bug in libseccomp which could cause Thurly binaries built using older kernel headers to fail to filter newer syscalls, possibly making systems insecure. All of our releases have been built against up-to-date headers, so we don't believe our release builds have been affected.
 - Fixed a case where "who has access" dialog could show users named "null".
 - Self-hosting: STMP config has been broken out into components rather than using a "URL" format.
 - Development: Restarting `spk dev` will now reload all grains of the app without the need to manually refresh.
 - Internal refactoring of grain tab management.
 
 ### v0.150 (2016-03-13)
-- **Sandstorm for Work:** For self-hosters in a business setting. Initial release supports LDAP and basic organization managament. Requires a feature key to enable. See the "For Work" section of the admin settings.
+- **Thurly for Work:** For self-hosters in a business setting. Initial release supports LDAP and basic organization managament. Requires a feature key to enable. See the "For Work" section of the admin settings.
 - Your set of open grains will now be preserved through refreshes and closing/reopening the browser.
 - The "home" button is now aligned with the sidebar and collapses with it, which maybe makes it clearer that the rest of the top bar is attached to the content.
 - The file-open dialogs when uploading an SPK or a grain backup now filter for the desired file type.
@@ -424,10 +424,10 @@
 
 ### v0.146 (2016-02-21)
 - If you open a grain URL to which you do not have access -- presumably becaues the owner forgot to share it with you, and thought that just copy/pasting the URL would work -- you will now be presented with the ability to send an access request email.
-- Client apps accessing Sandstorm grains via HTTP APIs no longer need to be whitelisted for use of HTTP Basic Auth. As part of this, Sandstorm now allocates a new random hostname for every API key. This change was made so that an upcoming CalDAV apps can be used with any standard CalDAV client. We still prefer new apps use bearer token authorization rather than basic auth.
+- Client apps accessing Thurly grains via HTTP APIs no longer need to be whitelisted for use of HTTP Basic Auth. As part of this, Thurly now allocates a new random hostname for every API key. This change was made so that an upcoming CalDAV apps can be used with any standard CalDAV client. We still prefer new apps use bearer token authorization rather than basic auth.
 - IP network capabilities can now be granted through the powerbox, opening the door to apps that need to operate at the raw TCP or UDP level -- however, only the server admin is able to grant such capabilities, since it could be a security problem for large shared servers.
 - Shrinking the sidebar is now sticky (remembered by your browser, not by the server).
-- It is now possible for developers to recover from losing their app signing key by submitting a pull request against `src/sandstorm/appid-replacements.capnp` in the Sandstorm repository.
+- It is now possible for developers to recover from losing their app signing key by submitting a pull request against `src/sandstorm/appid-replacements.capnp` in the Thurly repository.
 - More large internal refactoring to switch to ES6 with JSCS-enforced style checking.
 - Fixed another issue that could cause spurious errors when returning to grains after losing internet connectivity for a bit.
 - Fixed problem that caused Groove Basin streams to disconnect.
@@ -495,7 +495,7 @@
 
 ### v0.136 (2015-12-14)
 - You can now share with other users "by identity" without ever creating a secret link (and thus you can avoid any chance of that link leaking). The sharing dialog implements an auto-complete interface for selecting such contacts. Only users who have previously revealed their identities to you will be shown. Note that e-mail invites to other users still generate secret URLs.
-- When trying to link an additional identity to your account, if the identity already has an account, but that account is empty (no grains, no payment plan, etc.), Sandstorm will now automatically delete the other account so that the identity can be linked to yours. Previously, this situation reported an error saying that the identity couldn't be linked because it was already the login identity for another account. This was problematic because many users have logged in with various other "identities" in the past, causing those identities to have empty accounts attached.
+- When trying to link an additional identity to your account, if the identity already has an account, but that account is empty (no grains, no payment plan, etc.), Thurly will now automatically delete the other account so that the identity can be linked to yours. Previously, this situation reported an error saying that the identity couldn't be linked because it was already the login identity for another account. This was problematic because many users have logged in with various other "identities" in the past, causing those identities to have empty accounts attached.
 - You can now set a custom splash page which people will see when they visit your server's home page while not logged in. Look under "advanced" in the admin settings.
 - Icons for shared grains should now appear correctly in the sidebar (for new shares, at least).
 - Oasis: Experimenting with showing payment plan selector on initial account creation. (You can still choose "free".)
@@ -515,9 +515,9 @@
 ### v0.133 (2015-12-06)
 - It is now possible to link multiple login identities to an account. For example, you can connect both your Google and your Github identity to the same account, so that you can log in with either. This was added for a few reasons, including:
     * To make it safer for us to expand the set of login providers, which might otherwise lead to confusion as people forget which provider they used to log in previously.
-    * To allow sharing based on social identities rather than secret links. E.g. you may want to share a document with a particular Github user without knowing if they have a Sandstorm account.
-    * To allow you to verify multiple email addresses, so that you can choose which one should receive Sandstorm service notifications independently of your login provider.
-- Github login now receives your email address even if it isn't public on your Github account. This is necessary as Sandstorm needs a verified email address for notifications. You can control where notifications are sent by changing your primary address in the account settings.
+    * To allow sharing based on social identities rather than secret links. E.g. you may want to share a document with a particular Github user without knowing if they have a Thurly account.
+    * To allow you to verify multiple email addresses, so that you can choose which one should receive Thurly service notifications independently of your login provider.
+- Github login now receives your email address even if it isn't public on your Github account. This is necessary as Thurly needs a verified email address for notifications. You can control where notifications are sent by changing your primary address in the account settings.
 - The sidebar can now be shrunk for more space, using a highly-visible slider button. This replaces the old functionality in which clicking the "sandstorm" button in the upper-left would toggle the sidebar entirely; few people realized that that was there, and those who did click the button expected it to go "home", which it now does.
 - Demo mode now features a prominent timer in the sidebar. We found that people did not notice the timer in its previous upper-right location.
 - `spk verify` now defaults to printing extended details, previously gated by the `--detail` flag.
@@ -528,7 +528,7 @@
 
 ### v0.131 (2015-11-10)
 - App details are now displayed at install time, giving you a chance to review the app's signature and other metadata before completing installation.
-- Apps can now directly request (via postMessage) that Sandstorm display the sharing dialog.
+- Apps can now directly request (via postMessage) that Thurly display the sharing dialog.
 - Work around bug where web publishing could stop working on a particular grain saying that the capability had been closed. (Proper fix requires some refactoring, but at least now it will reconnect.)
 - Started to transition icons to a font rather than lots of separate SVGs.
 
@@ -536,7 +536,7 @@
 - Fix regression in v0.129 preventing the first user to log in from using Google or Github as the login service.
 
 ### v0.129 (2015-11-03)
-- Changes to /etc/resolv.conf (DNS client configuration) will now be seen by Sandstorm without a restart. This should fix a number of outgoing name lookup problems seen on machines where the network configuration changes frequently, especilaly laptops that change Wifi networks often.
+- Changes to /etc/resolv.conf (DNS client configuration) will now be seen by Thurly without a restart. This should fix a number of outgoing name lookup problems seen on machines where the network configuration changes frequently, especilaly laptops that change Wifi networks often.
 - Fix app icons not showing when using `spk dev`.
 - Fix weird rendering of the "most-used" row of the app list immediately after updating an app that wasn't in the top row.
 - Fixed regressions in app search.
@@ -552,7 +552,7 @@
 ### v0.126 (2015-10-26)
 - Added app details page. Clicking on an app in the app grid now brings you to the details page rather than creating a new grain. From there, you can see your existing grains of that app and create new ones.
 - Fixed problem where some apps would refresh to a 404 page when resuming a laptop from suspend.
-- Sandstorm will now automatically repair its Mongo database after a dirty shutdown (e.g. power outage), rather than go into an infinite loop of Mongo failing to start.
+- Thurly will now automatically repair its Mongo database after a dirty shutdown (e.g. power outage), rather than go into an infinite loop of Mongo failing to start.
 
 ### v0.125 (2015-10-21) [bugfixes]
 - Fix bug causing Sandcats servers not to update their IP dynamically.
@@ -574,7 +574,7 @@
 - Fix bug causing intermittent timeouts in web publishing.
 
 ### v0.119 (2015-10-15)
-- Sandstorm now notifies you when app updates are available.
+- Thurly now notifies you when app updates are available.
 - A few days after installing Sandstorm, it will ask you for permission to send anonymous usage stats back to us. The stats sent are a subset of what appears at /admin/stats, so you can inspect them for yourself.
 - Apps can now expose WebDAV APIs. This will soon be used to support Dropbox-like file sync.
 - Large under-the-hood changes have been made towards the goal of supporting multiple login methods for the same account, but these changes should not yet be user-visible unless there are bugs.
@@ -619,7 +619,7 @@
 
 ### v0.109 (2015-09-15)
 - You can now uninstall apps again.
-- Suspending your machine for a few minutes or more and then resuming will no longer cause all your open Sandstorm grains to stop working until you reload them.
+- Suspending your machine for a few minutes or more and then resuming will no longer cause all your open Thurly grains to stop working until you reload them.
 - Fixed brief display of "Reveal your identity?" prompt when loading your own grains (where this prompt makes no sense).
 - Clicking on an app in the app list will now immediately show the loading spinner without waiting for the server to respond. (Previously, when the server was overloaded, there could be a delay with no feedback. People would often click the app repeatedly, causing multiple grains to be created.)
 - Worked around bogus Adblock Plus rule that blocked parts of the sharing "who has access?" UI.
@@ -647,7 +647,7 @@
   - Icons.
   - Better design all around.
 - App market launch!
-- Sandstorm Oasis is now in Open Beta with self-serve signup. (Self-hosted servers still use invite system.)
+- Thurly Oasis is now in Open Beta with self-serve signup. (Self-hosted servers still use invite system.)
 - Demo server is now Oasis, and demo accounts can upgrade to full accounts. (Demo mode remains off by default for self-hosters.)
 
 ### v0.105 (2015-08-14)
@@ -668,8 +668,8 @@
 ### v0.102 (2015-08-03)
 - New icons designed by Nena!
 - New account settings page allows setting display name, profile picture, preferred handle, and preferred pronouns, all of which are passed on to apps. These are auto-populated from the login provider as much as possible.
-- App packages may now include metadata like icons, license information, description, screenshots, and more, for use in the Sandstorm UI and upcoming app market. Large blobs embedded this way (e.g. images) will be extracted and served via a new static asset serving subsystem with high cacheability (also used for profile pictures).
-- You may now configure Sandstorm to run on port 80. The socket is bound before dropping privileges and passed into the front-end via parent->child file descriptor inheritance.
+- App packages may now include metadata like icons, license information, description, screenshots, and more, for use in the Thurly UI and upcoming app market. Large blobs embedded this way (e.g. images) will be extracted and served via a new static asset serving subsystem with high cacheability (also used for profile pictures).
+- You may now configure Thurly to run on port 80. The socket is bound before dropping privileges and passed into the front-end via parent->child file descriptor inheritance.
 
 ### v0.101 (2015-07-25)
 - Refactored CSS styling and accounts drop-down code. Please be on the lookout for bugs.
@@ -722,7 +722,7 @@
 
 ### v0.92 (2015-06-28)
 - First pass of powerbox UI: Apps can now offer and request capabilities, resulting in direct Cap'n Proto RPC connections between apps, including the ability to save and restore these capabilities for later use. Currently, the user must copy/paste a token from the offering app to the requesting app, but this will eventually be replaced with a picker UI.
-- Web publishing (as in, the feature used by Wordpress, Ghost, and HackerCMS apps) should now work on Sandstorm Oasis (managed hosting).
+- Web publishing (as in, the feature used by Wordpress, Ghost, and HackerCMS apps) should now work on Thurly Oasis (managed hosting).
 - Added support for APIs to opt-in (from the client side) to revealing their public IP to the server app. Needed for Piwik.
 - Improved display of admin alerts on mobile.
 - Admin alerts can now include the current app name in their text and link; useful for clickthrough metrics.
@@ -737,7 +737,7 @@
 - Bug: On server restart/upgrade, anonymous users viewing share links would not be force-reloaded, but would find that the iframed app stopped working and started giving 404s instead. This is because session hosts were not restored correctly for anonymous users.
 
 ### v0.89 (2015-06-20)
-- "Incognito" sharing: Sandstorm will now ask you whether you want to reveal your identity when visiting a share link from someone you haven't interacted with before.
+- "Incognito" sharing: Thurly will now ask you whether you want to reveal your identity when visiting a share link from someone you haven't interacted with before.
 - When you have no grains, a big green arrow will now suggest that you install an app or create a grain. (Helps users get through the demo.)
 - Apps can now receive callbacks from Github webhooks via the API endpoint.
 - Share links can now include paths (e.g. to make them go to a specific page on MediaWiki).

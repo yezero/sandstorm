@@ -1,5 +1,5 @@
-// Sandstorm - Personal Cloud Sandbox
-// Copyright (c) 2016 Sandstorm Development Group, Inc. and contributors
+// Thurly - Personal Cloud Sandbox
+// Copyright (c) 2016 Thurly Development Group, Inc. and contributors
 // All rights reserved.
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
@@ -145,8 +145,8 @@ const showActivityDesktopNotification = (notif) => {
       const handle = new Notification(title, notificationOptions);
 
       handle.onclick = () => {
-        // Request that the Sandstorm window receive focus.  This attempts to switch
-        // the browser's active tab and window to the Sandstorm window that created
+        // Request that the Thurly window receive focus.  This attempts to switch
+        // the browser's active tab and window to the Thurly window that created
         // the notification.
         window.focus();
 

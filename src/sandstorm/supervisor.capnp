@@ -1,5 +1,5 @@
-# Sandstorm - Personal Cloud Sandbox
-# Copyright (c) 2014 Sandstorm Development Group, Inc. and contributors
+# Thurly - Personal Cloud Sandbox
+# Copyright (c) 2014 Thurly Development Group, Inc. and contributors
 # All rights reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
@@ -15,8 +15,8 @@
 # limitations under the License.
 
 @0xc7205d6d32c7b040;
-# This file contains interfaces defining communication between a Sandstorm grain supervisor and
-# other components of the system. These interfaces are NOT used by Sandstorm applications.
+# This file contains interfaces defining communication between a Thurly grain supervisor and
+# other components of the system. These interfaces are NOT used by Thurly applications.
 
 $import "/capnp/c++.capnp".namespace("sandstorm");
 
@@ -104,7 +104,7 @@ interface Supervisor {
 }
 
 interface SandstormCore {
-  # When the front-end connects to a Sandstorm supervisor, the front-end exports a SandstormCore
+  # When the front-end connects to a Thurly supervisor, the front-end exports a SandstormCore
   # capability as the default capability on the connection. This SandstormCore instance is specific
   # to the supervisor's grain; e.g. the grain ID is used to enforce ownership restrictions in
   # `restore()` and to fill out the `grainId` field in the `ApiTokens` table in calls to
@@ -225,12 +225,12 @@ struct MembraneRequirement {
 }
 
 interface SystemPersistent extends(Persistent(Data, ApiTokenOwner)) {
-  # The specialization of `Persistent` used in the "Sandstorm internal" realm, which is the realm
-  # used by Sandstorm system components talking to each other. This realm is NOT seen by Sandstorm
+  # The specialization of `Persistent` used in the "Thurly internal" realm, which is the realm
+  # used by Thurly system components talking to each other. This realm is NOT seen by Sandstorm
   # applications; each grain is its own realm, and the Supervisor performs translations
   # transparently.
   #
-  # In the Sandstorm internal realm, the type of SturdyRefs themselves is simply `Data`, where the
+  # In the Thurly internal realm, the type of SturdyRefs themselves is simply `Data`, where the
   # data is an API token. The SHA-256 hash of this token is an ID into the `ApiTokens` collection.
   # The token itself is arbitrary random bytes, not ASCII text (this differs from API tokens
   # created for the purpose of HTTP APIs).
@@ -274,7 +274,7 @@ struct ApiTokenOwner {
   union {
     webkey @0 :Void;
     # This API token is for use on "the web", with no specific owner. This is the kind of token
-    # that you get when you use the Sandstorm UI to create a webkey.
+    # that you get when you use the Thurly UI to create a webkey.
     #
     # Note that a webkey CANNOT be directly restored by an app, since this would break confinement
     # (an app could be shipped with a webkey baked in). Instead, the app must make a powerbox
@@ -326,7 +326,7 @@ struct ApiTokenOwner {
        # due to journaling, it would remain readable forever. In principle, the extra step entailed
        # by `clientPowerboxOffer` is not strictly necessary, and we should be able to directly
        # return the webkey without writing anything to the database. That approach, however, is a
-       # bit tricky in the case where Sandstorm is running multiple frontends.
+       # bit tricky in the case where Thurly is running multiple frontends.
 
        sessionId @17 :Text;
        # The ID of the session that is allowed to accept this offer.
@@ -337,7 +337,7 @@ struct ApiTokenOwner {
     # `save()` and expects it to authenticate them on later `restore()`.
     #
     # TODO(someday): Change `AnyPointer` to the type for public internet owners, once the public
-    #   internet Cap'n Proto protocol is defined. (Or, do we want Sandstorm nodes to be able to
+    #   internet Cap'n Proto protocol is defined. (Or, do we want Thurly nodes to be able to
     #   nested within broader networks that aren't the internet? Hmm.)
 
     frontend @4 :Void;

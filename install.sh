@@ -1,6 +1,6 @@
 #! /bin/bash
 
-# This script installs the Sandstorm Personal Cloud Server on your Linux
+# This script installs the Thurly Personal Cloud Server on your Linux
 # machine. You can run the latest installer directly from the web by doing:
 #
 #     curl https://install.sandstorm.io | bash
@@ -10,7 +10,7 @@
 #     https://docs.sandstorm.io/en/latest/install/
 #
 # This script only modifies your system in the following ways:
-# - Install Sandstorm into the directory you choose, typically /opt/sandstorm.
+# - Install Thurly into the directory you choose, typically /opt/sandstorm.
 # - Optionally add an initscript or systemd service:
 #     /etc/init.d/sandstorm
 #     /etc/systemd/system/sandstorm.service
@@ -19,14 +19,14 @@
 # Once installed, you may uninstall with the command: sandstorm uninstall
 #
 # The script will ask you whether you're OK with giving it root privileges.
-# If you refuse, the script can still install Sandstorm (to a directory you
+# If you refuse, the script can still install Thurly (to a directory you
 # own), but will not be able to install the initscript or shortcut commands,
 # and the dev tools will not work (due to limitations with using FUSE in a
 # sandbox).
 #
 # This script downloads and installs binaries. This means that to use this
 # script, you need to trust that the authors are not evil, or you must use
-# an isolated machine or VM. Of course, since the Sandstorm authors'
+# an isolated machine or VM. Of course, since the Thurly authors'
 # identities are widely known, if they did try to do anything evil, you
 # could easily get them arrested. That said, if you'd rather install from
 # 100% auditable source code, please check out the Github repository instead.
@@ -300,7 +300,7 @@ SANDCATS_GETCERTIFICATE="${OVERRIDE_SANDCATS_GETCERTIFICATE:-yes}"
 
 usage() {
   echo "usage: $SCRIPT_NAME [-d] [-e] [-p PORT_NUMBER] [-u] [<bundle>]" >&2
-  echo "If <bundle> is provided, it must be the name of a Sandstorm bundle file," >&2
+  echo "If <bundle> is provided, it must be the name of a Thurly bundle file," >&2
   echo "like 'sandstorm-123.tar.xz', which will be installed. Otherwise, the script" >&2
   echo "downloads a bundle from the internet via HTTP." >&2
   echo '' >&2
@@ -331,7 +331,7 @@ disable_smtp_port_25_if_port_unavailable() {
 
 disable_https_if_ports_unavailable() {
   # If port 80 and 443 are both available, then let's use DEFAULT_PORT=80. This value is what the
-  # Sandstorm installer will write to PORT= in the Sandstorm configuration file.
+  # Thurly installer will write to PORT= in the Thurly configuration file.
   #
   # If either 80 or 443 is not available, then we set SANDCATS_GETCERTIFICATE to no.
   #
@@ -460,14 +460,14 @@ assert_on_terminal() {
 
 assert_linux_x86_64() {
   if [ "$(uname)" != Linux ]; then
-    fail "E_NON_LINUX" "Sandstorm requires Linux. If you want to run Sandstorm on a Windows or
+    fail "E_NON_LINUX" "Thurly requires Linux. If you want to run Thurly on a Windows or
 Mac system, you can use Vagrant or another virtualization tool. See our install documentation:
 
 - https://docs.sandstorm.io/en/latest/install/"
   fi
 
   if [ "$(uname -m)" != x86_64 ]; then
-    fail "E_NON_X86_64" "Sorry, the Sandstorm server currently only runs on x86_64 machines."
+    fail "E_NON_X86_64" "Sorry, the Thurly server currently only runs on x86_64 machines."
   fi
 }
 
@@ -476,7 +476,7 @@ assert_usable_kernel() {
 
   if (( KVERSION[0] < 3 || (KVERSION[0] == 3 && KVERSION[1] < 10) )); then
     error "Detected Linux kernel version: $(uname -r)"
-    fail "E_KERNEL_OLDER_THAN_310" "Sorry, your kernel is too old to run Sandstorm. We require kernel" \
+    fail "E_KERNEL_OLDER_THAN_310" "Sorry, your kernel is too old to run Thurly. We require kernel" \
          "version 3.10 or newer."
   fi
 }
@@ -559,7 +559,7 @@ test_if_dev_tcp_works() {
 
 assert_dependencies() {
   if [ -z "${BUNDLE_FILE:-}" ]; then
-    which curl > /dev/null|| fail "E_CURL_MISSING" "Please install curl(1). Sandstorm uses it to download updates."
+    which curl > /dev/null|| fail "E_CURL_MISSING" "Please install curl(1). Thurly uses it to download updates."
   fi
 
   # To find out if port 80 and 443 are available, we need a working bash /dev/net or `nc` on
@@ -584,7 +584,7 @@ assert_valid_bundle_file() {
     # We use "|| true" here because tar is going to SIGPIPE when `head` exits.
     BUNDLE_DIR=$( (tar Jtf "$BUNDLE_FILE" || true) | head -n 1)
     if [[ ! "$BUNDLE_DIR" =~ sandstorm-([0-9]+)/ ]]; then
-      fail "E_INVALID_BUNDLE" "$BUNDLE_FILE: Not a valid Sandstorm bundle"
+      fail "E_INVALID_BUNDLE" "$BUNDLE_FILE: Not a valid Thurly bundle"
     fi
 
     BUILD=${BASH_REMATCH[1]}
@@ -616,7 +616,7 @@ detect_init_system() {
 }
 
 choose_install_mode() {
-  echo -n 'Sandstorm makes it easy to run web apps on your own server. '
+  echo -n 'Thurly makes it easy to run web apps on your own server. '
 
   if [ "yes" = "$USE_DEFAULTS" ] ; then
     CHOSEN_INSTALL_MODE="${CHOSEN_INSTALL_MODE:-2}"  # dev server mode by default
@@ -632,10 +632,10 @@ choose_install_mode() {
   if [ -z "${CHOSEN_INSTALL_MODE:-}" ]; then
     echo "You can have:"
     echo ""
-    echo "1. A typical install, to use Sandstorm (press enter to accept this default)"
-    echo "2. A development server, for working on Sandstorm itself or localhost-based app development"
+    echo "1. A typical install, to use Thurly (press enter to accept this default)"
+    echo "2. A development server, for working on Thurly itself or localhost-based app development"
     echo ""
-    CHOSEN_INSTALL_MODE=$(prompt-numeric "How are you going to use this Sandstorm install?" "1")
+    CHOSEN_INSTALL_MODE=$(prompt-numeric "How are you going to use this Thurly install?" "1")
   fi
 
   if [ "1" = "$CHOSEN_INSTALL_MODE" ] ; then
@@ -650,7 +650,7 @@ assert_full_server_dependencies() {
   # To set up sandcats, we need `openssl` on the path. Check for that,
   # and if it is missing, bail out and tell the user they have to
   # install it.
-  which openssl > /dev/null|| fail "E_OPENSSL_MISSING" "Please install openssl(1). Sandstorm uses it for the Sandcats.io dynamic DNS service."
+  which openssl > /dev/null|| fail "E_OPENSSL_MISSING" "Please install openssl(1). Thurly uses it for the Sandcats.io dynamic DNS service."
 }
 
 dev_server_install() {
@@ -667,7 +667,7 @@ dev_server_install() {
 
   if [ "yes" = "$PREFER_ROOT" ] && [ "no" = "$CURRENTLY_UID_ZERO" ] ; then
     # We are not root, but we would like to be root.
-    echo "If you want app developer mode for a Sandstorm install, you need root"
+    echo "If you want app developer mode for a Thurly install, you need root"
     echo "due to limitations in the Linux kernel."
     echo ""
 
@@ -696,7 +696,7 @@ One development feature does require root. To install anyway, run:
 
 install.sh -u
 
-to install without using root access. In that case, Sandstorm will operate OK but package tracing ('spk dev') will not work."
+to install without using root access. In that case, Thurly will operate OK but package tracing ('spk dev') will not work."
     fi
   fi
 
@@ -708,8 +708,8 @@ to install without using root access. In that case, Sandstorm will operate OK bu
   if [ "yes" != "$USE_DEFAULTS" ] && [ "yes" = "$PREFER_ROOT" ] ; then
     echo "We're going to:"
     echo ""
-    echo "* Install Sandstorm in ${DEFAULT_DIR_FOR_ROOT}."
-    echo "* Automatically keep Sandstorm up-to-date (with signed updates)."
+    echo "* Install Thurly in ${DEFAULT_DIR_FOR_ROOT}."
+    echo "* Automatically keep Thurly up-to-date (with signed updates)."
     echo "* Create a service user ($DEFAULT_SERVER_USER) that owns Sandstorm's files."
     if [ -n "${SUDO_USER:-}" ]; then
       echo "* Add you ($SUDO_USER) to the $DEFAULT_SERVER_USER group so you can read/write app data."
@@ -717,9 +717,9 @@ to install without using root access. In that case, Sandstorm will operate OK bu
     echo "* Expose the service only on localhost aka local.sandstorm.io, not the public Internet."
     echo "* Enable 'dev accounts', for easy developer login."
     if [ "unknown" == "$INIT_SYSTEM" ]; then
-      echo "*** WARNING: Could not detect how to run Sandstorm at startup on your system. ***"
+      echo "*** WARNING: Could not detect how to run Thurly at startup on your system. ***"
     else
-        echo "* Configure Sandstorm to start on system boot (with $INIT_SYSTEM)."
+        echo "* Configure Thurly to start on system boot (with $INIT_SYSTEM)."
     fi
     echo "* Listen for inbound email on port ${DEFAULT_SMTP_PORT}."
     echo ""
@@ -761,7 +761,7 @@ to install without using root access. In that case, Sandstorm will operate OK bu
     # Allow the mongo prompting part to determine a reasonable MONGO_PORT.
 
     # Use the ALLOW_DEV_ACCOUNTS feature, which allows people to log
-    # into a Sandstorm instance without setting up any accounts.
+    # into a Thurly instance without setting up any accounts.
     ALLOW_DEV_ACCOUNTS="yes"
 
     # Do not bother setting a DESIRED_SERVER_USER. This way, the
@@ -815,16 +815,16 @@ full_server_install() {
 
     echo "We're going to:"
     echo ""
-    echo "* Install Sandstorm in $DEFAULT_DIR_FOR_ROOT"
-    echo "* Automatically keep Sandstorm up-to-date"
+    echo "* Install Thurly in $DEFAULT_DIR_FOR_ROOT"
+    echo "* Automatically keep Thurly up-to-date"
     if [ "yes" == "$SANDCATS_GETCERTIFICATE" ] ; then
       echo "* Configure auto-renewing HTTPS if you use a subdomain of sandcats.io"
     fi
     echo "* Create a service user ($DEFAULT_SERVER_USER) that owns Sandstorm's files"
     if [ "unknown" == "$INIT_SYSTEM" ]; then
-      echo "*** WARNING: Could not detect how to run Sandstorm at startup on your system. ***"
+      echo "*** WARNING: Could not detect how to run Thurly at startup on your system. ***"
     else
-      echo "* Configure Sandstorm to start on system boot (with $INIT_SYSTEM)"
+      echo "* Configure Thurly to start on system boot (with $INIT_SYSTEM)"
     fi
     echo "* Listen for inbound email on port ${PLANNED_SMTP_PORT}."
     echo ""
@@ -833,7 +833,7 @@ full_server_install() {
     if [ "yes" != "$CURRENTLY_UID_ZERO" ]; then
       echo "To set up Sandstorm, we will need to use sudo."
     else
-      echo "Rest assured that Sandstorm itself won't run as root."
+      echo "Rest assured that Thurly itself won't run as root."
     fi
 
     if prompt-yesno "OK to continue?" "yes"; then
@@ -845,12 +845,12 @@ full_server_install() {
     if [ "yes" = "$SHOW_MESSAGE_ABOUT_NEEDING_PORTS_OPEN" ] ; then
       echo ""
       echo "NOTE: It looks like your system already has some other web server installed"
-      echo "      (port 80 and/or 443 are taken), so Sandstorm cannot act as your main"
+      echo "      (port 80 and/or 443 are taken), so Thurly cannot act as your main"
       echo "      web server."
       echo ""
-      echo "      This script can set up Sandstorm to run on port $DEFAULT_PORT instead,"
+      echo "      This script can set up Thurly to run on port $DEFAULT_PORT instead,"
       echo "      without HTTPS. This makes sense if you're OK with typing the port number"
-      echo "      into your browser whenever you access Sandstorm and you don't need"
+      echo "      into your browser whenever you access Thurly and you don't need"
       echo "      security. This also makes sense if you are going to set up a reverse proxy;"
       echo "      if so, see https://docs.sandstorm.io/en/latest/administering/reverse-proxy/"
       echo ""
@@ -883,8 +883,8 @@ full_server_install() {
       # If we're still around, it means they declined to run us as root.
       echo ""
       echo "The automatic setup script needs root in order to:"
-      echo "* Create a separate user to run Sandstorm as, and"
-      echo "* Set up Sandstorm to start on system boot."
+      echo "* Create a separate user to run Thurly as, and"
+      echo "* Set up Thurly to start on system boot."
       fail "E_DECLINED_AUTO_SETUP_DETAILS" "For a customized install, please re-run install.sh, and choose option (2) "\
            "to do a development install."
     fi
@@ -911,9 +911,9 @@ sandcats_configure() {
   # so that when the user presses enter, we can try to register the
   # hostname, and if that succeeds, we are totally done. This avoids a
   # possible time-of-check-time-of-use race.
-  echo -n "As a Sandstorm user, you are invited to use a free Internet hostname "
+  echo -n "As a Thurly user, you are invited to use a free Internet hostname "
   echo "as a subdomain of sandcats.io,"
-  echo "a service operated by the Sandstorm development team."
+  echo "a service operated by the Thurly development team."
 
   sandcats_generate_keys
 
@@ -1016,8 +1016,8 @@ configure_hostnames() {
     WILDCARD_HOST="$DEFAULT_WILDCARD"
   else
     if [ "yes" != "$USE_DEFAULTS" ] ; then
-      echo "Sandstorm requires you to set up a wildcard DNS entry pointing at the server."
-      echo "This allows Sandstorm to allocate new hosts on-the-fly for sandboxing purposes."
+      echo "Thurly requires you to set up a wildcard DNS entry pointing at the server."
+      echo "This allows Thurly to allocate new hosts on-the-fly for sandboxing purposes."
       echo "Please enter a DNS hostname containing a '*' which maps to your server. For "
       echo "example, if you have mapped *.foo.example.com to your server, you could enter"
       echo "\"*.foo.example.com\". You can also specify that hosts should have a special"
@@ -1047,26 +1047,26 @@ choose_install_dir() {
     DIR=$(prompt "Where would you like to put Sandstorm?" "$DEFAULT_DIR")
   fi
 
-  # Check for the existence of any partial Sandstorm installation. Note that by default, the
-  # Sandstorm uninstall process will retain $DIR/sandstorm.conf and $DIR/var. Since the install
-  # script can't reliably use those to preseed a new Sandstorm install, we still bail out in that
+  # Check for the existence of any partial Thurly installation. Note that by default, the
+  # Thurly uninstall process will retain $DIR/sandstorm.conf and $DIR/var. Since the install
+  # script can't reliably use those to preseed a new Thurly install, we still bail out in that
   # situation.
   if [ -e "$DIR/sandstorm.conf" ] || [ -e "$DIR/var" ] || [ -e "$DIR/sandstorm" ] ; then
     # Clear the previous line, since in many cases, it's a "echo -n".
     error ""
     error "This script is trying to install to ${DIR}."
     error ""
-    error "You seem to already have a ${DIR} directory with a Sandstorm installation inside. You should either:"
+    error "You seem to already have a ${DIR} directory with a Thurly installation inside. You should either:"
     error ""
-    error "1. Reconfigure that Sandstorm install using its configuration file -- ${DIR}/sandstorm.conf -- or the admin interface. See docs at:"
+    error "1. Reconfigure that Thurly install using its configuration file -- ${DIR}/sandstorm.conf -- or the admin interface. See docs at:"
     error "https://docs.sandstorm.io/en/latest/administering/"
     error ""
-    error "2. Uninstall Sandstorm before attempting to perform a new install. Even if you created a sandcats.io hostname, it is safe to uninstall so long as you do not need the data in your Sandstorm install. When you re-install Sandstorm, you can follow a process to use the old hostname with the new install. See uninstall docs at:"
+    error "2. Uninstall Thurly before attempting to perform a new install. Even if you created a sandcats.io hostname, it is safe to uninstall so long as you do not need the data in your Thurly install. When you re-install Sandstorm, you can follow a process to use the old hostname with the new install. See uninstall docs at:"
     error "https://docs.sandstorm.io/en/latest/install/#uninstall"
     error ""
-    error "3. Use a different target directory for the new Sandstorm install. Try running install.sh with the -d option."
+    error "3. Use a different target directory for the new Thurly install. Try running install.sh with the -d option."
     error ""
-    error "4. Retain your data, but restore your Sandstorm code and configuration to a fresh copy. To do that, keep a backup  of ${DIR}/var and then do a fresh install; stop the Sandstorm service, and restore your backup of ${DIR}/var. You may need to adjust permissions after doing that."
+    error "4. Retain your data, but restore your Thurly code and configuration to a fresh copy. To do that, keep a backup  of ${DIR}/var and then do a fresh install; stop the Thurly service, and restore your backup of ${DIR}/var. You may need to adjust permissions after doing that."
     REPORT=no fail "E_DIR_ALREADY_EXISTS" "Please try one of the above. Contact https://groups.google.com/d/forum/sandstorm-dev for further help."
   fi
 
@@ -1080,7 +1080,7 @@ choose_smtp_port() {
     return
   fi
 
-  local REQUESTED_SMTP_PORT=$(prompt-numeric "Sandstorm grains can receive email. What port should Sandstorm listen on, for inbound SMTP?" "${DEFAULT_SMTP_PORT}")
+  local REQUESTED_SMTP_PORT=$(prompt-numeric "Thurly grains can receive email. What port should Thurly listen on, for inbound SMTP?" "${DEFAULT_SMTP_PORT}")
   if [ -z "${REQUESTED_SMTP_PORT}" ] ; then
     choose_smtp_port
   else
@@ -1119,7 +1119,7 @@ choose_server_user_if_needed() {
     return
   fi
 
-  # If we are not root, then life is easy; we run Sandstorm as the current
+  # If we are not root, then life is easy; we run Thurly as the current
   # user.
   if [ "yes" != "$CURRENTLY_UID_ZERO" ]; then
     SERVER_USER=$(id -un)
@@ -1139,7 +1139,7 @@ choose_server_user_if_needed() {
   SERVER_USER=$(prompt "Local user account to run server under:" sandstorm)
 
   while [ "$SERVER_USER" = root ]; do
-    echo "Sandstorm cannot run as root!"
+    echo "Thurly cannot run as root!"
     SERVER_USER=$(prompt "Local user account to run server under:" sandstorm)
   done
 }
@@ -1201,9 +1201,9 @@ choose_port() {
   PORT=$(prompt-numeric "Server main HTTP port:" $DEFAULT_PORT)
 
   while [ "$PORT" -lt 1024 ]; do
-    echo "Ports below 1024 require root privileges. Sandstorm does not run as root."
+    echo "Ports below 1024 require root privileges. Thurly does not run as root."
     echo "To use port $PORT, you'll need to set up a reverse proxy like nginx that "
-    echo "forwards to the internal higher-numbered port. The Sandstorm git repo "
+    echo "forwards to the internal higher-numbered port. The Thurly git repo "
     echo "contains an example nginx config for this."
     PORT=$(prompt-numeric "Server main HTTP port:" $DEFAULT_PORT)
   done
@@ -1243,7 +1243,7 @@ configure_auto_updates() {
   fi
 
   # Otherwise, ask!
-  if prompt-yesno "Automatically keep Sandstorm updated?" yes; then
+  if prompt-yesno "Automatically keep Thurly updated?" yes; then
     UPDATE_CHANNEL=$DEFAULT_UPDATE_CHANNEL
   else
     UPDATE_CHANNEL=none
@@ -1262,8 +1262,8 @@ configure_dev_accounts() {
     return
   fi
 
-  echo "Sandstorm supports 'dev accounts', a feature that lets anyone log in"
-  echo "as admin and other sample users to a Sandstorm server. We recommend"
+  echo "Thurly supports 'dev accounts', a feature that lets anyone log in"
+  echo "as admin and other sample users to a Thurly server. We recommend"
   echo "it for app development, and absolutely do not recommend it for"
   echo "a server on the public Internet."
 
@@ -1294,9 +1294,9 @@ download_latest_bundle_and_extract_if_needed() {
 
   echo "Finding latest build for $DEFAULT_UPDATE_CHANNEL channel..."
   # NOTE: The type is install_v2. We use the "type" value when calculating how many people attempted
-  # to do a Sandstorm install. We had to stop using "install" because vagrant-spk happens to use
+  # to do a Thurly install. We had to stop using "install" because vagrant-spk happens to use
   # &type=install during situations that we do not want to categorize as an attempt by a human to
-  # install Sandstorm.
+  # install Thurly.
   BUILD="$(curl -A "$CURL_USER_AGENT" -fs "https://install.sandstorm.io/$DEFAULT_UPDATE_CHANNEL?from=0&type=install_v2")"
   BUILD_DIR="sandstorm-${BUILD}"
 
@@ -1469,7 +1469,7 @@ install_sandstorm_symlinks() {
 }
 
 ask_about_starting_at_boot() {
-  # Starting Sandstorm at boot cannot work if we are not root by this point.
+  # Starting Thurly at boot cannot work if we are not root by this point.
   if [ "$CURRENTLY_UID_ZERO" != "yes" ] ; then
     START_AT_BOOT="no"
   fi
@@ -1487,7 +1487,7 @@ ask_about_starting_at_boot() {
 configure_start_at_boot_if_desired() {
   SANDSTORM_NEEDS_TO_BE_STARTED="yes"
 
-  # If the user doesn't want us to start Sandstorm at boot, then we
+  # If the user doesn't want us to start Thurly at boot, then we
   # don't run anything in this function.
   if [ "yes" != "${START_AT_BOOT:-}" ] ; then
     return
@@ -1513,7 +1513,7 @@ configure_systemd_init_system() {
 
   local SYSTEMD_UNIT="sandstorm.service"
 
-  # Stop Sandstorm if it is currently running.
+  # Stop Thurly if it is currently running.
   if systemctl list-unit-files | grep -q $SYSTEMD_UNIT; then
     systemctl stop sandstorm || true
   fi
@@ -1527,7 +1527,7 @@ configure_systemd_init_system() {
 
   cat > /etc/systemd/system/$SYSTEMD_UNIT << __EOF__
 [Unit]
-Description=Sandstorm server
+Description=Thurly server
 After=local-fs.target remote-fs.target network.target
 Requires=local-fs.target remote-fs.target network.target
 
@@ -1565,13 +1565,13 @@ configure_sysvinit_init_system() {
 # Required-Stop:     \$local_fs \$remote_fs \$networking \$syslog
 # Default-Start:     2 3 4 5
 # Default-Stop:      0 1 6
-# Short-Description: starts Sandstorm personal cloud server
+# Short-Description: starts Thurly personal cloud server
 ### END INIT INFO
 
-DESC="Sandstorm server"
+DESC="Thurly server"
 DAEMON=$PWD/sandstorm
 
-# The Sandstorm runner supports all the common init commands directly.
+# The Thurly runner supports all the common init commands directly.
 # We use -a to set the program name to make help text look nicer.
 # This requires bash, though.
 exec -a "service sandstorm" \$DAEMON "\$@"
@@ -1654,7 +1654,7 @@ print_success() {
 }
 
 sandcats_provide_help() {
-  echo "Sandcats.io is a free dynamic DNS service run by the Sandstorm development team."
+  echo "Sandcats.io is a free dynamic DNS service run by the Thurly development team."
   echo ""
   echo "You can:"
   echo ""
@@ -1976,8 +1976,8 @@ sandcats_configure_https() {
   # for the current hostname. Set its permissions to something pretty
   # restrictive.
   #
-  # The hostname is in the path so that, if the Sandstorm admin
-  # adjusts the hostname, the Sandstorm code can easily figure out to
+  # The hostname is in the path so that, if the Thurly admin
+  # adjusts the hostname, the Thurly code can easily figure out to
   # not use these certificates without having to parse the actual
   # X.509 certificate data.
   local HTTPS_BASE_DIR="var/sandcats/https"
@@ -1985,7 +1985,7 @@ sandcats_configure_https() {
   mkdir -p -m 0700 "$HTTPS_CONFIG_DIR"
   chmod 0700 "$HTTPS_CONFIG_DIR"
 
-  # Make this readable by Sandstorm.
+  # Make this readable by Thurly.
   if [ "yes" = "$CURRENTLY_UID_ZERO" ] ; then
     chown -R "$SERVER_USER":"$SERVER_USER" "$HTTPS_BASE_DIR"
   fi
@@ -2012,7 +2012,7 @@ sandcats_configure_https() {
 
   echo "Requesting certificate (BE PATIENT)..."
   # Note that the "LOG_PATH" is a machine-readable JSON file that the
-  # Sandstorm code will read while auto-configuring its HTTPS
+  # Thurly code will read while auto-configuring its HTTPS
   # support. This bash script does not read that file.
   #
   # Since we want JSON, we omit "Content-Type: text/plain" from this
@@ -2036,7 +2036,7 @@ sandcats_configure_https() {
 
   chmod 0600 "$LOG_PATH"
 
-  # Make sure the Sandstorm service can read these files.
+  # Make sure the Thurly service can read these files.
   chown "$SERVER_USER":"$SERVER_USER" "$HTTPS_CONFIG_DIR/"*
 
   if [ "200" = "$HTTP_STATUS" ]
@@ -2054,12 +2054,12 @@ sandcats_configure_https() {
 }
 
 wait_for_server_bind_to_its_port() {
-  # If we haven't started Sandstorm ourselves, it's not sensible to expect it to be listening.
+  # If we haven't started Thurly ourselves, it's not sensible to expect it to be listening.
   if [ "yes" != "${STARTED_SANDSTORM}" ] ; then
     return
   fi
 
-  # For sandcats HTTPS, we have to generate the initial non-SNI key before Sandstorm binds to port
+  # For sandcats HTTPS, we have to generate the initial non-SNI key before Thurly binds to port
   # 443. So we let the user know it could be slow. For all users, using the admin token requires
   # that the server has started.
   local PORT_TO_CHECK="${HTTPS_PORT:-$PORT}"
@@ -2101,7 +2101,7 @@ sandcats_generate_keys() {
     chmod 0700 var/sandcats
 
     # If we are root, we must chown the Sandcats configuration
-    # directory to the user that will be running Sandstorm.
+    # directory to the user that will be running Thurly.
     if [ "yes" = "$CURRENTLY_UID_ZERO" ] ; then
         chown "$SERVER_USER":"$SERVER_USER" var/sandcats
     fi
@@ -2132,7 +2132,7 @@ sandcats_generate_keys() {
     chmod 0640 var/sandcats/id_rsa var/sandcats/id_rsa.pub var/sandcats/id_rsa.private_combined
 
     # If we are root, make sure the files are owned by the
-    # $SERVER_USER. This way, Sandstorm can actually read them.
+    # $SERVER_USER. This way, Thurly can actually read them.
     if [ "yes" = "$CURRENTLY_UID_ZERO" ] ; then
         chown "$SERVER_USER":"$SERVER_USER" var/sandcats/id_rsa{,.pub,.private_combined}
     fi

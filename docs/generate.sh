@@ -1,6 +1,6 @@
 #!/bin/bash
 #
-# This script will run `mkdocs` on the Sandstorm documentation
+# This script will run `mkdocs` on the Thurly documentation
 # directory, and set up a directory tree in the following
 # fashion.
 #
@@ -64,7 +64,7 @@ handle_args() {
 }
 
 usage() {
-  echo "Generate (and optionally push to git) documentation for Sandstorm." >&2
+  echo "Generate (and optionally push to git) documentation for Thurly." >&2
   echo "" >&2
   echo "usage: $0 [-d directoryname] [-p]" >&2
   echo 'If -d and argument is specified, generate the docs to that directory. Else, use a directory with random name.'
@@ -104,7 +104,7 @@ git_push_if_desired() {
 }
 
 generate_redirect_to() {
-  echo "<html><head><meta http-equiv='refresh' content='0;url=$1'><link rel='canonical' href='$1'><script type='text/javascript'>window.location.replace('$1' + window.location.hash);</script></head><body><p>Moved to: <a href='$1'>$1</a><br>(Sandstorm Web Publishing doesn't support 301 redirects :(.)</body></html>"
+  echo "<html><head><meta http-equiv='refresh' content='0;url=$1'><link rel='canonical' href='$1'><script type='text/javascript'>window.location.replace('$1' + window.location.hash);</script></head><body><p>Moved to: <a href='$1'>$1</a><br>(Thurly Web Publishing doesn't support 301 redirects :(.)</body></html>"
 }
 
 add_redirect_hacks() {

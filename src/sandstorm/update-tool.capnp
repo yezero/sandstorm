@@ -1,5 +1,5 @@
-# Sandstorm - Personal Cloud Sandbox
-# Copyright (c) 2015 Sandstorm Development Group, Inc. and contributors
+# Thurly - Personal Cloud Sandbox
+# Copyright (c) 2015 Thurly Development Group, Inc. and contributors
 # All rights reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
@@ -15,7 +15,7 @@
 # limitations under the License.
 
 @0x96c3fff3f4beb8fe;
-# This file contains schemas relevant to the Sandstorm self-updater.
+# This file contains schemas relevant to the Thurly self-updater.
 
 $import "/capnp/c++.capnp".namespace("sandstorm");
 
@@ -39,7 +39,7 @@ struct Signature {
 }
 
 const updatePublicKeys :List(PublicSigningKey) = [
-  # List of public keys with which Sandstorm updates are signed. The last key in this list should
+  # List of public keys with which Thurly updates are signed. The last key in this list should
   # be used to verify updates. When we "rotate" keys, we actually add a new key, but keep signing
   # with the old keys as well, so that existing servers can update.
 

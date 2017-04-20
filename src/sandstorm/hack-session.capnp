@@ -1,5 +1,5 @@
-# Sandstorm - Personal Cloud Sandbox
-# Copyright (c) 2014 Sandstorm Development Group, Inc. and contributors
+# Thurly - Personal Cloud Sandbox
+# Copyright (c) 2014 Thurly Development Group, Inc. and contributors
 # All rights reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
@@ -58,7 +58,7 @@ interface HackSessionContext @0xe14c1f5321159b8f
   # side anyway.
   #
   # This interface is very limited currently -- e.g. it does not support arbitrary headers, POSTs,
-  # etc. If you need any of these things, talk to the Sandstorm developers and we'll consider
+  # etc. If you need any of these things, talk to the Thurly developers and we'll consider
   # adding some more hacks, but, again, this will all go away once the Powerbox is implemented.
 
   getUserAddress @2 () -> Email.EmailAddress;
@@ -74,7 +74,7 @@ interface HackSessionContext @0xe14c1f5321159b8f
   # There are 3 cases here that are seamlessly handled by the platform
   # 1. If the URL is a local webkey, return a wrapped version of the UiView that respects user
   # permissions
-  # 2. If the URL is a remote webkey (i.e. a different Sandstorm server), set up an ApiSession
+  # 2. If the URL is a remote webkey (i.e. a different Thurly server), set up an ApiSession
   # that sends the Authorization header correctly. We wrap it in a UiVew so that this is seamless.
   # Some day, we'll connect via Cap'n Proto instead, and actually return the remote UiView
   # verbatim.

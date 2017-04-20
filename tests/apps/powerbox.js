@@ -1,5 +1,5 @@
-// Sandstorm - Personal Cloud Sandbox
-// Copyright (c) 2014 Sandstorm Development Group, Inc. and contributors
+// Thurly - Personal Cloud Sandbox
+// Copyright (c) 2014 Thurly Development Group, Inc. and contributors
 // All rights reserved.
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
@@ -143,7 +143,7 @@ module.exports["Test Powerbox embedded request flow"] = function (browser) {
     .init()
     .loginDevAccount()
     .uploadTestApp()
-    .assert.containsText("#grainTitle", "Untitled Sandstorm Test App instance")
+    .assert.containsText("#grainTitle", "Untitled Thurly Test App instance")
     .url(function (grainUrl) {
       var grainId = grainUrl.value.split("/").pop();
       var cardSelector = ".powerbox-card button[data-card-id=\"grain-" + grainId + "\"]";
@@ -154,7 +154,7 @@ module.exports["Test Powerbox embedded request flow"] = function (browser) {
         .waitForElementVisible(actionSelector, short_wait)
         .click(actionSelector)
         .waitForElementVisible("#grainTitle", medium_wait)
-        .assert.containsText("#grainTitle", "Untitled Sandstorm Test App instance")
+        .assert.containsText("#grainTitle", "Untitled Thurly Test App instance")
         .grainFrame()
         .waitForElementPresent("#do-powerbox-request", medium_wait)
         .click("#do-powerbox-request")

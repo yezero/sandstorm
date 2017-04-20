@@ -21,7 +21,7 @@ docs about the `vagrant-spk enter-grain` command](debugging.md).
 
 ## Clicking a link in the app does not open the link
 
-Sandstorm apps cannot navigate the user away from the app. Therefore, app
+Thurly apps cannot navigate the user away from the app. Therefore, app
 authors should set `target="_blank"` on links within the app.
 
 A convenient way to do this automatically for all links in the page is to add
@@ -33,9 +33,9 @@ the following HTML to your document's `<head>`:
 
 ## A blank white screen renders where the app should be
 
-This can happen when a Sandstorm app in development doesn't know its
+This can happen when a Thurly app in development doesn't know its
 correct base URL and serves a HTTP redirect away from the Sandstorm
-server. Sandstorm blocks that redirect, resulting in a white grain
+server. Thurly blocks that redirect, resulting in a white grain
 frame.
 
 To find out if you're running into this issue, open the Javascript
@@ -45,7 +45,7 @@ very likely you are seeing this error.
 
 If possible, configure the app to use a base URL of `''`, literally
 the empty string. Then it will send HTTP redirects without
-specifying a base URL. If that isn't possible, Sandstorm apps should
+specifying a base URL. If that isn't possible, Thurly apps should
 look at the `Host:` header for a base URL.
 
 ## KeyError: 'getpwuid(): uid not found: 1000'
@@ -71,8 +71,8 @@ permitted so long as it follows the HTTP specification's requirement that the he
 formatted with double-quote marks, like: `ETag: "value"` or `ETag: W/"value"`.
 
 Some apps use strings without quotation marks in their ETag headers, such as `ETag: value`, which
-violates the HTTP standard.  Sandstorm does not permit invalid header values because ambiguity can
-lead to security problems. Therefore, Sandstorm will drop invalid `ETag` headers and will write a
+violates the HTTP standard.  Thurly does not permit invalid header values because ambiguity can
+lead to security problems. Therefore, Thurly will drop invalid `ETag` headers and will write a
 warning to the grain's debug log. Usually, this does not affect app functionality, other than to
 reduce the effectiveness of the browser's cache.
 
@@ -83,12 +83,12 @@ causing the request to fail.
 
 ## SPK is missing files, but app works in dev mode
 
-Sandstorm packages, when "packed" into an SPK file, must contain all files needed by the app. Those
+Thurly packages, when "packed" into an SPK file, must contain all files needed by the app. Those
 files are typically specified in `.sandstorm/sandstorm-files.list` and detected when the app runs in
 dev mode. Further files can be specified via an `alwaysInclude` directive in
 `.sandstorm/sandstorm-pkgdef.capnp`. Some apps hard-code all files in
 `.sandstorm/sandstorm-files.list` rather than relying on auto-detection. In any event, if the app
-needs a file that is missing in the Sandstorm package, the file must be added.
+needs a file that is missing in the Thurly package, the file must be added.
 
 Note that paths begin without a slash character. For example, to include `/path/to/include`, one
 types `path/to/include` into the `alwaysInclude` line or the `sandstorm-files.list` file.

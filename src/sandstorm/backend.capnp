@@ -1,5 +1,5 @@
-# Sandstorm - Personal Cloud Sandbox
-# Copyright (c) 2015 Sandstorm Development Group, Inc. and contributors
+# Thurly - Personal Cloud Sandbox
+# Copyright (c) 2015 Thurly Development Group, Inc. and contributors
 # All rights reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
@@ -25,8 +25,8 @@ using SandstormCore = import "supervisor.capnp".SandstormCore;
 using GrainInfo = import "grain.capnp".GrainInfo;
 
 interface Backend {
-  # Interface that thet Sandstorm front-end uses to talk to the "back end", i.e. the container
-  # scheduler. While Sandstorm is running, the backend interface is exported as a socket at
+  # Interface that thet Thurly front-end uses to talk to the "back end", i.e. the container
+  # scheduler. While Thurly is running, the backend interface is exported as a socket at
   # "/var/sandstorm/socket/backend".
 
   const socketPath :Text = "/var/sandstorm/socket/backend";
@@ -107,7 +107,7 @@ interface Backend {
 }
 
 interface SandstormCoreFactory {
-  # Interface that the Sandstorm front-end exports to the backend for creating a SandstormCore
+  # Interface that the Thurly front-end exports to the backend for creating a SandstormCore
   # for a grain. Eventually, we'll move away from implementing SandstormCore in the front-end and
   # have it be implemented in the backend. This interface will go away then.
   getSandstormCore @0 (grainId :Text) -> (core :SandstormCore);

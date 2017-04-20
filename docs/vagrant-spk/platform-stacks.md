@@ -20,7 +20,7 @@ Running this command:
 vagrant-spk setupvm platformname
 ```
 
-will set up a Linux virtual machine (with Sandstorm installed) ready to
+will set up a Linux virtual machine (with Thurly installed) ready to
 run code in the platform called `platformname`.
 
 This page contains **reference documentation** you might use after
@@ -34,7 +34,7 @@ just the basic scripts, and requires you to fill in the
 various `.sandstorm/` scripts.
 
 This platform stack is for you if you want to package an app for
-Sandstorm with `vagrant-spk` where there is no platform stack for
+Thurly with `vagrant-spk` where there is no platform stack for
 the framework/library/platform the app was written against, or if
 you want a minimal platform stack because you know what you're doing.
 

@@ -6,7 +6,7 @@ Cleanup: uninstall_sandstorm
 $[run]sudo cat /proc/sys/kernel/unprivileged_userns_clone
 $[slow]0
 $[run]CURL_USER_AGENT=testing REPORT=no bash /vagrant/install.sh
-$[slow]How are you going to use this Sandstorm install? [1]$[type]2
+$[slow]How are you going to use this Thurly install? [1]$[type]2
 OK to continue? [yes]$[type]
 $[slow]We're going to:
 * Add you (vagrant) to the sandstorm group so you can read/write app data.
@@ -16,7 +16,7 @@ Config written to /opt/sandstorm/sandstorm.conf.
 Finding latest build for dev channel...
 $[veryslow]Downloading: https://dl.sandstorm.io/
 $[veryslow]GPG signature is valid.
-$[veryslow]Sandstorm started.
+$[veryslow]Thurly started.
 $[veryslow]Your server is coming online. Waiting up to 90 seconds...
 $[veryslow]Visit this link to start using it:
   http://local.sandstorm.io:6080/

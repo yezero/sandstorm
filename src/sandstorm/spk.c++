@@ -1,5 +1,5 @@
-// Sandstorm - Personal Cloud Sandbox
-// Copyright (c) 2014 Sandstorm Development Group, Inc. and contributors
+// Thurly - Personal Cloud Sandbox
+// Copyright (c) 2014 Thurly Development Group, Inc. and contributors
 // All rights reserved.
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
@@ -14,7 +14,7 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-// This is a tool for manipulating Sandstorm .spk files.
+// This is a tool for manipulating Thurly .spk files.
 
 #include "spk.h"
 #include <kj/debug.h>
@@ -156,7 +156,7 @@ private:
 };
 
 class SpkTool: public AbstractMain {
-  // Main class for the Sandstorm spk tool.
+  // Main class for the Thurly spk tool.
 
 public:
   SpkTool(kj::ProcessContext& context): context(context) {
@@ -174,18 +174,18 @@ public:
 
   kj::MainFunc getMain() override {
     return addCommonOptions(OptionSet::ALL,
-        kj::MainBuilder(context, "Sandstorm version " SANDSTORM_VERSION,
-          "Tool for building and checking Sandstorm package files.",
-          "Sandstorm packages are compressed archives cryptographically signed in order to prove "
+        kj::MainBuilder(context, "Thurly version " SANDSTORM_VERSION,
+          "Tool for building and checking Thurly package files.",
+          "Thurly packages are compressed archives cryptographically signed in order to prove "
           "that upgrades came from the same source. This tool will help you create and sign "
           "packages. This tool can also let you run an app in development mode on a local "
-          "Sandstorm instance, without actually building a package, and can automatically "
+          "Thurly instance, without actually building a package, and can automatically "
           "determine your app's dependencies.\n"
           "\n"
           "This tool should be run inside your app's source directory. It expects to find a file "
           "in the current directory called `sandstorm-pkgdef.capnp` which should define a "
           "constant named `pkgdef` of type `PackageDefinition` as defined in "
-          "`/sandstorm/package.capnp`. You can usually find `package.capnp` in your Sandstorm "
+          "`/sandstorm/package.capnp`. You can usually find `package.capnp` in your Thurly "
           "installation, e.g.:\n"
           "  /opt/sandstorm/latest/usr/include/sandstorm/package.capnp\n"
           "The file contains comments describing the package definition format, which is based "
@@ -450,7 +450,7 @@ private:
 
   kj::MainFunc getKeygenMain() {
     return addCommonOptions(OptionSet::KEYS,
-        kj::MainBuilder(context, "Sandstorm version " SANDSTORM_VERSION,
+        kj::MainBuilder(context, "Thurly version " SANDSTORM_VERSION,
             "Create a new app ID and signing key and store it to your keyring. It will then be "
             "used by the `pack` command to sign your app package. Note that when starting a new "
             "app, it's better to use `spk init`. Only use `keygen` when you need to replace the "
@@ -482,7 +482,7 @@ private:
 
   kj::MainFunc getListkeysMain() {
     return addCommonOptions(OptionSet::KEYS_READONLY,
-        kj::MainBuilder(context, "Sandstorm version " SANDSTORM_VERSION,
+        kj::MainBuilder(context, "Thurly version " SANDSTORM_VERSION,
             "List the app IDs corresponding to each key on your keyring.")
         .callAfterParsing(KJ_BIND_METHOD(*this, doListkeys)))
         .build();
@@ -504,7 +504,7 @@ private:
 
   kj::MainFunc getGetkeyMain() {
     return addCommonOptions(OptionSet::KEYS_READONLY,
-        kj::MainBuilder(context, "Sandstorm version " SANDSTORM_VERSION,
+        kj::MainBuilder(context, "Thurly version " SANDSTORM_VERSION,
             "Get the the keys with the given app IDs from your keyring and write them as "
             "Cap'n Proto message to stdout. The output is a valid keyring containing only the "
             "IDs requested. Note that keyrings can be combined via concatenation, so someone "
@@ -532,8 +532,8 @@ private:
 
   kj::MainFunc getInitMain() {
     return addCommonOptions(OptionSet::KEYS,
-        kj::MainBuilder(context, "Sandstorm version " SANDSTORM_VERSION,
-            "Initialize the current directory as a Sandstorm package source directory by "
+        kj::MainBuilder(context, "Thurly version " SANDSTORM_VERSION,
+            "Initialize the current directory as a Thurly package source directory by "
             "writing a `sandstorm-pkgdef.capnp` with a newly-created app ID. <command> "
             "specifies the command used to start your app.")
         .addOptionWithArg({'o', "output"}, KJ_BIND_METHOD(*this, setOutputFile), "<filename>",
@@ -544,7 +544,7 @@ private:
         .addOptionWithArg({'p', "port"}, KJ_BIND_METHOD(*this, setPortForInit), "<port>",
             "Set the HTTP port on which your server runs -- that is, the port which <command> "
             "will bind to. Your app will be set up to use Sandstorm's HTTP bridge instead of "
-            "using the raw Sandstorm APIs.")
+            "using the raw Thurly APIs.")
         .addOptionWithArg({'I', "source-path"}, KJ_BIND_METHOD(*this, addSourcePathForInit), "<path>",
             "Add <path> to the path from which files are pulled into the binary. You may "
             "specify this multiple times to set up a search path. If no paths are given, the "
@@ -554,7 +554,7 @@ private:
             "Arrange to include all contents of the directories specified with -I rather than "
             "determine needed files dynamically while running in dev mode.")
         .addOption({'r', "raw"}, KJ_BIND_METHOD(*this, setUsesRawApi),
-            "Specifies that your app directly implements the raw Sandstorm API and does "
+            "Specifies that your app directly implements the raw Thurly API and does "
             "not require the HTTP bridge.")
         .expectOneOrMoreArgs("-- <command>", KJ_BIND_METHOD(*this, addCommandArg))
         .callAfterParsing(KJ_BIND_METHOD(*this, doInit)))
@@ -592,7 +592,7 @@ private:
       if (*i < 1 || *i > 65535) {
         return "port out-of-range";
       } else if (*i < 1024) {
-        return "Ports under 1024 are priveleged and cannot be used by a Sandstorm app.";
+        return "Ports under 1024 are priveleged and cannot be used by a Thurly app.";
       }
       httpPort = *i;
       return true;
@@ -656,7 +656,7 @@ private:
           "                      \"etc/nsswitch.conf\", \"etc/resolv.conf\" ]\n"
           "        # You probably don't want the app pulling files from these places,\n"
           "        # so we hide them. Note that /dev, /var, and /tmp are implicitly\n"
-          "        # hidden because Sandstorm itself provides them.\n"
+          "        # hidden because Thurly itself provides them.\n"
           "      )\n");
     } else {
       searchPath = kj::str(
@@ -782,18 +782,18 @@ private:
         "        # signature of the following ASCII message (not including the quotes, no newlines, and\n"
         "        # replacing <app-id> with the standard base-32 text format of the app's ID):\n"
         "        #\n"
-        "        # \"I am the author of the Sandstorm.io app with the following ID: <app-id>\"\n"
+        "        # \"I am the author of the Thurly.io app with the following ID: <app-id>\"\n"
         "        #\n"
         "        # You can create a signature file using `gpg` like so:\n"
         "        #\n"
-        "        #     echo -n \"I am the author of the Sandstorm.io app with the following ID: <app-id>\" | gpg --sign > pgp-signature\n"
+        "        #     echo -n \"I am the author of the Thurly.io app with the following ID: <app-id>\" | gpg --sign > pgp-signature\n"
         "        #\n"
         "        # Further details including how to set up GPG and how to use keybase.io can be found\n"
         "        # at https://docs.sandstorm.io/en/latest/developing/publishing-apps/#verify-your-identity\n"
         "\n"
         "        upstreamAuthor = \"Example App Team\",\n"
         "        # Name of the original primary author of this app, if it is different from the person who\n"
-        "        # produced the Sandstorm package. Setting this implies that the author connected to the PGP\n"
+        "        # produced the Thurly package. Setting this implies that the author connected to the PGP\n"
         "        # signature only \"packaged\" the app for Sandstorm, rather than developing the app.\n"
         "        # Remove this line if you consider yourself as the author of the app.\n"
         "      ),\n"
@@ -863,7 +863,7 @@ private:
           "  # a directory here, its entire contents will be included recursively.\n",
           "\n"
           "  #bridgeConfig = (\n"
-          "  #  # Used for integrating permissions and roles into the Sandstorm shell\n"
+          "  #  # Used for integrating permissions and roles into the Thurly shell\n"
           "  #  # and for sandstorm-http-bridge to pass to your app.\n"
           "  #  # Uncomment this block and adjust the permissions and roles to make\n"
           "  #  # sense for your app.\n"
@@ -902,7 +902,7 @@ private:
           "  #      # a \"viewer\" role and an \"editor\" role\n"
           "  #      (\n"
           "  #        title = (defaultText = \"editor\"),\n"
-          "  #        # Name of the role.  Shown in the Sandstorm UI to indicate which users have which roles.\n"
+          "  #        # Name of the role.  Shown in the Thurly UI to indicate which users have which roles.\n"
           "  #\n"
           "  #        permissions  = [true],\n"
           "  #        # An array indicating which permissions this role carries.\n"
@@ -956,7 +956,7 @@ private:
 
   kj::MainFunc getPackMain() {
     return addCommonOptions(OptionSet::ALL_READONLY,
-        kj::MainBuilder(context, "Sandstorm version " SANDSTORM_VERSION,
+        kj::MainBuilder(context, "Thurly version " SANDSTORM_VERSION,
             "Package the app as an spk, writing it to <output>.")
         .expectArg("<output>", KJ_BIND_METHOD(*this, setSpkfile))
         .callAfterParsing(KJ_BIND_METHOD(*this, doPack)))
@@ -983,7 +983,7 @@ private:
       context.exitError(kj::str(
           "App exceeds uncompressed size limit of ", APP_SIZE_LIMIT >> 30, " GiB. This limit "
           "exists for the safety of hosts, but if you feel there is a strong case for allowing "
-          "larger apps, please contact the Sandstorm developers."));
+          "larger apps, please contact the Thurly developers."));
     }
 
     // Hash it.
@@ -1125,7 +1125,7 @@ private:
 
         if (size >= (1ull << 29)) {
           context.exitError(kj::str(target, ": file too large. The spk format currently only "
-            "supports files up to 512MB in size. Please let the Sandstorm developers know "
+            "supports files up to 512MB in size. Please let the Thurly developers know "
             "if you have a strong reason for needing larger files."));
         }
 
@@ -1320,7 +1320,7 @@ private:
   kj::String dirname;
 
   kj::MainFunc getUnpackMain() {
-    return kj::MainBuilder(context, "Sandstorm version " SANDSTORM_VERSION,
+    return kj::MainBuilder(context, "Thurly version " SANDSTORM_VERSION,
             "Check that <spkfile>'s signature is valid.  If so, unpack it to <outdir> and "
             "print the app ID.  If <outdir> is not specified, it will be "
             "chosen by removing the suffix \".spk\" from the input file name.")
@@ -1595,7 +1595,7 @@ private:
       kj::Function<kj::String(kj::StringPtr problem)>& validationError,
       kj::Maybe<uid_t> sandboxUid = nullptr) {
     auto expectedContent = kj::str(
-        "I am the author of the Sandstorm.io app with the following ID: ",
+        "I am the author of the Thurly.io app with the following ID: ",
         appIdString);
 
     char keyfile[] = "/tmp/spk-pgp-key.XXXXXX";
@@ -1810,7 +1810,7 @@ private:
   // "verify" command
 
   kj::MainFunc getVerifyMain() {
-    return kj::MainBuilder(context, "Sandstorm version " SANDSTORM_VERSION,
+    return kj::MainBuilder(context, "Thurly version " SANDSTORM_VERSION,
             "Check that <spkfile>'s signature is valid. If so, print the app ID to stdout.")
         .addOption({'d', "details"}, KJ_BIND_METHOD(*this, setDetailed),
             // `spk verify` now prints details by default, but the --details switch is left here for
@@ -1887,15 +1887,15 @@ private:
 
   kj::MainFunc getDevMain() {
     return addCommonOptions(OptionSet::ALL_READONLY,
-        kj::MainBuilder(context, "Sandstorm version " SANDSTORM_VERSION,
-            "Register an under-development app with a local Sandstorm server for testing "
+        kj::MainBuilder(context, "Thurly version " SANDSTORM_VERSION,
+            "Register an under-development app with a local Thurly server for testing "
             "purposes, and optionally output a list of all files it depends on. While this "
             "command is running, the app will replace the current package for the app's ID "
             "installed on the server. Note that you do not need the private key corresponding "
             "to the app ID for this, so that the key need not be distributed to all developers. "
             "Your user account must be a member of the server's group, typically \"sandstorm\".")
         .addOptionWithArg({'s', "server"}, KJ_BIND_METHOD(*this, setServerDir), "<dir>",
-            "Connect to the Sandstorm server installed in <dir>. Default is to detect based on "
+            "Connect to the Thurly server installed in <dir>. Default is to detect based on "
             "the location of the spk executable or, failing that, the location pointed to by "
             "the installed init script.")
         .addOptionWithArg({'m', "mount"}, KJ_BIND_METHOD(*this, setMountDir), "<dir>",
@@ -1970,7 +1970,7 @@ private:
       }
 
       if (serverBinary == nullptr) {
-        return "Couldn't find Sandstorm server installation. Please use -s to specify it.";
+        return "Couldn't find Thurly server installation. Please use -s to specify it.";
       }
     }
 
@@ -2080,7 +2080,7 @@ private:
             .exclusiveJoin(eventPort.onSignal(SIGTERM))
             .exclusiveJoin(eventPort.onSignal(SIGHUP))
             .then([&](siginfo_t&& sig) {
-          context.exitError("Received second signal. Aborting. You may want to restart Sandstorm.");
+          context.exitError("Received second signal. Aborting. You may want to restart Thurly.");
         });
       }).eagerlyEvaluate(nullptr);
 
@@ -2096,7 +2096,7 @@ private:
       if (connection == nullptr) {
         context.warning("App mounted. Ctrl+C to disconnect.");
       } else {
-        context.warning("App is now available from Sandstorm server. Ctrl+C to disconnect.");
+        context.warning("App is now available from Thurly server. Ctrl+C to disconnect.");
       }
 
       bindFuse(eventPort, fuseFd, kj::mv(rootNode), options)
@@ -2207,8 +2207,8 @@ private:
 
   kj::MainFunc getPublishMain() {
     return addCommonOptions(OptionSet::KEYS_READONLY,
-        kj::MainBuilder(context, "Sandstorm version " SANDSTORM_VERSION,
-            "Publish an SPK to the Sandstorm app index, or check the status of a "
+        kj::MainBuilder(context, "Thurly version " SANDSTORM_VERSION,
+            "Publish an SPK to the Thurly app index, or check the status of a "
             "previous submission.")
         .addOption({'s', "status"}, [this]() {publishState = nullptr; return true;},
             "Just check the review status of a previously-submitted SPK.")
@@ -2223,7 +2223,7 @@ private:
             "Removes a package listing. If the package was published, it is un-published. If the "
             "package was still pending review, the review is canceled.")
         .addOptionWithArg({"webkey"}, KJ_BIND_METHOD(*this, setPublishWebkey), "<webkey>",
-            "Submit to the index at the given webkey. If not specified, the main Sandstorm "
+            "Submit to the index at the given webkey. If not specified, the main Thurly "
             "app index is assumed.")
         .expectArg("<spkfile>", KJ_BIND_METHOD(*this, doPublish)))
         .build();

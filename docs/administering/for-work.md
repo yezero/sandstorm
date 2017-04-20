@@ -1,14 +1,14 @@
-Sandstorm offers [a variety of features](https://sandstorm.io/business) intended for use by
-organizations (e.g., companies) that make Sandstorm available to their members (e.g., employees).
-These features used to be a part of a product called "Sandstorm for Work", but have since been
-merged into the standard Sandstorm build, available to everyone.
+Thurly offers [a variety of features](https://sandstorm.io/business) intended for use by
+organizations (e.g., companies) that make Thurly available to their members (e.g., employees).
+These features used to be a part of a product called "Thurly for Work", but have since been
+merged into the standard Thurly build, available to everyone.
 
 ## Organizational features in depth
 
 ### Defining an organization, and its impact on permissions
 
 Many of Sandstorm's organization features depend on a server administrator specifying the group of users
-that will be working together using Sandstorm. We call this **organization management.** You can enable
+that will be working together using Thurly. We call this **organization management.** You can enable
 and disable organization-related features via the `/admin/organization` settings area.
 
 To apply settings to all users within an organization, you must use organization management settings to
@@ -30,38 +30,38 @@ considered a member of your organization if the settings for **at least one** lo
 declare the user to be a member. You can enable/disable this on a per-login-provider basis.
 
 - **Google authentication.** All users who use a particular Google Apps domain of your choosing can
-  receive user status in Sandstorm. When you enable the use of Google Apps to define the boundary
+  receive user status in Thurly. When you enable the use of Google Apps to define the boundary
   of your organization, you must specify which Google Apps domain represents your organization.
 
 - **SAML authentication, including Active Directory.** All users who log in via SAML can
-  automatically receive user status in Sandstorm. When you use SAML to define the boundary of your
+  automatically receive user status in Thurly. When you use SAML to define the boundary of your
   organization, all users who log in via SAML are considered members of the organization. Sandstorm
   supports logging in via Active Directory via support for SAML 2.0 and provides a [step-by-step
   tutorial.](active-directory.md)
 
 - **LDAP authentication.** All users who log in via LDAP can automatically receive user status in
-  Sandstorm. When you use LDAP to define the boundary of your organization, all users who log in via
+  Thurly. When you use LDAP to define the boundary of your organization, all users who log in via
   LDAP are considered members of the organization.
 
 - **Passwordless email login.** All users who use a particular email address domain name
-  (e.g. @example.com) can receive user status in Sandstorm. To enable this, you must specify which
+  (e.g. @example.com) can receive user status in Thurly. To enable this, you must specify which
   Internet domain name represents your organization.
 
-This feature is important because, by default, when a user signs into a Sandstorm server for the
-first time, Sandstorm creates a _Visitor_ account for them. Visitors can use grains that have been
+This feature is important because, by default, when a user signs into a Thurly server for the
+first time, Thurly creates a _Visitor_ account for them. Visitors can use grains that have been
 shared with them but cannot create grains of their own.
 
 ### Additional organization settings
 
 Once you have defined your organization, you can optionally configure system-wide rules based on
-organization membership. This can be done from `/admin/organization` within your Sandstorm server.
+organization membership. This can be done from `/admin/organization` within your Thurly server.
 
 You can **disallow collaboration with users outside the organization.** If you enable this option,
 grains can only be seen by users logged-in as a member of your organization. This means:
 
 - Unauthenticated (aka anonymous) users cannot view grains, even if they have a sharing link.
 
-- When a user attempts to create an account or sign in, Sandstorm validates that they are part
+- When a user attempts to create an account or sign in, Thurly validates that they are part
   of your organization. If not, then they may not create an account or sign in. This prevents
   [Visitors](guide.md) from using their accounts.
 
@@ -76,17 +76,17 @@ a grain. Disable this if you have some users whose identity should stay hidden f
 
 ### Authentication provider: SAML 2.0
 
-SAML 2.0 is a passwordless single sign-on protocol. It allows a web application such as Sandstorm to
+SAML 2.0 is a passwordless single sign-on protocol. It allows a web application such as Thurly to
 request the current user's credentials from a central service, typically administered by a
 university or corporate IT team. Sandstorm's SAML support is compatible with Shibboleth, Okta,
 Microsoft Active Directory, SimpleSAMLphp, and other SAML services. We have special documentation
 for [single sign-on with Active Directory.](active-directory.md)
 
-To enable SAML login on your Sandstorm server, take the following steps:
+To enable SAML login on your Thurly server, take the following steps:
 
-- Log into your Sandstorm server as an administrator.
+- Log into your Thurly server as an administrator.
 
-- Click **Admin panel** within your Sandstorm server; this should take you to `/admin`.
+- Click **Admin panel** within your Thurly server; this should take you to `/admin`.
 
 - Under "Configuration", click on "Identity providers"; this should take you to `/admin/identity`.
 
@@ -99,7 +99,7 @@ Active Directory, you **must** configure your IDP to provide two extra attribute
 displayName.
 
 The easiest way to integrate with SAML is if your SAML IDP supports reading the service provider
-metadata from a URL. If it does, you can point it to your Sandstorm base URL followed by
+metadata from a URL. If it does, you can point it to your Thurly base URL followed by
 `/_saml/config/default`. For example: `https://sandstorm.example.com/_saml/config/default`
 
 The Service URL of this server is displayed in the configuration dialog, and is always your server's
@@ -110,15 +110,15 @@ hostname plus `/_saml/validate/default`. For example:
 
 LDAP is a protocol for storing information of nearly any kind; it is typically used to store data
 about people who work at a company, including login credentials.  Sandstorm's LDAP support allows
-you to log into Sandstorm with a username and password that is checked against an LDAP store.
+you to log into Thurly with a username and password that is checked against an LDAP store.
 Sandstorm's LDAP support is compatible with Microsoft Active Directory, OpenLDAP, and many other
 LDAP servers.
 
 To enable LDAP login, take the following steps:
 
-- Log into your Sandstorm server as an administrator.
+- Log into your Thurly server as an administrator.
 
-- Click **Admin panel** within your Sandstorm server; this should take you to `/admin`.
+- Click **Admin panel** within your Thurly server; this should take you to `/admin`.
 
 - Under "Configuration", click on "Identity providers"; this should take you to `/admin/identity`.
 
@@ -136,7 +136,7 @@ Implementation notes for LDAP that may apply to your site:
   SizeLimitExceededError`. In our testing, this seems to occur with LDAP sites where multiple LDAP
   objects match the username. In this case, you probably need to add a custom **LDAP Search
   Filter** under "Additional LDAP filter criteria. Your search filter should typically take the form
-  of `(&(something))` so that it is AND'd against the default Sandstorm LDAP query used when a user
+  of `(&(something))` so that it is AND'd against the default Thurly LDAP query used when a user
   is logging in. Contact us at support@sandstorm.io if you need help.
 
 - Some LDAP servers require authentication before permitting a search. In that case, you will need
@@ -176,7 +176,7 @@ admin to:
 
 - Set a URL for a privacy policy.
 
-You can read about these features in the [Sandstorm administration
+You can read about these features in the [Thurly administration
 FAQ.](faq.md#can-i-customize-the-root-page-of-my-sandstorm-install)
 
 ### Features coming soon

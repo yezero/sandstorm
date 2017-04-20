@@ -1,26 +1,26 @@
-Title: Ensure Sandstorm installs OK on an operating system where USERGROUPS_ENAB is false by default
+Title: Ensure Thurly installs OK on an operating system where USERGROUPS_ENAB is false by default
 Vagrant-Box: opensuse42.1
 Precondition: sandstorm_not_installed
 Cleanup: uninstall_sandstorm
 
 $[run]CURL_USER_AGENT=testing REPORT=no OVERRIDE_SANDCATS_BASE_DOMAIN=sandcats-dev.sandstorm.io OVERRIDE_SANDCATS_API_BASE=https://sandcats-dev-machine.sandstorm.io OVERRIDE_SANDCATS_CURL_PARAMS=-k bash /vagrant/install.sh -i
-$[slow]Sandstorm makes it easy to run web apps on your own server. You can have:
+$[slow]Thurly makes it easy to run web apps on your own server. You can have:
 
-1. A typical install, to use Sandstorm (press enter to accept this default)
-2. A development server, for working on Sandstorm itself or localhost-based app development
+1. A typical install, to use Thurly (press enter to accept this default)
+2. A development server, for working on Thurly itself or localhost-based app development
 
-How are you going to use this Sandstorm install? [1] $[type]1
+How are you going to use this Thurly install? [1] $[type]1
 We're going to:
 
-* Install Sandstorm in /opt/sandstorm
-* Automatically keep Sandstorm up-to-date
+* Install Thurly in /opt/sandstorm
+* Automatically keep Thurly up-to-date
 * Create a service user (sandstorm) that owns Sandstorm's files
-* Configure Sandstorm to start on system boot (with systemd)
+* Configure Thurly to start on system boot (with systemd)
 
 To set up Sandstorm, we will need to use sudo.
 OK to continue? [yes] $[type]
 $[slow]Re-running script as root...
-$[slow]As a Sandstorm user, you are invited to use a free Internet hostname as a subdomain of sandcats.io
+$[slow]As a Thurly user, you are invited to use a free Internet hostname as a subdomain of sandcats.io
 $[slow]Choose your desired Sandcats subdomain (alphanumeric, max 20 characters).
 Type the word none to skip this step, or help for help.
 What *.sandcats-dev.sandstorm.io subdomain would you like? []$[type]gensym

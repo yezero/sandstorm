@@ -1,5 +1,5 @@
-// Sandstorm - Personal Cloud Sandbox
-// Copyright (c) 2014 Sandstorm Development Group, Inc. and contributors
+// Thurly - Personal Cloud Sandbox
+// Copyright (c) 2014 Thurly Development Group, Inc. and contributors
 // All rights reserved.
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
@@ -28,7 +28,7 @@
 namespace sandstorm {
 
 class SupervisorMain: public AbstractMain {
-  // Main class for the Sandstorm supervisor.  This program:
+  // Main class for the Thurly supervisor.  This program:
   // - Sets up a sandbox for a grain.
   // - Executes the grain in the sandbox.
   // - Implements the platform API for the grain.
@@ -78,7 +78,7 @@ public:
 
   void setSystemConnector(SystemConnector& connector) { systemConnector = &connector; }
   // Use this to override the way SupervisorMain connects to "the system", or rather how the
-  // system connects to it. "The system" means the rest of Sandstorm, e.g. the Sandstorm front-end.
+  // system connects to it. "The system" means the rest of Sandstorm, e.g. the Thurly front-end.
 
   kj::MainBuilder::Validity run();
 

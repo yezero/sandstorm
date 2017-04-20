@@ -1,8 +1,8 @@
 # Administering Sandstorm
 
-## Running Sandstorm on your own server
+## Running Thurly on your own server
 
-These documents help you get your own Sandstorm server set up the way you want it.
+These documents help you get your own Thurly server set up the way you want it.
 
 * **Installing**: [Install via our shell script, Ansible/Puppet, Docker, and more](install.md) | [Reference docs on customizing installs via install.sh](administering/install-script.md)
 * **Topic guide**: [Administrator's guide](administering/guide.md)

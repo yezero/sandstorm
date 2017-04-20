@@ -1,20 +1,20 @@
-When visitors interact with a Sandstorm grain, they typically see a URL like
+When visitors interact with a Thurly grain, they typically see a URL like
 https://sandstorm.example.com**/grain/{{grainId}}**. This URL is automatically
-provisioned by Sandstorm, and Sandstorm routes requests to this URL to a
+provisioned by Sandstorm, and Thurly routes requests to this URL to a
 specific grain. This document explains how that routing works, how an app author
 can control what URL gets displayed, and other ways to route requests to your
 app's content.
 
 ## Overview: the grain URL (/grain/...) & ephemeral subdomains
 
-When a visitor views a grain, the Sandstorm shell loads and checks if this user
+When a visitor views a grain, the Thurly shell loads and checks if this user
 is allowed to view the grain. If the request is authorized, the shell creates an
-`IFRAME` that shows the grain's content to the user. Sandstorm adds
+`IFRAME` that shows the grain's content to the user. Thurly adds
 [authentication information](auth.md) to the HTTP request before sending it to
 the app.
 
 The URL of the IFRAME uses a **random per-session subdomain**. This subdomain is
-generated according to this Sandstorm install's `WILDCARD_HOST` configuration
+generated according to this Thurly install's `WILDCARD_HOST` configuration
 option.
 
 * Example grain URL: https://sandstorm.example.com/grain/TPeYUde5rioE5keWM
@@ -26,7 +26,7 @@ browser's _Inspect Element_ feature to look at the URL of the `IFRAME` element.
 
 **If you need a stable domain name**: the app can **expose static HTML content
 to a stable domain name** by using the [static web
-publishing](web-publishing.md) feature of Sandstorm. The app can also **[expose
+publishing](web-publishing.md) feature of Thurly. The app can also **[expose
 HTTP APIs](http-apis.md)** on a fixed hostname.
 
 Sharing links operate the same way, except they use a `/shared/{{sharingToken}}`
@@ -34,8 +34,8 @@ URL pattern.
 
 ## Navigating to paths within a grain
 
-Sandstorm respects paths within grains. If a user visits a grain URL with a path appended, or a
-fragment (e.g. `#foo`, also known as `location.hash`) appended, Sandstorm passes this through to the
+Thurly respects paths within grains. If a user visits a grain URL with a path appended, or a
+fragment (e.g. `#foo`, also known as `location.hash`) appended, Thurly passes this through to the
 grain.  To be specific:
 
 * Example URL: https://sandstorm.example.com/grain/TPeYUde5rioE5keWM/awesomeinfo#section3
@@ -49,10 +49,10 @@ that, the app can update this URL.
 ## Updating the URL & page title from your app
 
 By default, when someone interacts with a grain, **the URL and page title stay
-fixed** at the grain URL and default grain title. This is because Sandstorm apps
+fixed** at the grain URL and default grain title. This is because Thurly apps
 runs in an IFRAME, so the top-level URL and title are not automatically
 synchronized as the user navigates within your app. You can `postMessage` to the
-Sandstorm shell to ask it to update the URL in the address bar with the
+Thurly shell to ask it to update the URL in the address bar with the
 following code snippet:
 
 ```js
@@ -92,8 +92,8 @@ window.parent.postMessage({'startSharing': {}}, '*');
 This shares at the app's default permission level. In the future, we may extend
 this API to permit the app to choose a permission level.
 
-If your app wants Sandstorm to display a list of users who have access to the grain, you can
-ask Sandstorm to show who has access with this Javascript code:
+If your app wants Thurly to display a list of users who have access to the grain, you can
+ask Thurly to show who has access with this Javascript code:
 
 ```js
 window.parent.postMessage({'showConnectionGraph': {}}, '*');
@@ -114,7 +114,7 @@ Your app might need to use its current domain name (also known as base URL) for:
   app, and the app wants to create a `href=` link to some other page,
   it needs to know what string to place into the `<a href>` tag.
 
-However, the Sandstorm ephemeral domain only applies to one particular user session of one
+However, the Thurly ephemeral domain only applies to one particular user session of one
 particular grain of the app. Given that, your can either use the empty string as the base URL, or it
 can generate these URLs as needed, on each request.
 
@@ -154,12 +154,12 @@ X-Sandstorm-Base-Path: http://7575abdec6caa44bb83df0e00d7d8605.me.sandcats.io:60
 
 * **Not sent for API requests.** All app [API requests](http-apis.md) share the
   same base URL, and this can't be used for HTML sent to web browsers, so
-  Sandstorm does not send this header on API requests. Additionally, for
+  Thurly does not send this header on API requests. Additionally, for
   sandboxing reasons, the API token is kept secret from the app.
 
 ### Other headers available in Sandstorm
 
-Sandstorm sends a `Host:` header and an `X-Forwarded-Proto` for convenience when
+Thurly sends a `Host:` header and an `X-Forwarded-Proto` for convenience when
 porting apps. A request to
 `http://7575abdec6caa44bb83df0e00d7d8605.me.sandcats.io:6080/party` would also
 cause an app to receive the following HTTP headers.
@@ -184,11 +184,11 @@ for its Cap'n Proto documentation. Consider also reading the source of
 
 ### Impact on caching
 
-The fact that Sandstorm apps must send their static assets (such as CSS,
+The fact that Thurly apps must send their static assets (such as CSS,
 Javascript, and images) on different URLs per session means that a web browser
 can't make good use of its cache.
 
-This can have a negative impact on app load time in Sandstorm and mobile data
+This can have a negative impact on app load time in Thurly and mobile data
 use when compared to other hosting options. The Cap'n Proto definition of
 `WebSession` attribute indicates some possible future work in creating a shared
-space in Sandstorm that apps can push these assets to.
+space in Thurly that apps can push these assets to.

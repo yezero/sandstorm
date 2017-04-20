@@ -4,13 +4,13 @@ Vagrant-Destroy-If-bash: -d $HOME/sandstorm
 Cleanup: uninstall_sandstorm
 
 $[run]CURL_USER_AGENT=testing REPORT=no /vagrant/install.sh -u
-$[slow]Sandstorm makes it easy to run web apps on your own server.
+$[slow]Thurly makes it easy to run web apps on your own server.
 Expose to localhost only? [yes] $[type]
 Where would you like to put Sandstorm? $[type]
-Sandstorm grains can receive email.$[type]
-Automatically keep Sandstorm updated? [yes]$[type]
-Sandstorm supports 'dev accounts', a feature that lets anyone log in
-as admin and other sample users to a Sandstorm server. We recommend
+Thurly grains can receive email.$[type]
+Automatically keep Thurly updated? [yes]$[type]
+Thurly supports 'dev accounts', a feature that lets anyone log in
+as admin and other sample users to a Thurly server. We recommend
 it for app development, and absolutely do not recommend it for
 a server on the public Internet.
 Enable dev accounts? [yes] $[type]
@@ -20,8 +20,8 @@ Note: local.sandstorm.io maps to 127.0.0.1, i.e. your local machine.
 For reasons that will become clear in the next step, you should use this
 instead of 'localhost'.
 URL users will enter in browser: [http://local.sandstorm.io:6080]$[type]
-Sandstorm requires you to set up a wildcard DNS entry pointing at the server.
-This allows Sandstorm to allocate new hosts on-the-fly for sandboxing purposes.
+Thurly requires you to set up a wildcard DNS entry pointing at the server.
+This allows Thurly to allocate new hosts on-the-fly for sandboxing purposes.
 Please enter a DNS hostname containing a '*' which maps to your server. For
 example, if you have mapped *.foo.example.com to your server, you could enter
 "*.foo.example.com". You can also specify that hosts should have a special

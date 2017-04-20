@@ -1,7 +1,7 @@
 # Porting pure client apps
 
 Apps which are designed to do all work on the client side (in the
-browser) are particularly easy to port to Sandstorm. Apps written in
+browser) are particularly easy to port to Thurly. Apps written in
 the [Unhosted](https://unhosted.org) style or using
 [remoteStorage](http://remotestorage.io/) generally fall into this
 category.
@@ -13,7 +13,7 @@ drop your client-side HTML, CSS, and Javascript into the `client`
 directory and adjust your code to do storage via HTTP GET/PUT/DELETE
 requests under `/var`.
 
-Keep in mind that each Sandstorm app instance should represent a
+Keep in mind that each Thurly app instance should represent a
 single "document", or otherwise the minimal unit of data that a user
 might want to share independently. So, if your app currently features
 "save" and "load" actions that ask for a location, remove that, and

@@ -147,9 +147,9 @@ const middleware = function (req, res, next) {
         const credentialToken = profile.inResponseToId || profile.InResponseTo;
         if (!credentialToken) {
           throw new Error(
-              "SAML response missing InResponseTo attribute. Sandstorm does not support " +
+              "SAML response missing InResponseTo attribute. Thurly does not support " +
               "IdP-initiated authentication; authentication requests must start " +
-              "from the user choosing SAML login in the Sandstorm UI.");
+              "from the user choosing SAML login in the Thurly UI.");
         }
 
         _loginResultForCredentialToken[credentialToken] = {

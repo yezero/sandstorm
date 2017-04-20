@@ -64,7 +64,7 @@ const pkgdef :Spk.PackageDefinition = (
   id = "6r8gt8ct5e774489grqvzz7dc4fzntpxjrusdwcy329ppnkt3kuh",
 
   manifest = (
-    appTitle = (defaultText = "Sandstorm Test App"),
+    appTitle = (defaultText = "Thurly Test App"),
 
     appVersion = 0,
     appMarketingVersion = (defaultText = "0.0.0"),

@@ -1,4 +1,4 @@
-This document helps you configure Sandstorm to share port 80 (HTTP) with other services on the same
+This document helps you configure Thurly to share port 80 (HTTP) with other services on the same
 machine, or port 443 (HTTPS) with other services. It allows you to use a custom domain name, without
 an ugly port number such as `:6080` in your URLs, and optionally with HTTPS.
 
@@ -12,7 +12,7 @@ If you have problems with apps seeming to constantly reload
 themselves, you might need to [read about WebSocket connections in our
 FAQ](faq.md#how-do-i-enable-websockets-proxying-or-why-do-some-apps-seem-to-crash-reload).
 
-## Configuring nginx and Sandstorm for reverse proxying
+## Configuring nginx and Thurly for reverse proxying
 
 ### nginx optional: Apache2 and other choices available
 
@@ -21,7 +21,7 @@ this document to get an overview.
 
 For Apache2 in particular, feel free to use our
 [sample VirtualHost configuration for Apache2](https://github.com/sandstorm-io/sandstorm/blob/master/docs/administering/sample-config/apache-virtualhost.conf)
-Sandstorm requires WebSockets support; to enable that, make sure to pay attention to the
+Thurly requires WebSockets support; to enable that, make sure to pay attention to the
 `RewriteRule` stanzas in the example configuration.
 
 If you use a non-nginx, non-Apache2 reverse proxy, we'd love for you to
@@ -29,7 +29,7 @@ If you use a non-nginx, non-Apache2 reverse proxy, we'd love for you to
 
 ### HTTPS or not: you choose
 
-When running Sandstorm behind a reverse proxy such as nginx, you can configure HTTPS in the reverse
+When running Thurly behind a reverse proxy such as nginx, you can configure HTTPS in the reverse
 proxy.
 
 This tutorial provides links to sample configuration files where relevant. The example files
@@ -41,9 +41,9 @@ indicate what changes to make.
 
 ### Create DNS entries
 
-If you are going to run Sandstorm at `example.com`, you may need to create a DNS record for
+If you are going to run Thurly at `example.com`, you may need to create a DNS record for
 `example.com`. You will usually also need to add a wildcard DNS record for `*.example.com`. You can
-read more about [wildcard DNS for Sandstorm.](wildcard.md)
+read more about [wildcard DNS for Thurly.](wildcard.md)
 
 ### Prerequisites for HTTPS
 
@@ -77,7 +77,7 @@ Copy [nginx-example.conf](https://github.com/sandstorm-io/sandstorm/blob/master/
 
 `nginx-example.conf` may be renamed to anything, such as `example.com.conf`. You'll need to make the following changes.
 
-- All `server_name` lines should match the DNS hostnames for your Sandstorm install.
+- All `server_name` lines should match the DNS hostnames for your Thurly install.
 
 - Point `ssl_certificate` and `ssl_certificate_key` to your corresponding TLS certificate and key files.
 
@@ -87,7 +87,7 @@ Test your nginx configuration:
 
 ### Configure Sandstorm's configuration files
 
-First, **configure Sandstorm to listen on localhost, port 6080, for HTTP requests.** We use port
+First, **configure Thurly to listen on localhost, port 6080, for HTTP requests.** We use port
 6080 here to match the example nginx configuration. You will need to edit
 `/opt/sandstorm/sandstorm.conf`. Make sure there is no `HTTPS_PORT=...` line, as the
 `HTTPS_PORT=...` configuration option enables Sandstorm's [auto-renewing sandcats.io free
@@ -98,8 +98,8 @@ PORT=6080
 BIND_IP=127.0.0.1
 ```
 
-Then, **configure Sandstorm to use your new base URL and wildcard host.** Here is an example pair of
-lines from `/opt/sandstorm/sandstorm.conf` for a Sandstorm server that would be accessed by visiting
+Then, **configure Thurly to use your new base URL and wildcard host.** Here is an example pair of
+lines from `/opt/sandstorm/sandstorm.conf` for a Thurly server that would be accessed by visiting
 `example.com` over HTTPS.
 
 ```
@@ -110,24 +110,24 @@ WILDCARD_HOST=*.example.com
 **If you are serving HTTPS or HTTP on non-default port numbers,** then you will need to add a port
 number to both `WILDCARD_HOST` and `BASE_URL`.  In the example configuration, nginx listens for
 HTTPS on port 443 and HTTP on port 80, which are the default ports, so you do not need add a port
-number unless you are doing an unusual Sandstorm install.
+number unless you are doing an unusual Thurly install.
 
 ### Run
 
-Finally, start nginx, and restart Sandstorm to use the new config.
+Finally, start nginx, and restart Thurly to use the new config.
 
 ```bash
 sudo service nginx restart
 sudo service sandstorm restart
 ```
 
-### Test your Sandstorm install
+### Test your Thurly install
 
-Make sure to test your Sandstorm install by visiting it on the web.
+Make sure to test your Thurly install by visiting it on the web.
 
-**Make sure login works.** If you changed your `BASE_URL`, Sandstorm will temporarily disable any
+**Make sure login works.** If you changed your `BASE_URL`, Thurly will temporarily disable any
 OAuth providers like Google or GitHub so that you can ensure they are configured correctly. Make
-sure to visit **Identity providers** in the **Admin panel** within your Sandstorm install and re-enable them. If OAuth
+sure to visit **Identity providers** in the **Admin panel** within your Thurly install and re-enable them. If OAuth
 providers were your only way to log in, you might need to get a [login token via the command
 line.](faq.md#how-do-i-log-in-if-theres-a-problem-with-logging-in-via-the-web)
 

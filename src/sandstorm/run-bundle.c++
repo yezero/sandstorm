@@ -1,5 +1,5 @@
-// Sandstorm - Personal Cloud Sandbox
-// Copyright (c) 2014 Sandstorm Development Group, Inc. and contributors
+// Thurly - Personal Cloud Sandbox
+// Copyright (c) 2014 Thurly Development Group, Inc. and contributors
 // All rights reserved.
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
@@ -430,9 +430,9 @@ private:
 // =======================================================================================
 
 class RunBundleMain {
-  // Main class for the Sandstorm bundle runner.  This is a convenience tool for running the
-  // Sandstorm binary bundle, which is a packaged chroot environment containing everything needed
-  // to run a Sandstorm server.  Just unpack and run!
+  // Main class for the Thurly bundle runner.  This is a convenience tool for running the
+  // Thurly binary bundle, which is a packaged chroot environment containing everything needed
+  // to run a Thurly server.  Just unpack and run!
 
   struct Config;
 
@@ -449,7 +449,7 @@ public:
   }
 
   kj::MainFunc getMain() {
-    static const char* VERSION = "Sandstorm version " SANDSTORM_VERSION;
+    static const char* VERSION = "Thurly version " SANDSTORM_VERSION;
 
     {
       auto programName = context.getProgramName();
@@ -466,18 +466,18 @@ public:
     }
 
     return kj::MainBuilder(context, VERSION,
-            "Controls the Sandstorm server.\n\n"
+            "Controls the Thurly server.\n\n"
             "Something not working? Check the logs in SANDSTORM_HOME/var/log.")
         .addSubCommand("start",
             [this]() {
-              return kj::MainBuilder(context, VERSION, "Starts the Sandstorm server (default).")
+              return kj::MainBuilder(context, VERSION, "Starts the Thurly server (default).")
                   .callAfterParsing(KJ_BIND_METHOD(*this, start))
                   .build();
             },
             "Start the sandstorm server.")
         .addSubCommand("stop",
             [this]() {
-              return kj::MainBuilder(context, VERSION, "Stops the Sandstorm server.")
+              return kj::MainBuilder(context, VERSION, "Stops the Thurly server.")
                   .callAfterParsing(KJ_BIND_METHOD(*this, stop))
                   .build();
             },
@@ -485,7 +485,7 @@ public:
         .addSubCommand("start-fe",
             [this]() {
               return kj::MainBuilder(context, VERSION,
-                    "Starts the Sandstorm front-end after it has previously been stopped using "
+                    "Starts the Thurly front-end after it has previously been stopped using "
                     "the `stop-fe` command.")
                   .callAfterParsing(KJ_BIND_METHOD(*this, startFe))
                   .build();
@@ -494,7 +494,7 @@ public:
         .addSubCommand("stop-fe",
             [this]() {
               return kj::MainBuilder(context, VERSION,
-                    "Stops the Sandstorm front-end, but leaves Mongo running. Useful when you "
+                    "Stops the Thurly front-end, but leaves Mongo running. Useful when you "
                     "want to run the front-end in dev mode in front of the existing database "
                     "and grains.")
                   .callAfterParsing(KJ_BIND_METHOD(*this, stopFe))
@@ -504,23 +504,23 @@ public:
         .addSubCommand("status",
             [this]() {
               return kj::MainBuilder(context, VERSION,
-                      "Checks whether Sandstorm is running. Prints the pid and exits successfully "
+                      "Checks whether Thurly is running. Prints the pid and exits successfully "
                       "if so; exits with an error otherwise.")
                   .callAfterParsing(KJ_BIND_METHOD(*this, status))
                   .build();
             },
-            "Check if Sandstorm is running.")
+            "Check if Thurly is running.")
         .addSubCommand("restart",
             [this]() {
-              return kj::MainBuilder(context, VERSION, "Restarts Sandstorm server.")
+              return kj::MainBuilder(context, VERSION, "Restarts Thurly server.")
                   .callAfterParsing(KJ_BIND_METHOD(*this, restart))
                   .build();
             },
-            "Restart Sandstorm server.")
+            "Restart Thurly server.")
         .addSubCommand("mongo",
             [this]() {
               return kj::MainBuilder(context, VERSION,
-                  "Runs MongoDB shell, connecting to the already-running Sandstorm server.")
+                  "Runs MongoDB shell, connecting to the already-running Thurly server.")
                   .callAfterParsing(KJ_BIND_METHOD(*this, mongo))
                   .build();
             },
@@ -528,7 +528,7 @@ public:
         .addSubCommand("update",
             [this]() {
               return kj::MainBuilder(context, VERSION,
-                      "Updates the Sandstorm platform to a new version. If <release> is provided "
+                      "Updates the Thurly platform to a new version. If <release> is provided "
                       "and specifies a bundle file (something like sandstorm-1234.tar.xz) it is "
                       "used as the update. If <release> is a channel name, e.g. \"dev\", we "
                       "securely check the web for an update. If <release> is not provided, we "
@@ -537,7 +537,7 @@ public:
                   .callAfterParsing(KJ_BIND_METHOD(*this, update))
                   .build();
             },
-            "Update the Sandstorm platform.")
+            "Update the Thurly platform.")
         .addSubCommand("spk",
             [this]() {
               alternateMain = getSpkMain(context);
@@ -547,8 +547,8 @@ public:
         .addSubCommand("continue",
             [this]() {
               return kj::MainBuilder(context, VERSION,
-                      "For internal use only: Continues running Sandstorm after an update. "
-                      "This command is invoked by the Sandstorm server itself. Do not run it "
+                      "For internal use only: Continues running Thurly after an update. "
+                      "This command is invoked by the Thurly server itself. Do not run it "
                       "directly.")
                   .addOption({"userns"}, [this]() { unsharedUidNamespace = true; return true; },
                       "Pass this flag if the parent has already set up and entered a UID "
@@ -582,13 +582,13 @@ public:
         .addSubCommand("uninstall",
             [this]() {
               return kj::MainBuilder(context, VERSION,
-                      "Uninstalls Sandstorm.")
+                      "Uninstalls Thurly.")
                   .addOption({"delete-user-data"}, [this]() { deleteUserData = true; return true; },
                       "Also delete all user data.")
                   .callAfterParsing(KJ_BIND_METHOD(*this, uninstall))
                   .build();
             },
-            "Uninstall Sandstorm.")
+            "Uninstall Thurly.")
         .build();
   }
 
@@ -608,7 +608,7 @@ public:
       if (fcntl(pidfile, F_SETLK, &lock) < 0) {
         int error = errno;
         if (error == EACCES || error == EAGAIN) {
-          context.exitInfo(kj::str("Sandstorm is already running.  PID = ", readAll(pidfile)));
+          context.exitInfo(kj::str("Thurly is already running.  PID = ", readAll(pidfile)));
         } else {
           KJ_FAIL_SYSCALL("fcntl(pidfile, F_SETLK)", error);
         }
@@ -645,7 +645,7 @@ public:
         }
 
         // Exit success.
-        context.exitInfo(kj::str("Sandstorm started. PID = ", mainPid));
+        context.exitInfo(kj::str("Thurly started. PID = ", mainPid));
         return true;
       }
 
@@ -662,7 +662,7 @@ public:
     // Lock the pidfile and make sure it still belongs to us.
     //
     // We need to wait for the parent process to release its lock, so we use F_SETLKW.
-    // However, if another Sandstorm server is started simultaneously and manages to steal
+    // However, if another Thurly server is started simultaneously and manages to steal
     // ownership, we want to detect this and exit, so we take a shared (read-only) lock.
     {
       struct flock lock;
@@ -678,7 +678,7 @@ public:
       pid_t pidfilePid = KJ_ASSERT_NONNULL(parseUInt(trim(readAll(pidfile)), 10));
       if (pidfilePid != mainPid) {
         context.exitInfo(kj::str(
-            "Oops, Sandstorm PID ", pidfilePid, " just started. "
+            "Oops, Thurly PID ", pidfilePid, " just started. "
             "PID ", mainPid, " exiting in deference."));
       }
     }
@@ -698,7 +698,7 @@ public:
     // Write time to log.
     time_t now;
     time(&now);
-    context.warning(kj::str("** Starting Sandstorm at: ", ctime(&now)));
+    context.warning(kj::str("** Starting Thurly at: ", ctime(&now)));
 
     // Detach from controlling terminal and make ourselves session leader.
     KJ_SYSCALL(setsid());
@@ -769,7 +769,7 @@ public:
   }
 
   bool doStop() {
-    // Stop Sandstorm. Don't return until it's stopped. Returns false if it wasn't running to start
+    // Stop Thurly. Don't return until it's stopped. Returns false if it wasn't running to start
     // with.
     KJ_ASSERT(changedDir);
 
@@ -831,9 +831,9 @@ public:
   kj::MainBuilder::Validity stop() {
     changeToInstallDir();
     if (doStop()) {
-      context.exitInfo("Sandstorm server stopped.");
+      context.exitInfo("Thurly server stopped.");
     } else {
-      context.exitInfo("Sandstorm is not running.");
+      context.exitInfo("Thurly is not running.");
     }
   }
 
@@ -852,14 +852,14 @@ public:
     KJ_IF_MAYBE(pf, openPidfile()) {
       pidfile = kj::mv(*pf);
     } else {
-      context.exitInfo("Sandstorm is not running.");
+      context.exitInfo("Thurly is not running.");
     }
 
     pid_t pid;
     KJ_IF_MAYBE(p, getRunningPid(pidfile)) {
       pid = *p;
     } else {
-      context.exitInfo("Sandstorm is not running.");
+      context.exitInfo("Thurly is not running.");
     }
 
     union sigval sigval;
@@ -873,9 +873,9 @@ public:
     changeToInstallDir();
 
     KJ_IF_MAYBE(pid, getRunningPid()) {
-      context.exitInfo(kj::str("Sandstorm is running; PID = ", *pid));
+      context.exitInfo(kj::str("Thurly is running; PID = ", *pid));
     } else {
-      context.exitError("Sandstorm is not running.");
+      context.exitError("Thurly is not running.");
     }
   }
 
@@ -886,16 +886,16 @@ public:
       KJ_SYSCALL(kill(*pid, SIGHUP));
       context.exitInfo("Restart request sent.");
     } else {
-      context.exitError("Sandstorm is not running.");
+      context.exitError("Thurly is not running.");
     }
   }
 
   kj::MainBuilder::Validity mongo() {
     changeToInstallDir();
 
-    // Verify that Sandstorm is running.
+    // Verify that Thurly is running.
     if (getRunningPid() == nullptr) {
-      context.exitError("Sandstorm is not running.");
+      context.exitError("Thurly is not running.");
     }
 
     const Config config = readConfig();
@@ -941,7 +941,7 @@ public:
 
     KJ_IF_MAYBE(pid, getRunningPid()) {
       KJ_SYSCALL(kill(*pid, SIGHUP));
-      context.exitInfo("Update complete; restarting Sandstorm.");
+      context.exitInfo("Update complete; restarting Thurly.");
     } else {
       context.exitInfo("Update complete.");
     }
@@ -990,14 +990,14 @@ public:
 
     // Make sure server is stopped.
     if (doStop()) {
-      context.warning("Sandstorm stopped.");
+      context.warning("Thurly stopped.");
     } else {
-      context.warning("Sandstorm is not running.");
+      context.warning("Thurly is not running.");
     }
 
     KJ_SYSCALL(chdir(sandstormHome.cStr()));
 
-    // Make extra-sure we're in a Sandstorm directory.
+    // Make extra-sure we're in a Thurly directory.
     KJ_ASSERT(access("sandstorm", F_OK) >= 0 &&
               access("sandstorm.conf", F_OK) >= 0 &&
               access("latest", F_OK) >= 0 &&
@@ -1007,8 +1007,8 @@ public:
 
     bool hasCustomUser = fileHasLine("sandstorm.conf", "SERVER_USER=sandstorm");
 
-    // Delete Sandstorm bundles.
-    context.warning("Deleting installed Sandstorm bundles...");
+    // Delete Thurly bundles.
+    context.warning("Deleting installed Thurly bundles...");
     static const kj::StringPtr BUNDLE_PREFIX = "sandstorm-";
     for (auto& file: listDirectory(".")) {
       if (file.startsWith(BUNDLE_PREFIX)) {
@@ -1043,21 +1043,21 @@ public:
 
     if (runningAsRoot) {
       // Delete system-installed stuff. Be careful to verify that these files actually point at
-      // the installation of Sandstorm that we're removing, not some other installation that might
+      // the installation of Thurly that we're removing, not some other installation that might
       // be present on the machine.
 
-      bool seemsLikePrimarySandstorm = false;
+      bool seemsLikePrimaryThurly = false;
 
       // Remove `sandstorm` and `spk` command prefixes. Note that for historical reasons there are
       // a few different places these might point, so we only check that they point somewhere under
-      // our Sandstorm install directory.
+      // our Thurly install directory.
       auto symlinkTargetPrefix = kj::str(sandstormHome, "/");
 
       static const kj::StringPtr SANDSTORM_SYMLINK = "/usr/local/bin/sandstorm";
       if (symlinkPointsInto(SANDSTORM_SYMLINK, symlinkTargetPrefix)) {
         context.warning("Removing sandstorm command...");
         KJ_SYSCALL(unlink(SANDSTORM_SYMLINK.cStr()));
-        seemsLikePrimarySandstorm = true;
+        seemsLikePrimaryThurly = true;
       }
 
       static const kj::StringPtr SPK_SYMLINK = "/usr/local/bin/spk";
@@ -1066,7 +1066,7 @@ public:
         KJ_SYSCALL(unlink(SPK_SYMLINK.cStr()));
       }
 
-      // SysV initscript. Remove if it inits this Sandstorm installation.
+      // SysV initscript. Remove if it inits this Thurly installation.
       static const kj::StringPtr INITSCRIPT_FILE = "/etc/init.d/sandstorm";
       auto initscriptLine = kj::str("DAEMON=", sandstormHome, "/sandstorm");
       if (fileHasLine(INITSCRIPT_FILE, initscriptLine)) {
@@ -1075,7 +1075,7 @@ public:
         system("update-rc.d sandstorm remove");
       }
 
-      // systemd service file. Remove if it inits this Sandstorm installation.
+      // systemd service file. Remove if it inits this Thurly installation.
       static const kj::StringPtr SYSTEMD_FILE = "/etc/systemd/system/sandstorm.service";
       auto systemdLine = kj::str("ExecStart=", sandstormHome, "/sandstorm start");
       if (fileHasLine(SYSTEMD_FILE, systemdLine)) {
@@ -1098,7 +1098,7 @@ public:
         // Also check if the non-sysctl.d sysctl.conf was modified.
         if (fileHasLine("/etc/sysctl.conf",
             "# Enable non-root users to create sandboxes (needed by Sandstorm).")) {
-          context.warning("WARNING: /etc/sysctl.conf was modified by Sandstorm. Please edit "
+          context.warning("WARNING: /etc/sysctl.conf was modified by Thurly. Please edit "
                           "it manually if you wish to undo these changes.");
         }
 
@@ -1112,12 +1112,12 @@ public:
       }
     }
 
-    // Attempt to remove the Sandstorm home directory. This will fail if it isn't empty, but that's
+    // Attempt to remove the Thurly home directory. This will fail if it isn't empty, but that's
     // fine.
     KJ_SYSCALL(chdir("/"));  // Can't delete directory if we're in it.
     rmdir(sandstormHome.cStr());
 
-    context.exitInfo("Sandstorm has been uninstalled.");
+    context.exitInfo("Thurly has been uninstalled.");
   }
 
   kj::MainBuilder::Validity dev() {
@@ -1130,9 +1130,9 @@ public:
 
     changeToInstallDir();
 
-    // Verify that Sandstorm is running.
+    // Verify that Thurly is running.
     if (getRunningPid() == nullptr) {
-      context.exitError("Sandstorm is not running.");
+      context.exitError("Thurly is not running.");
     }
 
     // Connect to the devmode socket. The server daemon listens on this socket for commands.
@@ -1205,7 +1205,7 @@ private:
     if (access("../var/sandstorm", W_OK) == -1) {
       if (errno == EACCES) {
         KJ_FAIL_REQUIRE(
-            "Sandstorm was not run with appropriate privileges; rerun as root or the user for "
+            "Thurly was not run with appropriate privileges; rerun as root or the user for "
             "which it was installed.");
       } else {
         KJ_FAIL_SYSCALL("access", errno);
@@ -1584,7 +1584,7 @@ private:
       if (key == "SERVER_USER") {
         KJ_IF_MAYBE(u, getUserIds(value)) {
           config.uids = kj::mv(*u);
-          KJ_REQUIRE(config.uids.uid != 0, "Sandstorm cannot run as root.");
+          KJ_REQUIRE(config.uids.uid != 0, "Thurly cannot run as root.");
         } else {
           KJ_FAIL_REQUIRE("invalid config value SERVER_USER", value);
         }
@@ -1606,7 +1606,7 @@ private:
         config.bindIp = kj::mv(value);
       } else if (key == "BASE_URL") {
         // If the value ends in any number of "/" characters, remove them now. This allows the
-        // Sandstorm codebase to assume that BASE_URL does not end in a slash.
+        // Thurly codebase to assume that BASE_URL does not end in a slash.
         int desiredLength = value.size();
         while (desiredLength > 0 && value[desiredLength-1] == '/') {
           desiredLength -= 1;
@@ -2088,7 +2088,7 @@ private:
         if (contents != "") {
           // This file should contain a PID, hence UInt.
           //
-          // If somehow there are two instances of Sandstorm running, and the other one is running a
+          // If somehow there are two instances of Thurly running, and the other one is running a
           // mongod, then this action could dangerously cause two mongod instances to be
           // running. However, in that case, we also can't see the other process, since it's in a
           // pid namespace. So this is all the sanity-checking we can do.
@@ -2134,7 +2134,7 @@ private:
     // we do not know how proceed.
     KJ_FAIL_ASSERT("**mongod failed to start. Initial exit code: ", status,
                    "bailing out now. For troubleshooting, read "
-                   "/opt/sandstorm/var/log/mongo.log (or var/log/mongo.log within your Sandstorm "
+                   "/opt/sandstorm/var/log/mongo.log (or var/log/mongo.log within your Thurly "
                    "if installed to a different place) and visit: "
                    "https://docs.sandstorm.io/en/latest/search.html?q=mongod+failed+to+start");
     return 0;

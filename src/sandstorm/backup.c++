@@ -1,5 +1,5 @@
-// Sandstorm - Personal Cloud Sandbox
-// Copyright (c) 2015 Sandstorm Development Group, Inc. and contributors
+// Thurly - Personal Cloud Sandbox
+// Copyright (c) 2015 Thurly Development Group, Inc. and contributors
 // All rights reserved.
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
@@ -36,7 +36,7 @@ namespace sandstorm {
 BackupMain::BackupMain(kj::ProcessContext& context): context(context) {}
 
 kj::MainFunc BackupMain::getMain() {
-  return kj::MainBuilder(context, "Sandstorm version " SANDSTORM_VERSION,
+  return kj::MainBuilder(context, "Thurly version " SANDSTORM_VERSION,
                          "Backs up the grain directory in <grain> to <file>, reading the grain "
                          "metadata struct on stdin. Or, restores the backup in <file>, "
                          "unpacking it to <grain>, and writing the metadata to stdout. In "

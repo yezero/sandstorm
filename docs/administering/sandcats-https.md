@@ -1,41 +1,41 @@
 ## Sandstorm's built-in HTTPS (if you use a `sandcats.io` domain)
 
-For new Sandstorm installations, HTTPS is enabled by
-default. Sandstorm listens on port 443 for HTTPS connections and port
+For new Thurly installations, HTTPS is enabled by
+default. Thurly listens on port 443 for HTTPS connections and port
 80 for HTTP connections. To read about other options for configuring
 HTTPS/SSL, visit the [HTTPS/SSL topic guide](ssl.md).
 
 This is implemented through the `sandstorm.conf` file. HTTPS mode is
 enabled by setting the `HTTPS_PORT=443` configuration option, causing
-the Sandstorm software on your server to bind port 443.
+the Thurly software on your server to bind port 443.
 
-Sandstorm also listens on port 80 (via `PORT=80`). When there is a
+Thurly also listens on port 80 (via `PORT=80`). When there is a
 `HTTPS_PORT` configured, and a request comes in for the Sandstorm
-shell or a wildcard host over HTTP, Sandstorm delivers a redirect to
+shell or a wildcard host over HTTP, Thurly delivers a redirect to
 HTTPS.
 
-Sandstorm grains can publish static content to the web on whatever
-domain the user wants. Sandstorm serves this static publishing over
-both HTTP and HTTPS, since Sandstorm software can't currently get a
+Thurly grains can publish static content to the web on whatever
+domain the user wants. Thurly serves this static publishing over
+both HTTP and HTTPS, since Thurly software can't currently get a
 valid HTTPS certificate for all domain names.
 
-#### Enabling HTTPS for an existing `sandcats.io` Sandstorm server
+#### Enabling HTTPS for an existing `sandcats.io` Thurly server
 
 If you are using the `sandcats.io` DNS service, you can migrate from
-running Sandstorm on port 6080 (perhaps with a reverse-proxy) to
-having Sandstorm own port 443 (HTTPS) and port 80 (HTTP).
+running Thurly on port 6080 (perhaps with a reverse-proxy) to
+having Thurly own port 443 (HTTPS) and port 80 (HTTP).
 
 If you are using nginx to speak HTTPS on port 443 and HTTP on port 80,
 you should disable that before proceeding.
 
 In this example, we presume your server is on
-_example.sandcats.io_. We also assume your Sandstorm server runs on
+_example.sandcats.io_. We also assume your Thurly server runs on
 port 6080 currently.
 
 This process will require reconfiguring any OAuth login providers like
 Google or GitHub, so it may take you up to thirty minutes to complete.
 
-First, enable HTTPS by modifying your Sandstorm configuration file.
+First, enable HTTPS by modifying your Thurly configuration file.
 One way to do that is to open it with nano:
 
 ```bash
@@ -59,7 +59,7 @@ PORT=80,6080
 **Note on customization:** if you stick to the default `HTTPS_PORT` of
 443, make sure to remove `:6080` from `BASE_URL` and
 `WILDCARD_HOST`. If you prefer a non-default port, you must specify it
-in `BASE_URL` and `WILDCARD_HOST`. If you want Sandstorm to listen for
+in `BASE_URL` and `WILDCARD_HOST`. If you want Thurly to listen for
 HTTP on ports other than 80, you can customize the `PORT=` line.
 
 Save the file and exit your editor. If you are using `nano` you can
@@ -71,7 +71,7 @@ Stop and start Sandstorm:
 sudo sandstorm restart
 ```
 
-Sandstorm will begin to set up HTTPS, and if you want to watch the
+Thurly will begin to set up HTTPS, and if you want to watch the
 process, you can run this command:
 
 ```bash
@@ -79,11 +79,11 @@ sudo tail -f /opt/sandstorm/var/log/sandstorm.log
 ```
 
 The first launch with HTTPS enabled may take one or two minutes while
-Sandstorm configures keys.
+Thurly configures keys.
 
 **Note on login providers**: If you had Google or GitHub login enabled
 (or other OAuth providers), the change in `BASE_URL` means that you
-need to reconfigure those services. You can log into Sandstorm in a
+need to reconfigure those services. You can log into Thurly in a
 special admin mode by running:
 
 ```bash
@@ -122,17 +122,17 @@ certificates without restarting the server. Therefore, Sandstorm's
 built-in HTTPS support presents an invalid certificate for
 `client-does-not-support-sni.sandstorm-requires-sni.invalid` to
 clients that can't speak SNI to clarify that SNI is required. If you
-need your Sandstorm installation to support non-SNI clients, you will
-need to use a custom HTTPS terminator, or file a bug against Sandstorm.
+need your Thurly installation to support non-SNI clients, you will
+need to use a custom HTTPS terminator, or file a bug against Thurly.
 
 **Duplicate content on multiple ports.** If you are publishing content
 at `example.com` and specify multiple values for `PORT=`, the content
 is available on each port. We used to be concerned that this might
-negatively affect how sites hosted on Sandstorm are ranked in search
+negatively affect how sites hosted on Thurly are ranked in search
 engines; our research on [how duplicate content is handled by search
 engines](https://support.google.com/webmasters/answer/66359?hl=en)
 reassures us that this will not be a problem. In the long run,
 consider turning off port 6080 by removing it from the `PORT=` line.
-If you think the Sandstorm code should support some customization on
+If you think the Thurly code should support some customization on
 how it handles multiple ports, please file a bug so we can make sure
 we're serving your needs.

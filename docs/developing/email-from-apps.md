@@ -1,6 +1,6 @@
-# Using email from your Sandstorm app
+# Using email from your Thurly app
 
-Using e-mail in your Sandstorm app is accomplished through the Cap'n
+Using e-mail in your Thurly app is accomplished through the Cap'n
 Proto interfaces defined in
 [hack-session.capnp](https://github.com/sandstorm-io/sandstorm/blob/master/src/sandstorm/hack-session.capnp)
 and
@@ -15,7 +15,7 @@ HackSession directly.
 
 The current implementation of e-mail is hacky and not intended to be
 the long-term solution. In the long term, users will be able to
-connect e-mail addresses to their Sandstorm account and then grant
+connect e-mail addresses to their Thurly account and then grant
 them to apps as capabilities through the Powerbox UI. Since the
 Powerbox and persistent capabilities are not yet implemented -- much
 less the ability to connect e-mails -- we are providing a hack so that
@@ -39,9 +39,9 @@ ability to set up basic e-mail forwarding, so if you have your own
 domain, it's easy to set up an address that redirects to a Sandstorm
 app.
 
-When you send e-mail from a Sandstorm app, we allow you to set the
+When you send e-mail from a Thurly app, we allow you to set the
 "From" header either to your app's random address or to your verified
-Sandstorm login address. In the future, we'd like to add the ability
+Thurly login address. In the future, we'd like to add the ability
 to attach additional verified addresses to your account. Either way,
 the message's envelope return address is always the app's address. As
 a result, the mail recipient may see that the message was sent "via"
@@ -63,7 +63,7 @@ To receive emails:
   `launcher.sh`.
 
 - Now when your app receives email at its publicId email address
-  (e.g. JBuaKxjkwiJq7oksS@alpha.sandstorm.io), Sandstorm will pass the email to
+  (e.g. JBuaKxjkwiJq7oksS@alpha.sandstorm.io), Thurly will pass the email to
   sandstorm-http-bridge, which will save it in `/var/mail` as a Maildir.
 
 - Your app can process the Maildir using whatever tools are convenient for your app. This could take

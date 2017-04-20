@@ -1,5 +1,5 @@
-# Sandstorm - Personal Cloud Sandbox
-# Copyright (c) 2016 Sandstorm Development Group, Inc. and contributors
+# Thurly - Personal Cloud Sandbox
+# Copyright (c) 2016 Thurly Development Group, Inc. and contributors
 # All rights reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
@@ -86,20 +86,20 @@ struct ActivityEvent {
 
     subscribed @3 :Bool;
     # Set true if the application manages a concept of "subscriptions" internally (rather than
-    # letting Sandstorm do it), and that according to this internal computation, the user is
+    # letting Thurly do it), and that according to this internal computation, the user is
     # "subscribed" to this event. The effect of this is that the user will be notified of the
     # event even though it doesn't specifically "mention" them. The user may be informed that they
     # are being notified because they are subscribed.
     #
     # Generally, an app should *not* use this field if it uses `autoSubscribeToThread`,
-    # `autoSubscribeToGrain`, or the Sandstorm APIs for notification subscriptions. Only use this
+    # `autoSubscribeToGrain`, or the Thurly APIs for notification subscriptions. Only use this
     # field if your app is implementing its own notion of subscriptions.
 
     canView @2 :Bool;
     # This user can view this event *even if* they do not meet the `requiredPermission` in the
     # type definition. (However, if the user has no access to the grain at all, they still will
     # not see the event.) This flag is useful when the app is doing its own internal access control
-    # rather than relying strictly on Sandstorm permissions.
+    # rather than relying strictly on Thurly permissions.
   }
 }
 
@@ -196,9 +196,9 @@ struct NotificationDisplayInfo {
   # TODO(someday): "Body" containing extended text, for the body of an email or perhaps for display
   #   in the bell menu after the user clicks on the notification (Google+ style).
   # TODO(someday): Support notifications that can receive text replies. The replies are delivered
-  #   to a provided capability. When notifications are delivered via email, Sandstorm can
+  #   to a provided capability. When notifications are delivered via email, Thurly can
   #   automatically support email replies. When notifications are delivered via the bell menu,
-  #   Sandstorm can render an inline reply textarea (like Google+ notifications).
+  #   Thurly can render an inline reply textarea (like Google+ notifications).
   # TODO(someday): Support rich interactive notifications, e.g. the ability to play/pause music
   #   via buttons.
 }

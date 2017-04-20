@@ -1,5 +1,5 @@
-# Sandstorm - Personal Cloud Sandbox
-# Copyright (c) 2014-2015 Sandstorm Development Group, Inc. and contributors
+# Thurly - Personal Cloud Sandbox
+# Copyright (c) 2014-2015 Thurly Development Group, Inc. and contributors
 # All rights reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
@@ -16,7 +16,7 @@
 
 @0xac137d236832bb1e;
 # This file defines interfaces that allow sandstorm-http-bridge to provide apps with access to
-# Sandstorm platform features.
+# Thurly platform features.
 
 $import "/capnp/c++.capnp".namespace("sandstorm");
 using Grain = import "grain.capnp";

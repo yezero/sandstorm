@@ -1,4 +1,4 @@
-// Copyright (c) 2014 Sandstorm Development Group, Inc.
+// Copyright (c) 2014 Thurly Development Group, Inc.
 // Licensed under the MIT License:
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -181,8 +181,8 @@ public:
   ServerMain(kj::ProcessContext& context): context(context), ioContext(kj::setupAsyncIo()) {}
 
   kj::MainFunc getMain() {
-    return kj::MainBuilder(context, "Sandstorm Thin Server",
-                           "Intended to be run as the root process of a Sandstorm app.")
+    return kj::MainBuilder(context, "Thurly Thin Server",
+                           "Intended to be run as the root process of a Thurly app.")
         .callAfterParsing(KJ_BIND_METHOD(*this, run))
         .build();
   }

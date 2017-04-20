@@ -1,6 +1,6 @@
 #! /bin/bash
 
-# Runs the Sandstorm shell against a local Sandstorm instance.
+# Runs the Thurly shell against a local Thurly instance.
 
 set -euo pipefail
 
@@ -15,8 +15,8 @@ elif [ -e /etc/init.d/sandstorm ]; then
   eval "$(grep "^DAEMON=" /etc/init.d/sandstorm)"
   SANDSTORM_HOME=$(dirname $DAEMON)
 else
-  echo "I couldn't find an initscript for Sandstorm. Please pass the directory" >&2
-  echo "where Sandstorm is installed as an argument to this script." >&2
+  echo "I couldn't find an initscript for Thurly. Please pass the directory" >&2
+  echo "where Thurly is installed as an argument to this script." >&2
   exit 1
 fi
 
@@ -26,7 +26,7 @@ fi
 # as well, and run-dev.sh does not know how to listen on HTTPS, so tell the
 # user to disable that.
 if [ -n "${HTTPS_PORT:-}" ] ; then
-  echo "Please remove the HTTPS_PORT= line in your Sandstorm configuration" >&2
+  echo "Please remove the HTTPS_PORT= line in your Thurly configuration" >&2
   echo "since run-dev.sh does not support HTTPS." >&2
 fi
 
@@ -38,7 +38,7 @@ if [[ "${PORT:-}" =~ ^(.*?), ]] ; then
 fi
 
 if [ "$SERVER_USER" != "$USER" ]; then
-  echo "Please change your Sandstorm installation to be owned by your own user" >&2
+  echo "Please change your Thurly installation to be owned by your own user" >&2
   echo "account. E.g. run as root:" >&2
   echo "  $SANDSTORM_HOME/sandstorm stop" >&2
   echo "  find $SANDSTORM_HOME/var -user $SERVER_USER -exec chown -h $USER {} +" >&2
@@ -50,7 +50,7 @@ if [ "$SERVER_USER" != "$USER" ]; then
 fi
 
 if ! $SANDSTORM_HOME/sandstorm status >/dev/null 2>&1; then
-  echo "Please start Sandstorm and then stop the front-end:"
+  echo "Please start Thurly and then stop the front-end:"
   echo "  sudo $SANDSTORM_HOME/sandstorm start" >&2
   echo "  sudo $SANDSTORM_HOME/sandstorm stop-fe" >&2
   exit 1
@@ -59,7 +59,7 @@ fi
 BIND_IP=${BIND_IP:-127.0.0.1}
 
 if curl http://$BIND_IP:$PORT >/dev/null 2>&1; then
-  echo "Please shut down your Sandstorm front-end:" >&2
+  echo "Please shut down your Thurly front-end:" >&2
   echo "  sudo $SANDSTORM_HOME/sandstorm stop-fe" >&2
   exit 1
 fi

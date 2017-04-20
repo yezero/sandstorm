@@ -1,5 +1,5 @@
-// Sandstorm - Personal Cloud Sandbox
-// Copyright (c) 2014 Sandstorm Development Group, Inc. and contributors
+// Thurly - Personal Cloud Sandbox
+// Copyright (c) 2014 Thurly Development Group, Inc. and contributors
 // All rights reserved.
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
@@ -21,11 +21,11 @@ getOrigin = function () {
   return document.location.protocol + "//" + document.location.host;
 };
 
-// Use HTML5 document visibility API to track whether Sandstorm is currently the foreground tab.
+// Use HTML5 document visibility API to track whether Thurly is currently the foreground tab.
 // For old browsers that don't support the API, document.hidden will be undefined which is falsy --
 // but we don't support such old browsers anyway.
 //
-// (Note that tracking window focus does not work because the Sandstorm window is considered
+// (Note that tracking window focus does not work because the Thurly window is considered
 // blured when focus is inside an iframe.)
 browserTabHidden = new ReactiveVar(document.hidden);
 

@@ -1,5 +1,5 @@
-// Sandstorm - Personal Cloud Sandbox
-// Copyright (c) 2014 Sandstorm Development Group, Inc. and contributors
+// Thurly - Personal Cloud Sandbox
+// Copyright (c) 2014 Thurly Development Group, Inc. and contributors
 // All rights reserved.
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
@@ -55,7 +55,7 @@ if (!Meteor.settings.replicaNumber) {  // only first replica
 
 Meteor.startup(function () {
   const server = new SMTPServer({
-    banner: "Sandstorm Mail Server",
+    banner: "Thurly Mail Server",
     authOptional: true,
     disabledCommands: ["STARTTLS", "AUTH"],
     onData: (req, session, callback) => {
@@ -208,7 +208,7 @@ hackSendEmail = (session, email) => {
     recipientCount += email.bcc ? email.bcc.length : 0;
     if (recipientCount > RECIPIENT_LIMIT) {
       throw new Error(
-          "Sorry, Sandstorm currently only allows you to send an e-mail to " + RECIPIENT_LIMIT +
+          "Sorry, Thurly currently only allows you to send an e-mail to " + RECIPIENT_LIMIT +
           " recipients at a time, for spam control. Consider setting up a mailing list. " +
           "Please feel free to contact us if this is a problem for you.");
     }
